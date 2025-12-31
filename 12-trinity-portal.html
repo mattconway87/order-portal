@@ -767,19 +767,14 @@
                 { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-cf.png' },
                 { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-pn.png' },
                 { id: 'grange-est-ch', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 25.50, lcbo: '', icon: '🥂', image: './images/grange-est-ch.png' },
-                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' },
-                { id: 'grange-24f-pn', name: '24 F Pinot Noir', size: '750mL', abv: '13%', price: 24.65, lcbo: '', icon: '🍷', image: './images/grange-24f-pn.png' },
-                { id: 'grange-23f-unoaked-ch', name: '23 F Unoaked Chardonnay', size: '750mL', abv: '13%', price: 17.00, lcbo: '', icon: '🥂', image: './images/grange-23f-unoaked-ch.png' },
-                { id: 'grange-24e-pg', name: '24 E Pinot Gris', size: '750mL', abv: '13%', price: 21.25, lcbo: '', icon: '🥂', image: './images/grange-24e-pg.png' },
-                { id: 'grange-24e-rose', name: '24 E Rose', size: '750mL', abv: '13%', price: 20.40, lcbo: '', icon: '🍷', image: './images/grange-24e-rose.png' },
-                { id: 'grange-23e-gamay', name: '23 E Gamay', size: '750mL', abv: '13%', price: 22.10, lcbo: '', icon: '🍷', image: './images/grange-23e-gamay.png' }
+                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' }
             ],
             'Cases': [
-                { id: 'case-soy-vodka', name: 'Spirit of York Vodka Case', size: '12x750mL', abv: '40%', price: 64.00, lcbo: '', icon: '📦', image: './images/case-soy-vodka.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'case-soy-gin', name: 'Spirit of York Gin Case', size: '12x750mL', abv: '40%', price: 80.00, lcbo: '', icon: '📦', image: './images/case-soy-gin.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'case-soy-whisky', name: 'Spirit of York Whisky Case', size: '12x750mL', abv: '40%', price: 93.33, lcbo: '', icon: '📦', image: './images/case-soy-whisky.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'case-distl-pink', name: 'DISTL Pink Gin Case (12)', size: '12x750mL', abv: '35%', price: 117.34, lcbo: '', icon: '📦', image: './images/case-distl-pink.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'case-distl-gin', name: 'DISTL Gin Case', size: '12x750mL', abv: '40%', price: 138.67, lcbo: '', icon: '📦', image: './images/case-distl-gin.png', allowedAccounts: ['ADMIN001'] }
+                { id: 'case-soy-vodka', name: 'Spirit of York Vodka Case', size: '12x750mL', abv: '40%', price: 64.00, lcbo: '', icon: '📦', image: './images/case-soy-vodka.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-soy-gin', name: 'Spirit of York Gin Case', size: '12x750mL', abv: '40%', price: 80.00, lcbo: '', icon: '📦', image: './images/case-soy-gin.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-soy-whisky', name: 'Spirit of York Whisky Case', size: '12x750mL', abv: '40%', price: 93.33, lcbo: '', icon: '📦', image: './images/case-soy-whisky.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-distl-pink', name: 'DISTL Pink Gin Case (12)', size: '12x750mL', abv: '35%', price: 117.34, lcbo: '', icon: '📦', image: './images/case-distl-pink.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-distl-gin', name: 'DISTL Gin Case', size: '12x750mL', abv: '40%', price: 138.67, lcbo: '', icon: '📦', image: './images/case-distl-gin.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] }
             ]
         };
 
@@ -828,10 +823,12 @@
                     // If no restrictions, show to everyone
                     if (!product.allowedAccounts) return true;
                     
-                    // If admin mode, show everything
-                    if (isAdmin) return true;
+                    // If product is admin-only (only ADMIN001 in allowedAccounts), show when in admin mode
+                    if (product.allowedAccounts.length === 1 && product.allowedAccounts[0] === 'ADMIN001') {
+                        return isAdmin;
+                    }
                     
-                    // Otherwise check if account is in allowed list
+                    // Otherwise check if active account is in allowed list (applies even to admin)
                     return product.allowedAccounts.includes(activeAccount);
                 });
             };
@@ -1083,7 +1080,13 @@
                             
                             <div className="brand-tabs">
                                 {Object.keys(PRODUCTS)
-                                    .filter(brand => brand !== 'Cases' || isAdmin)
+                                    .filter(brand => {
+                                        // Show all brands except Cases
+                                        if (brand !== 'Cases') return true;
+                                        // Only show Cases for Pearson Duty Free or Queenston Lewiston
+                                        const activeAccount = isAdmin && selectedAccountForAdmin ? selectedAccountForAdmin : accountCode;
+                                        return activeAccount === '844YRPRC' || activeAccount === '7FTWKS5S';
+                                    })
                                     .map(brand => (
                                     <button
                                         key={brand}
