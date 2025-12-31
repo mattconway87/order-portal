@@ -1072,7 +1072,9 @@
                             <h2>Select Products</h2>
                             
                             <div className="brand-tabs">
-                                {Object.keys(PRODUCTS).map(brand => (
+                                {Object.keys(PRODUCTS)
+                                    .filter(brand => brand !== 'Cases' || isAdmin)
+                                    .map(brand => (
                                     <button
                                         key={brand}
                                         type="button"
