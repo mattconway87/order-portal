@@ -443,30 +443,29 @@
         // Product data from your portfolio
         const PRODUCTS = {
             'Spirit of York': [
-                { id: 'soy-vodka', name: 'Vodka', size: '750mL', abv: '40%', price: 34.08, lcbo: '541755', icon: '🥃', image: './images/soy-vodka.png' },
-                { id: 'soy-gin', name: 'Gin', size: '750mL', abv: '40%', price: 34.08, lcbo: '536805', icon: '🍸', image: './images/soy-gin.png' },
-                { id: 'soy-aquavit', name: 'Aquavit', size: '750mL', abv: '44%', price: 37.43, lcbo: '645846', icon: '🥂', image: './images/soy-aquavit.png' },
-                { id: 'soy-coffee', name: 'Coffee Liqueur', size: '375mL', abv: '25%', price: 22.38, lcbo: '', icon: '☕', image: './images/soy-coffee.png' }
+                { id: 'soy-vodka', name: 'Vodka', size: '750mL', abv: '40%', price: 36.08, lcbo: '541755', icon: '🥃', image: './images/soy-vodka.png' },
+                { id: 'soy-gin', name: 'Gin', size: '750mL', abv: '40%', price: 36.08, lcbo: '536805', icon: '🍸', image: './images/soy-gin.png' },
+                { id: 'soy-aquavit', name: 'Aquavit', size: '750mL', abv: '44%', price: 39.63, lcbo: '645846', icon: '🥂', image: './images/soy-aquavit.png' },
+                { id: 'soy-coffee', name: 'Coffee Liqueur', size: '375mL', abv: '25%', price: 23.70, lcbo: '', icon: '☕', image: './images/soy-coffee.png' }
             ],
             'DISTL': [
-                { id: 'distl-vodka', name: 'DISTL Vodka', size: '750mL', abv: '40%', price: 26.14, lcbo: '', icon: '🥃', image: './images/distl-vodka.png' },
-                { id: 'distl-gin', name: 'DISTL Gin', size: '750mL', abv: '40%', price: 29.90, lcbo: '34588', icon: '🍸', image: './images/distl-gin.png' },
-                { id: 'distl-whisky', name: 'DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 27.98, lcbo: '46049', icon: '🥃', image: './images/distl-whisky.png' },
-                { id: 'distl-pink', name: 'DISTL Pink Gin', size: '750mL', abv: '35%', price: 29.90, lcbo: '', icon: '💗', image: './images/distl-pink.png' },
-                { id: 'distl-chili', name: 'DISTL Ancho Chili', size: '750mL', abv: '40%', price: 29.90, lcbo: '', icon: '🌶️', image: './images/distl-chili.png' },
-                { id: 'distl-peach', name: 'RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.18, lcbo: '', icon: '🍑', image: './images/distl-peach.png' },
-                { id: 'distl-rasp', name: 'RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.18, lcbo: '', icon: '🍋', image: './images/distl-rasp.png' }
+                { id: 'distl-vodka', name: 'DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: './images/distl-vodka.png' },
+                { id: 'distl-gin', name: 'DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34588', icon: '🍸', image: './images/distl-gin.png' },
+                { id: 'distl-whisky', name: 'DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '46049', icon: '🥃', image: './images/distl-whisky.png' },
+                { id: 'distl-pink', name: 'DISTL Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: './images/distl-pink.png' },
+                { id: 'distl-chili', name: 'DISTL Ancho Chili', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: './images/distl-chili.png' },
+                { id: 'distl-peach', name: 'RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍑', image: './images/distl-peach.png' },
+                { id: 'distl-rasp', name: 'RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍋', image: './images/distl-rasp.png' }
             ],
             'The Grange': [
-                { id: 'grange-laf', name: 'Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 49.30, lcbo: '', icon: '🍾', image: './images/grange-laf.png' },
-                { id: 'grange-aur-cf', name: '2023 Aurelia Cabernet Franc', size: '750mL', abv: '13%', price: 55.25, lcbo: '', icon: '🍷', image: './images/grange-aur-cf.png' },
-                { id: 'grange-aur-pn', name: '2023 Aurelia Pinot Noir', size: '750mL', abv: '12%', price: 55.25, lcbo: '', icon: '🍷', image: './images/grange-aur-pn.png' },
-                { id: 'grange-aur-ch', name: '2023 Aurelia Chardonnay', size: '750mL', abv: '14.3%', price: 55.25, lcbo: '', icon: '🥂', image: './images/grange-aur-ch.png' },
-                { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 27.20, lcbo: '', icon: '🍷', image: './images/grange-est-cf.png' },
-                { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 27.20, lcbo: '', icon: '🍷', image: './images/grange-est-pn.png' },
+                { id: 'grange-laf', name: 'Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 52.20, lcbo: '', icon: '🍾', image: './images/grange-laf.png' },
+                { id: 'grange-aur-cf', name: '2023 Aurelia Cabernet Franc', size: '750mL', abv: '13%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-cf.png' },
+                { id: 'grange-aur-pn', name: '2023 Aurelia Pinot Noir', size: '750mL', abv: '12%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-pn.png' },
+                { id: 'grange-aur-ch', name: '2023 Aurelia Chardonnay', size: '750mL', abv: '14.3%', price: 58.50, lcbo: '', icon: '🥂', image: './images/grange-aur-ch.png' },
+                { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-cf.png' },
+                { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-pn.png' },
                 { id: 'grange-est-ch', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 25.50, lcbo: '', icon: '🥂', image: './images/grange-est-ch.png' },
-                { id: 'grange-alm-red', name: '2024 Almanac Red', size: '750mL', abv: '13%', price: 13.35, lcbo: '', icon: '🍷', image: './images/grange-alm-red.png' },
-                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 11.85, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' }
+                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' }
             ]
         };
 
