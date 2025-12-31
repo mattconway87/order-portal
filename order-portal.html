@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -518,7 +519,7 @@
         .tech-sheet-icon {
             position: absolute;
             top: 15px;
-            right: 15px;
+            left: 15px;
             background: #252f42;
             color: white;
             width: 32px;
@@ -636,37 +637,39 @@
         // Product Database with merged DISTL products
         const PRODUCTS = {
             'Spirit of York': [
-                { id: 'soy-vodka', name: 'Spirit of York Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: '', techSheet: 1 },
-                { id: 'soy-gin', name: 'Spirit of York Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34586', icon: '🍸', image: '', techSheet: 2 },
-                { id: 'soy-whisky', name: 'Spirit of York Whisky', size: '750mL', abv: '40%', price: 57.30, lcbo: '', icon: '🥃', image: '', allowedAccounts: ['ADMIN001'], techSheet: 3 },
-                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', size: '750mL', abv: '18%', price: 23.70, lcbo: '', icon: '🍹', image: '', allowedAccounts: ['ADMIN001'], techSheet: 4 },
-                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', size: '750mL', abv: '30%', price: 23.70, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['ADMIN001'], techSheet: 5 },
-                { id: 'soy-rye', name: 'Spirit of York Rye Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '26013', icon: '🥃', image: '', techSheet: 6 },
-                { id: 'soy-limonata', name: 'Spirit of York Limonata', size: '750mL', abv: '20%', price: 23.70, lcbo: '', icon: '🍋', image: '', techSheet: 7 },
+                { id: 'soy-vodka', name: 'Spirit of York Vodka', size: '750mL', abv: '40%', price: 36.08, lcbo: 'LCBO', icon: '🥃', image: '', techSheet: 1 },
+                { id: 'soy-gin', name: 'Spirit of York Gin', size: '750mL', abv: '40%', price: 36.08, lcbo: 'LCBO', icon: '🍸', image: '', techSheet: 2 },
+                { id: 'soy-aquavit', name: 'Spirit of York Aquavit', size: '750mL', abv: '44%', price: 39.63, lcbo: 'LCBO DDVP', icon: '🥃', image: '', techSheet: 3 },
+                { id: 'soy-coffee', name: 'Spirit of York Coffee Liqueur', size: '375mL', abv: '25%', price: 23.70, lcbo: '', icon: '☕', image: '', techSheet: 4 },
+                { id: 'soy-rye', name: 'Spirit of York Rye Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '26013', icon: '🥃', image: '', allowedAccounts: ['ADMIN001'], techSheet: 5 },
+                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', size: '750mL', abv: '18%', price: 23.70, lcbo: '', icon: '🍹', image: '', allowedAccounts: ['ADMIN001'], techSheet: 6 },
+                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', size: '750mL', abv: '30%', price: 23.70, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['ADMIN001'], techSheet: 7 },
                 
-                // DISTL Products (merged with prefix)
+                // DISTL Products
                 { id: 'distl-vodka', name: 'Spirit of York: DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: '', techSheet: 8 },
-                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34588', icon: '🍸', image: '', techSheet: 9 },
-                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '46049', icon: '🥃', image: '', techSheet: 10 },
-                { id: 'distl-pink', name: 'Spirit of York: DISTL Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: '', techSheet: 11 },
-                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chili', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: '', techSheet: 12 },
-                { id: 'distl-coffee', name: 'Spirit of York: DISTL Coffee Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '☕', image: '', techSheet: 13 },
-                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍵', image: '', allowedAccounts: ['ADMIN001'], techSheet: 14 },
-                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ADMIN001'], techSheet: 15 },
-                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', size: '750mL', abv: '40%', price: 28.14, lcbo: '', icon: '🍸', image: '', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'], techSheet: 16 },
-                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', size: '750mL', abv: '40%', price: 30.75, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 17 },
-                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', size: '750mL', abv: '40%', price: 20.13, lcbo: '', icon: '🍒', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 18 },
-                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['NQ7C553C'], techSheet: 19 }
+                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: 'LCBO DDVP', icon: '🍸', image: '', techSheet: 9 },
+                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '', icon: '🥃', image: '', techSheet: 10 },
+                { id: 'distl-pink', name: 'Spirit of York: DISTL Flawless Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: '', techSheet: 11 },
+                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chilli', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: '', techSheet: 12 },
+                { id: 'distl-peach-rtd', name: 'Spirit of York: DISTL RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍑', image: '', techSheet: 13 },
+                { id: 'distl-rasp-rtd', name: 'Spirit of York: DISTL RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍋', image: '', techSheet: 14 },
+                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍵', image: '', allowedAccounts: ['ADMIN001'], techSheet: 15 },
+                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ADMIN001'], techSheet: 16 },
+                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', size: '750mL', abv: '40%', price: 28.14, lcbo: '', icon: '🍸', image: '', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'], techSheet: 17 },
+                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', size: '750mL', abv: '40%', price: 30.75, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 18 },
+                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', size: '750mL', abv: '40%', price: 20.13, lcbo: '', icon: '🍒', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 19 },
+                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM', 'NQ7C553C'], techSheet: 20 }
             ],
             'The Grange': [
-                { id: 'grange-lafontaine', name: '2021 Lafontaine du Loup Brut', size: '750mL', abv: '12.5%', price: 16.39, lcbo: '', icon: '🍾', image: '', isWine: true, techSheet: 20 },
-                { id: 'grange-aurelia-chard', name: '2023 Aurelia Series Chardonnay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 21 },
-                { id: 'grange-aurelia-cab', name: '2023 Aurelia Series Cabernet Franc', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 22 },
-                { id: 'grange-aurelia-pinot', name: '2023 Aurelia Series Pinot Noir', size: '750mL', abv: '13.5%', price: 24.59, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 23 },
-                { id: 'grange-estate-pinot', name: '2024 Estate Pinot Noir', size: '750mL', abv: '13.5%', price: 24.59, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 24 },
-                { id: 'grange-estate-cab', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 25 },
-                { id: 'grange-estate-chard', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 26 },
-                { id: 'grange-almanac-white', name: '2024 Almanac White', size: '750mL', abv: '12%', price: 16.39, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 27 }
+                { id: 'grange-lafontaine', name: '2021 Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 52.20, lcbo: 'LCBO', icon: '🍾', image: '', isWine: true, techSheet: 21 },
+                { id: 'grange-aurelia-chard', name: '2023 Aurelia Series Chardonnay', size: '750mL', abv: '14.3%', price: 58.50, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 22 },
+                { id: 'grange-aurelia-cab', name: '2023 Aurelia Series Cabernet Franc', size: '750mL', abv: '13%', price: 58.50, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 23 },
+                { id: 'grange-aurelia-pinot', name: '2023 Aurelia Series Pinot Noir', size: '750mL', abv: '12%', price: 58.50, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 24 },
+                { id: 'grange-estate-pinot', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 25 },
+                { id: 'grange-estate-cab', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 26 },
+                { id: 'grange-estate-chard', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 27.00, lcbo: 'LCBO Vintages', icon: '🥂', image: '', isWine: true, techSheet: 27 },
+                { id: 'grange-almanac-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 28 },
+                { id: 'grange-almanac-red', name: '2024 Almanac Red', size: '750mL', abv: '13%', price: 14.14, lcbo: 'LCBO', icon: '🍷', image: '', isWine: true, techSheet: 29 }
             ]
         };
 
@@ -707,6 +710,32 @@
                 spiritOfYork: 'Welcome to the new year! Check out our latest releases and special offers.',
                 grange: 'Discover our exceptional wines from Prince Edward County\'s finest vineyard.'
             });
+            const [accountsData, setAccountsData] = useState({});
+
+            // Load accounts CSV on mount
+            useEffect(() => {
+                fetch('./12-trinity-all-accounts.csv')
+                    .then(response => response.text())
+                    .then(csvText => {
+                        const lines = csvText.split('\n');
+                        const accountMap = {};
+                        
+                        lines.forEach((line, index) => {
+                            if (index === 0 || !line.trim()) return; // Skip header and empty lines
+                            const parts = line.split(',');
+                            if (parts.length >= 2) {
+                                const code = parts[0].trim();
+                                const name = parts[1].trim();
+                                accountMap[code] = name;
+                            }
+                        });
+                        
+                        setAccountsData(accountMap);
+                    })
+                    .catch(error => {
+                        console.log('Could not load accounts CSV, using fallback names');
+                    });
+            }, []);
 
             // Get account code from URL
             useEffect(() => {
@@ -714,7 +743,10 @@
                 const code = params.get('account');
                 if (code) {
                     setAccountCode(code);
-                    setAccountName(ACCOUNT_NAMES[code] || code);
+                    
+                    // Try to get name from CSV data, fallback to hardcoded, fallback to code
+                    const name = accountsData[code] || ACCOUNT_NAMES[code] || code;
+                    setAccountName(name);
                     
                     // Load settings
                     const savedLowStock = localStorage.getItem('lowStockItems');
@@ -732,7 +764,7 @@
                         setAnnouncementMessages(JSON.parse(savedAnnouncementMessages));
                     }
                 }
-            }, []);
+            }, [accountsData]);
 
             // Save settings
             useEffect(() => {
@@ -1090,7 +1122,14 @@
                                         {product.size} • {product.abv}
                                         {product.lcbo && ` • LCBO ${product.lcbo}`}
                                     </div>
-                                    <div className="product-price">${product.price.toFixed(2)}</div>
+                                    {product.isWine ? (
+                                        <div className="product-price">
+                                            <div>${product.price.toFixed(2)} /bottle</div>
+                                            <div style={{fontSize: '16px', color: '#666'}}>${(product.price * 12).toFixed(2)} /case</div>
+                                        </div>
+                                    ) : (
+                                        <div className="product-price">${product.price.toFixed(2)}</div>
+                                    )}
                                     
                                     {lowStockItems[product.id] && (
                                         <div className="low-stock-badge">⚠️ LOW STOCK - Order Now!</div>
