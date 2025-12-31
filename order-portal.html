@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -935,17 +936,20 @@
                 
                 if (getTotalBottles() === 0) {
                     setMessage({ type: 'error', text: 'Please select at least one product' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     return;
                 }
 
                 if (!deliveryDate) {
                     setMessage({ type: 'error', text: 'Please select a delivery date' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     return;
                 }
 
                 // If admin, require account selection
                 if (isAdmin && !selectedAccountForAdmin) {
                     setMessage({ type: 'error', text: 'Please select an account to place order for' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     return;
                 }
 
@@ -973,6 +977,11 @@
                         totalBottles: getTotalBottles()
                     };
 
+                    // Debug logging
+                    console.log('Submitting order:', formData);
+                    console.log('Is Admin:', isAdmin);
+                    console.log('Selected Account:', selectedAccountForAdmin);
+
                     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec';
                     
                     const response = await fetch(SCRIPT_URL, {
@@ -983,12 +992,14 @@
                     });
 
                     setMessage({ type: 'success', text: 'Order submitted successfully!' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     setCart({});
                     setDeliveryDate('');
                     
                 } catch (error) {
                     console.error('Error:', error);
                     setMessage({ type: 'error', text: 'Failed to submit order. Please try again.' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } finally {
                     setSubmitting(false);
                 }
