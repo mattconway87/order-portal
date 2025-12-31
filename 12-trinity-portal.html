@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -432,6 +433,45 @@
                 width: 100%;
             }
         }
+    
+
+        /* ADMIN MODE STYLES */
+        .admin-mode {
+            background: linear-gradient(135deg, #be835c 0%, #d4a574 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #252f42;
+            margin-bottom: 0;
+        }
+
+        .admin-mode h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .account-selector {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .account-selector select {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #252f42;
+            border-radius: 8px;
+            background: white;
+            color: #242429;
+            font-weight: 600;
+        }
+
+        .account-selector select:focus {
+            outline: none;
+            border-color: #252f42;
+            box-shadow: 0 0 10px rgba(190, 131, 92, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -440,37 +480,9 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Product data from your portfolio
-        const PRODUCTS = {
-            'Spirit of York': [
-                { id: 'soy-vodka', name: 'Vodka', size: '750mL', abv: '40%', price: 36.08, lcbo: '541755', icon: '🥃', image: './images/soy-vodka.png' },
-                { id: 'soy-gin', name: 'Gin', size: '750mL', abv: '40%', price: 36.08, lcbo: '536805', icon: '🍸', image: './images/soy-gin.png' },
-                { id: 'soy-aquavit', name: 'Aquavit', size: '750mL', abv: '44%', price: 39.63, lcbo: '645846', icon: '🥂', image: './images/soy-aquavit.png' },
-                { id: 'soy-coffee', name: 'Coffee Liqueur', size: '375mL', abv: '25%', price: 23.70, lcbo: '', icon: '☕', image: './images/soy-coffee.png' }
-            ],
-            'DISTL': [
-                { id: 'distl-vodka', name: 'DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: './images/distl-vodka.png' },
-                { id: 'distl-gin', name: 'DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34588', icon: '🍸', image: './images/distl-gin.png' },
-                { id: 'distl-whisky', name: 'DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '46049', icon: '🥃', image: './images/distl-whisky.png' },
-                { id: 'distl-pink', name: 'DISTL Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: './images/distl-pink.png' },
-                { id: 'distl-chili', name: 'DISTL Ancho Chili', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: './images/distl-chili.png' },
-                { id: 'distl-peach', name: 'RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍑', image: './images/distl-peach.png' },
-                { id: 'distl-rasp', name: 'RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍋', image: './images/distl-rasp.png' }
-            ],
-            'The Grange': [
-                { id: 'grange-laf', name: 'Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 52.20, lcbo: '', icon: '🍾', image: './images/grange-laf.png' },
-                { id: 'grange-aur-cf', name: '2023 Aurelia Cabernet Franc', size: '750mL', abv: '13%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-cf.png' },
-                { id: 'grange-aur-pn', name: '2023 Aurelia Pinot Noir', size: '750mL', abv: '12%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-pn.png' },
-                { id: 'grange-aur-ch', name: '2023 Aurelia Chardonnay', size: '750mL', abv: '14.3%', price: 58.50, lcbo: '', icon: '🥂', image: './images/grange-aur-ch.png' },
-                { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-cf.png' },
-                { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-pn.png' },
-                { id: 'grange-est-ch', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 25.50, lcbo: '', icon: '🥂', image: './images/grange-est-ch.png' },
-                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' }
-            ]
-        };
-
-
+        // ACCOUNT NAMES - 249 total
         const ACCOUNT_NAMES = {
+            "ADMIN001": "ADMIN - Matt Conway",
             "5772KDCM": "Roy Thomson Hall",
             "TFM6CE7C": "Nobu",
             "844YRPRC": "Pearson Duty Free",
@@ -707,160 +719,80 @@
             "Q6EGAFC3": "Pure Spirits",
             "AZFBWPD3": "Simpl Things",
             "HG6TT7XV": "The 222",
-            "6EZ7ZYGK": "#N/A",
-            "JLT3G2N9": "#N/A",
-            "W7E3LP56": "#N/A",
-            "59XGA5B7": "#N/A",
-            "S6X99T9F": "#N/A",
-            "FA8U9MZJ": "#N/A",
-            "DD2Z9PJQ": "#N/A",
-            "Q237YJGG": "#N/A",
-            "B3UCM8XQ": "#N/A",
-            "JWH3MQKS": "#N/A",
-            "XPSPUECX": "#N/A",
-            "WE3TXWDN": "#N/A",
-            "8VJVFHWF": "#N/A",
-            "EQ5NXWFT": "#N/A",
-            "TRK8HAQM": "#N/A",
-            "5Z4JSP6S": "#N/A",
-            "ANBGE3BA": "#N/A",
-            "Y5X4U2G4": "#N/A",
-            "EBL5HXWH": "#N/A",
-            "UYH39GAM": "#N/A",
-            "SRN8PP64": "#N/A",
-            "Z8RNKBJU": "#N/A",
-            "YFX4KVBH": "#N/A",
-            "RLZENZYR": "#N/A",
-            "89LGCKEF": "#N/A",
-            "7KNN3P3J": "#N/A",
-            "A8STBL5S": "#N/A",
-            "EPKCJCNN": "#N/A",
-            "V6FUNE9J": "#N/A",
-            "9ZJGMH2N": "#N/A",
-            "MSCXHJNS": "#N/A",
-            "9Q7KZA3D": "#N/A",
-            "LQNG34NS": "#N/A",
-            "887CSG7T": "#N/A",
-            "BNFFUMZU": "#N/A",
-            "LBDJERTG": "#N/A",
-            "LK6SWBBL": "#N/A",
-            "U8RKNAVQ": "#N/A",
-            "J4KKDLRL": "#N/A",
-            "NKNGZMJD": "#N/A",
-            "GUYJXFZ2": "#N/A",
-            "EFAS783V": "#N/A",
-            "TJPZXFSV": "#N/A",
-            "BT27T5NG": "#N/A",
-            "DTHZX2Z6": "#N/A",
-            "DE4TLA68": "#N/A",
-            "UJ3W2B8B": "#N/A",
-            "FTAN3HCT": "#N/A",
-            "L4MDR9VB": "#N/A",
-            "HR8FZ7MJ": "#N/A",
-            "7TUWDANG": "#N/A",
-            "HYJ2HQWJ": "#N/A",
-            "DCJVZE54": "#N/A",
-            "UQHD7PVR": "#N/A",
-            "QBHUNS2Q": "#N/A",
-            "K5FYSW98": "#N/A",
-            "XCUKP74C": "#N/A",
-            "D26KJV9D": "#N/A",
-            "YMC2NAF2": "#N/A",
-            "8J8XRQV7": "#N/A",
-            "AS98Y5A8": "#N/A",
-            "DNMN37FW": "#N/A",
-            "L7WERJMG": "#N/A",
-            "TEF6ULQ8": "#N/A",
-            "L2MRK4D8": "#N/A",
-            "DZW5BHZM": "#N/A",
-            "UEZYM9XL": "#N/A",
-            "YDUKWBTP": "#N/A",
-            "422ASZEC": "#N/A",
-            "844A9KKS": "#N/A",
-            "UXM8S2XM": "#N/A",
-            "NB4SBAKJ": "#N/A",
-            "UH6MTPND": "#N/A",
-            "Q7H66ASV": "#N/A",
-            "D95NMVTR": "#N/A",
-            "CK2K5YFG": "#N/A",
-            "XW2TNJ7T": "#N/A",
-            "36KVGRUT": "#N/A",
-            "LA8789UH": "#N/A",
-            "26WN9PWS": "#N/A",
-            "D6NUS8YR": "#N/A",
-            "6LFSRYYD": "#N/A",
-            "APVLWZN9": "#N/A",
-            "BU2EME9B": "#N/A",
-            "VB5GTZHJ": "#N/A",
-            "TNF75R85": "#N/A",
-            "SVJZYJPZ": "#N/A",
-            "HST8RTJ8": "#N/A",
-            "MZS34HTL": "#N/A",
-            "WYKW3PLF": "#N/A",
-            "7C5LZD9B": "#N/A",
-            "TXCA9FLC": "#N/A",
-            "XJUGJWW3": "#N/A",
-            "D6UUREHR": "#N/A",
-            "5Z3BNNN5": "#N/A",
-            "QTWVTUGE": "#N/A",
-            "Z54K3XBN": "#N/A",
-            "3L7AQ9E5": "#N/A",
-            "AWBBBYVZ": "#N/A",
-            "7YXDQNVG": "#N/A",
-            "AFKKMSCP": "#N/A",
-            "AA3SWJQD": "#N/A",
-            "2MNGNCEJ": "#N/A",
-            "RRFMS4UA": "#N/A",
-            "LUKBWSMD": "#N/A",
-            "XW83YBCF": "#N/A",
-            "NWLMWUHW": "#N/A",
-            "8EDYXBLU": "#N/A",
-            "TZ75VD59": "#N/A",
-            "PU8PFECN": "#N/A",
-            "MJHUPJ7H": "#N/A",
-            "U58EV2S9": "#N/A",
-            "R5TPZLS9": "#N/A",
-            "FE29UCX2": "#N/A",
-            "LGTX93DG": "#N/A",
-            "FX2HWP8H": "#N/A",
-            "V25CDM5T": "#N/A",
-            "78QUNAUG": "#N/A",
-            "HNKREXYE": "#N/A",
-            "MSZ6JAZY": "#N/A",
-            "HFQJWWYY": "#N/A",
-            "KQRRUW7Y": "#N/A",
-            "UC5MGKFS": "#N/A",
-            "SA73LGXZ": "#N/A",
-            "MKPXRWFR": "#N/A",
-            "PERYNVKW": "#N/A",
-            "J2574CWQ": "#N/A",
-            "MUHN8LLN": "#N/A",
-            "MNVT4F8C": "#N/A",
-            "BJUBVBHV": "#N/A",
-            "G6KKPCU7": "#N/A",
-            "SKJ5Z47Z": "#N/A",
-            "ULTZCE29": "#N/A",
-            "CEUSNCU7": "#N/A",
-            "PFLP8F3S": "#N/A",
-            "MVC9RXGU": "#N/A",
-            "PTACRKD2": "#N/A",
-            "PLV4BZS4": "#N/A",
-            "LJLZB89C": "#N/A",
-            "Q6BGPR9P": "#N/A",
-            "TG4QTWQN": "#N/A",
-            "WMRMP8XS": "#N/A",
-            "Y4V6FS3U": "#N/A",
-            "F5M6NUS8": "#N/A",
-            "USCXUJSE": "#N/A"
+            "3YBBY8SD": "History",
+            "1B2VHWPH": "Budweiser Stage",
+            "NBYUKKMV": "Electric Island",
+            "4GALK4CC": "Danforth Music Hall",
+            "0PHR4APK": "Revival Event Venue",
+            "4GRBZBC4": "Mod Club",
+            "RFMRTZ9J": "Opera House",
+            "VLY88JJW": "Kee To Bala",
+            "0IB5SNPS": "Escapade",
+            "4O4TUYR5": "Lakehouse",
+            "9K0KUXPA": "Boiler Room",
+            "LAX2DYA3": "Veld"
         };
+
+        // PRODUCTS - 38 total with restrictions
+        const PRODUCTS = {
+            'Spirit of York': [
+                { id: 'soy-vodka', name: 'Vodka', size: '750mL', abv: '40%', price: 36.08, lcbo: '541755', icon: '🥃', image: './images/soy-vodka.png' },
+                { id: 'soy-gin', name: 'Gin', size: '750mL', abv: '40%', price: 36.08, lcbo: '536805', icon: '🍸', image: './images/soy-gin.png' },
+                { id: 'soy-aquavit', name: 'Aquavit', size: '750mL', abv: '44%', price: 39.63, lcbo: '645846', icon: '🥂', image: './images/soy-aquavit.png' },
+                { id: 'soy-coffee', name: 'Coffee Liqueur', size: '375mL', abv: '25%', price: 23.70, lcbo: '', icon: '☕', image: './images/soy-coffee.png' },
+                { id: 'soy-whisky', name: 'Whisky', size: '750mL', abv: '40%', price: 57.30, lcbo: '', icon: '🥃', image: './images/soy-whisky.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'soy-aperitivo', name: 'Aperitivo', size: '750mL', abv: '20%', price: 23.70, lcbo: '', icon: '🍹', image: './images/soy-aperitivo.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'soy-citruscello', name: 'Citruscello', size: '750mL', abv: '20%', price: 23.70, lcbo: '', icon: '🍋', image: './images/soy-citruscello.png', allowedAccounts: ['ADMIN001'] }
+            ],
+            'DISTL': [
+                { id: 'distl-vodka', name: 'DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: './images/distl-vodka.png' },
+                { id: 'distl-gin', name: 'DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34588', icon: '🍸', image: './images/distl-gin.png' },
+                { id: 'distl-whisky', name: 'DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '46049', icon: '🥃', image: './images/distl-whisky.png' },
+                { id: 'distl-pink', name: 'DISTL Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: './images/distl-pink.png' },
+                { id: 'distl-chili', name: 'DISTL Ancho Chili', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: './images/distl-chili.png' },
+                { id: 'distl-peach', name: 'RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍑', image: './images/distl-peach.png' },
+                { id: 'distl-rasp', name: 'RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍋', image: './images/distl-rasp.png' },
+                { id: 'distl-sweet-tea', name: 'DISTL Sweet Tea Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍵', image: './images/distl-sweet-tea.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-orange-liq', name: 'DISTL Orange Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍊', image: './images/distl-orange-liq.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-signature-gin', name: 'DISTL Signature Gin', size: '750mL', abv: '40%', price: 28.14, lcbo: '', icon: '🍸', image: './images/distl-signature-gin.png', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'] },
+                { id: 'distl-orange-vodka', name: 'DISTL Orange Vodka', size: '750mL', abv: '40%', price: 30.75, lcbo: '', icon: '🍊', image: './images/distl-orange-vodka.png', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
+                { id: 'distl-cherry-vodka', name: 'DISTL Cherry Vodka', size: '750mL', abv: '40%', price: 20.13, lcbo: '', icon: '🍒', image: './images/distl-cherry-vodka.png', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
+                { id: 'distl-sour-poet', name: 'DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: './images/distl-sour-poet.png', allowedAccounts: ['NQ7C553C'] }
+            ],
+            'The Grange': [
+                { id: 'grange-laf', name: 'Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 52.20, lcbo: '', icon: '🍾', image: './images/grange-laf.png' },
+                { id: 'grange-aur-cf', name: '2023 Aurelia Cabernet Franc', size: '750mL', abv: '13%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-cf.png' },
+                { id: 'grange-aur-pn', name: '2023 Aurelia Pinot Noir', size: '750mL', abv: '12%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-pn.png' },
+                { id: 'grange-aur-ch', name: '2023 Aurelia Chardonnay', size: '750mL', abv: '14.3%', price: 58.50, lcbo: '', icon: '🥂', image: './images/grange-aur-ch.png' },
+                { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-cf.png' },
+                { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-pn.png' },
+                { id: 'grange-est-ch', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 25.50, lcbo: '', icon: '🥂', image: './images/grange-est-ch.png' },
+                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' },
+                { id: 'grange-24f-pn', name: '24 F Pinot Noir', size: '750mL', abv: '13%', price: 24.65, lcbo: '', icon: '🍷', image: './images/grange-24f-pn.png' },
+                { id: 'grange-23f-unoaked-ch', name: '23 F Unoaked Chardonnay', size: '750mL', abv: '13%', price: 17.00, lcbo: '', icon: '🥂', image: './images/grange-23f-unoaked-ch.png' },
+                { id: 'grange-24e-pg', name: '24 E Pinot Gris', size: '750mL', abv: '13%', price: 21.25, lcbo: '', icon: '🥂', image: './images/grange-24e-pg.png' },
+                { id: 'grange-24e-rose', name: '24 E Rose', size: '750mL', abv: '13%', price: 20.40, lcbo: '', icon: '🍷', image: './images/grange-24e-rose.png' },
+                { id: 'grange-23e-gamay', name: '23 E Gamay', size: '750mL', abv: '13%', price: 22.10, lcbo: '', icon: '🍷', image: './images/grange-23e-gamay.png' }
+            ],
+            'Cases': [
+                { id: 'case-soy-vodka', name: 'Spirit of York Vodka Case', size: '12x750mL', abv: '40%', price: 64.00, lcbo: '', icon: '📦', image: './images/case-soy-vodka.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'case-soy-gin', name: 'Spirit of York Gin Case', size: '12x750mL', abv: '40%', price: 80.00, lcbo: '', icon: '📦', image: './images/case-soy-gin.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'case-soy-whisky', name: 'Spirit of York Whisky Case', size: '12x750mL', abv: '40%', price: 93.33, lcbo: '', icon: '📦', image: './images/case-soy-whisky.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'case-distl-pink', name: 'DISTL Pink Gin Case (12)', size: '12x750mL', abv: '35%', price: 117.34, lcbo: '', icon: '📦', image: './images/case-distl-pink.png', allowedAccounts: ['ADMIN001'] },
+                { id: 'case-distl-gin', name: 'DISTL Gin Case', size: '12x750mL', abv: '40%', price: 138.67, lcbo: '', icon: '📦', image: './images/case-distl-gin.png', allowedAccounts: ['ADMIN001'] }
+            ]
+        };
+
         function OrderPortal() {
             const [accountCode, setAccountCode] = useState('');
             const [accountName, setAccountName] = useState('');
+            const [selectedAccountForAdmin, setSelectedAccountForAdmin] = useState('');
             const [deliveryDate, setDeliveryDate] = useState('');
             const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
             const [cart, setCart] = useState({});
             const [submitting, setSubmitting] = useState(false);
             const [message, setMessage] = useState({ type: '', text: '' });
+            const [isAdmin, setIsAdmin] = useState(false);
 
             // Get account code from URL
             useEffect(() => {
@@ -868,24 +800,80 @@
                 const code = urlParams.get('account');
                 if (code) {
                     setAccountCode(code);
-                    // Look up the real account name from the mapping
-                    const realName = ACCOUNT_NAMES[code];
-                    setAccountName(realName || `Account ${code}`);
+                    if (code === 'ADMIN001') {
+                        setIsAdmin(true);
+                        setAccountName('ADMIN - Matt Conway');
+                    } else {
+                        const realName = ACCOUNT_NAMES[code];
+                        setAccountName(realName || `Account ${code}`);
+                    }
                 } else {
                     setAccountName('Guest Account');
                 }
             }, []);
+
+            // When admin selects an account
+            useEffect(() => {
+                if (isAdmin && selectedAccountForAdmin) {
+                    setAccountName(ACCOUNT_NAMES[selectedAccountForAdmin]);
+                }
+            }, [isAdmin, selectedAccountForAdmin]);
+
+            // Filter products based on account permissions
+            const getVisibleProducts = (brand) => {
+                const brandProducts = PRODUCTS[brand] || [];
+                const activeAccount = isAdmin && selectedAccountForAdmin ? selectedAccountForAdmin : accountCode;
+                
+                return brandProducts.filter(product => {
+                    // If no restrictions, show to everyone
+                    if (!product.allowedAccounts) return true;
+                    
+                    // If admin mode, show everything
+                    if (isAdmin) return true;
+                    
+                    // Otherwise check if account is in allowed list
+                    return product.allowedAccounts.includes(activeAccount);
+                });
+            };
+
+            // Calculate cart totals
+            const getCartTotals = () => {
+                let totalItems = 0;
+                let totalBottles = 0;
+                let totalPrice = 0;
+
+                Object.keys(cart).forEach(productId => {
+                    const qty = cart[productId];
+                    if (qty > 0) {
+                        totalItems++;
+                        totalBottles += qty;
+                        
+                        // Find product price
+                        for (const brand in PRODUCTS) {
+                            const product = PRODUCTS[brand].find(p => p.id === productId);
+                            if (product) {
+                                totalPrice += product.price * qty;
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                return { totalItems, totalBottles, totalPrice };
+            };
+
+            const { totalItems, totalBottles, totalPrice } = getCartTotals();
 
             // Get next available delivery dates (Mon/Wed/Fri only)
             const getDeliveryDates = () => {
                 const dates = [];
                 const today = new Date();
                 let checkDate = new Date(today);
-                checkDate.setDate(checkDate.getDate() + 1); // Start from tomorrow
+                checkDate.setDate(checkDate.getDate() + 1);
 
                 while (dates.length < 10) {
                     const dayOfWeek = checkDate.getDay();
-                    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) { // Mon, Wed, Fri
+                    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) {
                         dates.push(new Date(checkDate));
                     }
                     checkDate.setDate(checkDate.getDate() + 1);
@@ -921,12 +909,15 @@
                 }
             };
 
+            const getTotalBottles = () => {
+                return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+            };
+
             const getCartItems = () => {
                 const items = [];
                 Object.keys(cart).forEach(productId => {
                     const qty = cart[productId];
                     if (qty > 0) {
-                        // Find the product
                         for (const brand in PRODUCTS) {
                             const product = PRODUCTS[brand].find(p => p.id === productId);
                             if (product) {
@@ -938,37 +929,6 @@
                 });
                 return items;
             };
-
-            const getTotalBottles = () => {
-                return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-            };
-
-            const getCartTotals = () => {
-                let totalItems = 0;
-                let totalBottles = 0;
-                let totalPrice = 0;
-
-                Object.keys(cart).forEach(productId => {
-                    const qty = cart[productId];
-                    if (qty > 0) {
-                        totalItems++;
-                        totalBottles += qty;
-                        
-                        // Find product price
-                        for (const brand in PRODUCTS) {
-                            const product = PRODUCTS[brand].find(p => p.id === productId);
-                            if (product) {
-                                totalPrice += product.price * qty;
-                                break;
-                            }
-                        }
-                    }
-                });
-
-                return { totalItems, totalBottles, totalPrice };
-            };
-
-            const { totalItems, totalBottles, totalPrice } = getCartTotals();
 
             const handleSubmit = async (e) => {
                 e.preventDefault();
@@ -983,71 +943,94 @@
                     return;
                 }
 
+                // If admin, require account selection
+                if (isAdmin && !selectedAccountForAdmin) {
+                    setMessage({ type: 'error', text: 'Please select an account to place order for' });
+                    return;
+                }
+
                 setSubmitting(true);
                 setMessage({ type: '', text: '' });
 
                 try {
-                    // Prepare order details
                     const orderDetails = getCartItems()
                         .map(item => `${item.qty}/${item.brand}/${item.name}`)
                         .join('\n');
 
+                    const activeAccountName = isAdmin && selectedAccountForAdmin 
+                        ? ACCOUNT_NAMES[selectedAccountForAdmin]
+                        : accountName;
+                    
+                    const activeAccountCode = isAdmin && selectedAccountForAdmin
+                        ? selectedAccountForAdmin
+                        : accountCode;
+
                     const formData = {
-                        accountName,
-                        accountCode,
+                        accountName: activeAccountName,
+                        accountCode: activeAccountCode,
                         deliveryDate,
                         orderDetails,
-                        timestamp: new Date().toISOString()
+                        totalBottles: getTotalBottles()
                     };
 
-                    // Google Apps Script URL - DO NOT CHANGE THIS
-                    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec';
+                    const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
                     
                     const response = await fetch(SCRIPT_URL, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain',
-                        },
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData)
                     });
 
-                    // Check if the request was successful
-                    if (!response.ok) {
-                        throw new Error(`Server responded with status: ${response.status}`);
-                    }
-                    
-                    const result = await response.json();
-                    
-                    if (result.status === 'error') {
-                        throw new Error(result.message || 'Unknown error occurred');
-                    }
-
-                    setMessage({ type: 'success', text: 'Order submitted successfully! We\'ll process your delivery request.' });
-                    
-                    // Clear form
+                    setMessage({ type: 'success', text: 'Order submitted successfully!' });
                     setCart({});
                     setDeliveryDate('');
                     
-                    // Scroll to top
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-
                 } catch (error) {
                     console.error('Error:', error);
-                    setMessage({ type: 'error', text: 'Error submitting order. Please try again or contact us directly.' });
+                    setMessage({ type: 'error', text: 'Failed to submit order. Please try again.' });
                 } finally {
                     setSubmitting(false);
                 }
             };
 
-            const deliveryDates = getDeliveryDates();
-            const cartItems = getCartItems();
-
             return (
                 <div className="container">
+                    {/* ADMIN MODE HEADER */}
+                    {isAdmin && (
+                        <div className="admin-mode">
+                            <h3>🔐 ADMIN MODE - SELECT ACCOUNT</h3>
+                            <div className="account-selector">
+                                <select 
+                                    value={selectedAccountForAdmin}
+                                    onChange={(e) => setSelectedAccountForAdmin(e.target.value)}
+                                >
+                                    <option value="">-- Select Account to Place Order For --</option>
+                                    {Object.entries(ACCOUNT_NAMES)
+                                        .filter(([code]) => code !== 'ADMIN001')
+                                        .sort((a, b) => a[1].localeCompare(b[1]))
+                                        .map(([code, name]) => (
+                                            <option key={code} value={code}>
+                                                {name} ({code})
+                                            </option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="header">
                         <h1>12 TRINITY</h1>
-                        <div style={{fontSize: '14px', color: '#be835c', marginTop: '8px', letterSpacing: '2px'}}>Spirit of York Distillery • The Grange of Prince Edward</div>
-                        <div className="account-name">{accountName}</div>
+                        <div style={{fontSize: '14px', color: '#be835c', marginTop: '8px', letterSpacing: '2px'}}>
+                            Spirit of York Distillery • The Grange of Prince Edward
+                        </div>
+                        <div className="account-name">
+                            {isAdmin && selectedAccountForAdmin 
+                                ? `Ordering for: ${ACCOUNT_NAMES[selectedAccountForAdmin]}`
+                                : accountName
+                            }
+                        </div>
                     </div>
 
                     {message.text && (
@@ -1068,16 +1051,24 @@
                                     required
                                 >
                                     <option value="">Select a delivery date...</option>
-                                    {deliveryDates.map(date => (
-                                        <option key={date.toISOString()} value={date.toISOString().split('T')[0]}>
-                                            {date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                                        </option>
-                                    ))}
+                                    {getDeliveryDates().map(date => {
+                                        const dateStr = date.toISOString().split('T')[0];
+                                        const displayDate = date.toLocaleDateString('en-US', { 
+                                            weekday: 'long', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                        });
+                                        return (
+                                            <option key={dateStr} value={dateStr}>
+                                                {displayDate}
+                                            </option>
+                                        );
+                                    })}
                                 </select>
                             </div>
                         </div>
 
-                        <div className="catalog-section">
+                        <div className="products-section">
                             <h2>Select Products</h2>
                             
                             <div className="brand-tabs">
@@ -1094,7 +1085,7 @@
                             </div>
 
                             <div className="product-grid">
-                                {PRODUCTS[selectedBrand].map(product => (
+                                {getVisibleProducts(selectedBrand).map(product => (
                                     <div 
                                         key={product.id}
                                         className={`product-card ${cart[product.id] > 0 ? 'selected' : ''}`}
@@ -1108,7 +1099,7 @@
                                                     style={{maxWidth: '100%', maxHeight: '200px', objectFit: 'contain'}}
                                                 />
                                             ) : null}
-                                            <span style={{display: product.image ? 'none' : 'block'}}>{product.icon}</span>
+                                            <span style={{display: product.image ? 'none' : 'block'}} >{product.icon}</span>
                                         </div>
                                         <div className="product-name">{product.name}</div>
                                         <div className="product-details">
@@ -1140,32 +1131,6 @@
                                     </div>
                                 ))}
                             </div>
-                        </div>
-
-                        <div className="cart-summary">
-                            <h2>Order Summary</h2>
-                            
-                            {cartItems.length === 0 ? (
-                                <div className="empty-cart">No products selected</div>
-                            ) : (
-                                <>
-                                    {cartItems.map(item => (
-                                        <div key={item.id} className="cart-item">
-                                            <div className="cart-item-name">
-                                                {item.brand} - {item.name}
-                                            </div>
-                                            <div className="cart-item-qty">
-                                                {item.qty} {item.qty === 1 ? 'bottle' : 'bottles'}
-                                            </div>
-                                        </div>
-                                    ))}
-                                    
-                                    <div className="cart-total">
-                                        <span>Total Bottles:</span>
-                                        <span>{getTotalBottles()}</span>
-                                    </div>
-                                </>
-                            )}
                         </div>
 
                         <div className="submit-section">
