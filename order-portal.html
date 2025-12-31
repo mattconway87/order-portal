@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spirit of York - Order Portal</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #242429;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: #252f42;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header .account-name {
+            font-size: 16px;
+            color: #be835c;
+            font-weight: 500;
+        }
+
+        /* Delivery Section */
+        .delivery-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .delivery-section h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #252f42;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #242429;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #be835c;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Product Catalog */
+        .catalog-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .catalog-section h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #252f42;
+            font-weight: 600;
+        }
+
+        .brand-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .brand-tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .brand-tab.active {
+            color: #252f42;
+            border-bottom-color: #be835c;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .product-card:hover {
+            border-color: #be835c;
+            box-shadow: 0 4px 12px rgba(190, 131, 92, 0.15);
+        }
+
+        .product-card.selected {
+            border-color: #be835c;
+            background: #fef9f5;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #252f42 0%, #be835c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 28px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #252f42;
+            text-align: center;
+        }
+
+        .product-details {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #be835c;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quantity-input button {
+            width: 36px;
+            height: 36px;
+            border: 2px solid #be835c;
+            background: white;
+            color: #be835c;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .quantity-input button:hover {
+            background: #be835c;
+            color: white;
+        }
+
+        .quantity-input input {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .cart-summary h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #252f42;
+            font-weight: 600;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+            color: #242429;
+        }
+
+        .cart-item-qty {
+            color: #be835c;
+            font-weight: 600;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #252f42;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+            font-size: 15px;
+        }
+
+        /* Submit Button */
+        .submit-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #252f42 0%, #be835c 100%);
+            color: white;
+            border: none;
+            padding: 16px 60px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(37, 47, 66, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 47, 66, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .error-message {
+            background: #f44336;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-tabs {
+                flex-direction: column;
+            }
+
+            .brand-tab {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Product data from your portfolio
+        const PRODUCTS = {
+            'Spirit of York': [
+                { id: 'soy-vodka', name: 'Vodka', size: '750mL', abv: '40%', price: 34.08, lcbo: '541755', icon: '🥃' },
+                { id: 'soy-gin', name: 'Gin', size: '750mL', abv: '40%', price: 34.08, lcbo: '536805', icon: '🍸' },
+                { id: 'soy-aquavit', name: 'Aquavit', size: '750mL', abv: '44%', price: 37.43, lcbo: '645846', icon: '🥂' },
+                { id: 'soy-coffee', name: 'Coffee Liqueur', size: '375mL', abv: '25%', price: 22.38, lcbo: '', icon: '☕' }
+            ],
+            'DISTL': [
+                { id: 'distl-vodka', name: 'DISTL Vodka', size: '750mL', abv: '40%', price: 26.14, lcbo: '', icon: '🥃' },
+                { id: 'distl-gin', name: 'DISTL Gin', size: '750mL', abv: '40%', price: 29.90, lcbo: '34588', icon: '🍸' },
+                { id: 'distl-whisky', name: 'DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 27.98, lcbo: '46049', icon: '🥃' },
+                { id: 'distl-pink', name: 'DISTL Pink Gin', size: '750mL', abv: '35%', price: 29.90, lcbo: '', icon: '💗' },
+                { id: 'distl-chili', name: 'DISTL Ancho Chili', size: '750mL', abv: '40%', price: 29.90, lcbo: '', icon: '🌶️' },
+                { id: 'distl-peach', name: 'RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.18, lcbo: '', icon: '🍑' },
+                { id: 'distl-rasp', name: 'RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.18, lcbo: '', icon: '🍋' }
+            ],
+            'The Grange': [
+                { id: 'grange-laf', name: 'Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 49.30, lcbo: '', icon: '🍾' },
+                { id: 'grange-aur-cf', name: '2023 Aurelia Cabernet Franc', size: '750mL', abv: '13%', price: 55.25, lcbo: '', icon: '🍷' },
+                { id: 'grange-aur-pn', name: '2023 Aurelia Pinot Noir', size: '750mL', abv: '12%', price: 55.25, lcbo: '', icon: '🍷' },
+                { id: 'grange-aur-ch', name: '2023 Aurelia Chardonnay', size: '750mL', abv: '14.3%', price: 55.25, lcbo: '', icon: '🥂' },
+                { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 27.20, lcbo: '', icon: '🍷' },
+                { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 27.20, lcbo: '', icon: '🍷' },
+                { id: 'grange-est-ch', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 25.50, lcbo: '', icon: '🥂' },
+                { id: 'grange-alm-red', name: '2024 Almanac Red', size: '750mL', abv: '13%', price: 13.35, lcbo: '', icon: '🍷' },
+                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 11.85, lcbo: '', icon: '🥂' }
+            ]
+        };
+
+        function OrderPortal() {
+            const [accountCode, setAccountCode] = useState('');
+            const [accountName, setAccountName] = useState('');
+            const [deliveryDate, setDeliveryDate] = useState('');
+            const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
+            const [cart, setCart] = useState({});
+            const [submitting, setSubmitting] = useState(false);
+            const [message, setMessage] = useState({ type: '', text: '' });
+
+            // Get account code from URL
+            useEffect(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('account');
+                if (code) {
+                    setAccountCode(code);
+                    // In production, you'd fetch the account name from your database
+                    setAccountName(`Account ${code}`);
+                } else {
+                    setAccountName('Guest Account');
+                }
+            }, []);
+
+            // Get next available delivery dates (Mon/Wed/Fri only)
+            const getDeliveryDates = () => {
+                const dates = [];
+                const today = new Date();
+                let checkDate = new Date(today);
+                checkDate.setDate(checkDate.getDate() + 1); // Start from tomorrow
+
+                while (dates.length < 10) {
+                    const dayOfWeek = checkDate.getDay();
+                    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) { // Mon, Wed, Fri
+                        dates.push(new Date(checkDate));
+                    }
+                    checkDate.setDate(checkDate.getDate() + 1);
+                }
+                return dates;
+            };
+
+            const updateQuantity = (productId, delta) => {
+                setCart(prev => {
+                    const currentQty = prev[productId] || 0;
+                    const newQty = Math.max(0, currentQty + delta);
+                    
+                    if (newQty === 0) {
+                        const newCart = { ...prev };
+                        delete newCart[productId];
+                        return newCart;
+                    }
+                    
+                    return { ...prev, [productId]: newQty };
+                });
+            };
+
+            const setQuantity = (productId, value) => {
+                const qty = parseInt(value) || 0;
+                if (qty === 0) {
+                    setCart(prev => {
+                        const newCart = { ...prev };
+                        delete newCart[productId];
+                        return newCart;
+                    });
+                } else {
+                    setCart(prev => ({ ...prev, [productId]: qty }));
+                }
+            };
+
+            const getCartItems = () => {
+                const items = [];
+                Object.keys(cart).forEach(productId => {
+                    const qty = cart[productId];
+                    if (qty > 0) {
+                        // Find the product
+                        for (const brand in PRODUCTS) {
+                            const product = PRODUCTS[brand].find(p => p.id === productId);
+                            if (product) {
+                                items.push({ ...product, brand, qty });
+                                break;
+                            }
+                        }
+                    }
+                });
+                return items;
+            };
+
+            const getTotalBottles = () => {
+                return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                
+                if (getTotalBottles() === 0) {
+                    setMessage({ type: 'error', text: 'Please select at least one product' });
+                    return;
+                }
+
+                if (!deliveryDate) {
+                    setMessage({ type: 'error', text: 'Please select a delivery date' });
+                    return;
+                }
+
+                setSubmitting(true);
+                setMessage({ type: '', text: '' });
+
+                try {
+                    // Prepare order details
+                    const orderDetails = getCartItems()
+                        .map(item => `${item.qty}/${item.brand}/${item.name}`)
+                        .join('\n');
+
+                    const formData = {
+                        accountName,
+                        accountCode,
+                        deliveryDate,
+                        orderDetails,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    // Google Apps Script URL - DO NOT CHANGE THIS
+                    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec';
+                    
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'text/plain',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    // Check if the request was successful
+                    if (!response.ok) {
+                        throw new Error(`Server responded with status: ${response.status}`);
+                    }
+                    
+                    const result = await response.json();
+                    
+                    if (result.status === 'error') {
+                        throw new Error(result.message || 'Unknown error occurred');
+                    }
+
+                    setMessage({ type: 'success', text: 'Order submitted successfully! We\'ll process your delivery request.' });
+                    
+                    // Clear form
+                    setCart({});
+                    setDeliveryDate('');
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    setMessage({ type: 'error', text: 'Error submitting order. Please try again or contact us directly.' });
+                } finally {
+                    setSubmitting(false);
+                }
+            };
+
+            const deliveryDates = getDeliveryDates();
+            const cartItems = getCartItems();
+
+            return (
+                <div className="container">
+                    <div className="header">
+                        <h1>SPIRIT OF YORK DISTILLERY Co.</h1>
+                        <div className="account-name">{accountName}</div>
+                    </div>
+
+                    {message.text && (
+                        <div className={message.type === 'success' ? 'success-message' : 'error-message'}>
+                            {message.text}
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="delivery-section">
+                            <h2>Delivery Information</h2>
+                            
+                            <div className="form-group">
+                                <label>Delivery Date *</label>
+                                <select 
+                                    value={deliveryDate} 
+                                    onChange={(e) => setDeliveryDate(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Select a delivery date...</option>
+                                    {deliveryDates.map(date => (
+                                        <option key={date.toISOString()} value={date.toISOString().split('T')[0]}>
+                                            {date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="catalog-section">
+                            <h2>Select Products</h2>
+                            
+                            <div className="brand-tabs">
+                                {Object.keys(PRODUCTS).map(brand => (
+                                    <button
+                                        key={brand}
+                                        type="button"
+                                        className={`brand-tab ${selectedBrand === brand ? 'active' : ''}`}
+                                        onClick={() => setSelectedBrand(brand)}
+                                    >
+                                        {brand}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="product-grid">
+                                {PRODUCTS[selectedBrand].map(product => (
+                                    <div 
+                                        key={product.id}
+                                        className={`product-card ${cart[product.id] > 0 ? 'selected' : ''}`}
+                                    >
+                                        <div className="product-icon">{product.icon}</div>
+                                        <div className="product-name">{product.name}</div>
+                                        <div className="product-details">
+                                            {product.size} | {product.abv}
+                                            {product.lcbo && <><br/>LCBO #{product.lcbo}</>}
+                                        </div>
+                                        <div className="product-price">${product.price.toFixed(2)}</div>
+                                        
+                                        <div className="quantity-input">
+                                            <button 
+                                                type="button"
+                                                onClick={() => updateQuantity(product.id, -1)}
+                                            >
+                                                -
+                                            </button>
+                                            <input 
+                                                type="number"
+                                                min="0"
+                                                value={cart[product.id] || 0}
+                                                onChange={(e) => setQuantity(product.id, e.target.value)}
+                                            />
+                                            <button 
+                                                type="button"
+                                                onClick={() => updateQuantity(product.id, 1)}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="cart-summary">
+                            <h2>Order Summary</h2>
+                            
+                            {cartItems.length === 0 ? (
+                                <div className="empty-cart">No products selected</div>
+                            ) : (
+                                <>
+                                    {cartItems.map(item => (
+                                        <div key={item.id} className="cart-item">
+                                            <div className="cart-item-name">
+                                                {item.brand} - {item.name}
+                                            </div>
+                                            <div className="cart-item-qty">
+                                                {item.qty} {item.qty === 1 ? 'bottle' : 'bottles'}
+                                            </div>
+                                        </div>
+                                    ))}
+                                    
+                                    <div className="cart-total">
+                                        <span>Total Bottles:</span>
+                                        <span>{getTotalBottles()}</span>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+
+                        <div className="submit-section">
+                            <button 
+                                type="submit" 
+                                className="submit-btn"
+                                disabled={submitting || getTotalBottles() === 0}
+                            >
+                                {submitting ? 'Submitting Order...' : 'Submit Order'}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<OrderPortal />, document.getElementById('root'));
+    </script>
+</body>
+</html>
