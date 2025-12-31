@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -660,14 +659,14 @@
                 { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['NQ7C553C'], techSheet: 19 }
             ],
             'The Grange': [
-                { id: 'grange-lafontaine-2021', name: 'LaFontaine (2021)', size: '750mL', abv: '12.5%', price: 16.39, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 20 },
-                { id: 'grange-rose', name: 'Rosé', size: '750mL', abv: '12%', price: 16.39, lcbo: '', icon: '🌸', image: '', isWine: true, techSheet: 21 },
-                { id: 'grange-gamay', name: 'Gamay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 22 },
-                { id: 'grange-chardonnay', name: 'Chardonnay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 23 },
-                { id: 'grange-pinot-noir', name: 'Pinot Noir', size: '750mL', abv: '13.5%', price: 24.59, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 24 },
-                { id: 'grange-cab-franc', name: 'Cabernet Franc', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 25 },
-                { id: 'grange-riesling', name: 'Riesling', size: '750mL', abv: '11%', price: 16.39, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 26 },
-                { id: 'grange-pinot-gris', name: 'Pinot Gris', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 27 }
+                { id: 'grange-lafontaine', name: '2021 Lafontaine du Loup Brut', size: '750mL', abv: '12.5%', price: 16.39, lcbo: '', icon: '🍾', image: '', isWine: true, techSheet: 20 },
+                { id: 'grange-aurelia-chard', name: '2023 Aurelia Series Chardonnay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 21 },
+                { id: 'grange-aurelia-cab', name: '2023 Aurelia Series Cabernet Franc', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 22 },
+                { id: 'grange-aurelia-pinot', name: '2023 Aurelia Series Pinot Noir', size: '750mL', abv: '13.5%', price: 24.59, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 23 },
+                { id: 'grange-estate-pinot', name: '2024 Estate Pinot Noir', size: '750mL', abv: '13.5%', price: 24.59, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 24 },
+                { id: 'grange-estate-cab', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 25 },
+                { id: 'grange-estate-chard', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 26 },
+                { id: 'grange-almanac-white', name: '2024 Almanac White', size: '750mL', abv: '12%', price: 16.39, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 27 }
             ]
         };
 
@@ -700,6 +699,14 @@
             const [pendingCartItem, setPendingCartItem] = useState(null);
             const [wineShippingAcknowledged, setWineShippingAcknowledged] = useState(false);
             const [spiritDeliveryAcknowledged, setSpiritDeliveryAcknowledged] = useState(false);
+            const [announcementImages, setAnnouncementImages] = useState({
+                spiritOfYork: 'https://via.placeholder.com/600x400/252f42/ffffff?text=Spirit+of+York',
+                grange: 'https://via.placeholder.com/600x400/be835c/ffffff?text=The+Grange'
+            });
+            const [announcementMessages, setAnnouncementMessages] = useState({
+                spiritOfYork: 'Welcome to the new year! Check out our latest releases and special offers.',
+                grange: 'Discover our exceptional wines from Prince Edward County\'s finest vineyard.'
+            });
 
             // Get account code from URL
             useEffect(() => {
@@ -709,22 +716,32 @@
                     setAccountCode(code);
                     setAccountName(ACCOUNT_NAMES[code] || code);
                     
-                    // Load low stock settings if admin
-                    if (code === 'ADMIN001') {
-                        const savedLowStock = localStorage.getItem('lowStockItems');
-                        if (savedLowStock) {
-                            setLowStockItems(JSON.parse(savedLowStock));
-                        }
+                    // Load settings
+                    const savedLowStock = localStorage.getItem('lowStockItems');
+                    if (savedLowStock) {
+                        setLowStockItems(JSON.parse(savedLowStock));
+                    }
+                    
+                    const savedAnnouncementImages = localStorage.getItem('announcementImages');
+                    if (savedAnnouncementImages) {
+                        setAnnouncementImages(JSON.parse(savedAnnouncementImages));
+                    }
+                    
+                    const savedAnnouncementMessages = localStorage.getItem('announcementMessages');
+                    if (savedAnnouncementMessages) {
+                        setAnnouncementMessages(JSON.parse(savedAnnouncementMessages));
                     }
                 }
             }, []);
 
-            // Save low stock settings
+            // Save settings
             useEffect(() => {
                 if (accountCode === 'ADMIN001') {
                     localStorage.setItem('lowStockItems', JSON.stringify(lowStockItems));
+                    localStorage.setItem('announcementImages', JSON.stringify(announcementImages));
+                    localStorage.setItem('announcementMessages', JSON.stringify(announcementMessages));
                 }
-            }, [lowStockItems, accountCode]);
+            }, [lowStockItems, announcementImages, announcementMessages, accountCode]);
 
             const isAdmin = accountCode === 'ADMIN001';
 
@@ -897,32 +914,71 @@
 
                     {/* Announcements Section */}
                     <div className="announcements-section">
+                        {isAdmin && (
+                            <div style={{marginBottom: '20px', padding: '15px', background: '#fff8f3', borderRadius: '8px'}}>
+                                <div style={{fontWeight: 600, marginBottom: '10px', color: '#be835c'}}>⚙️ Edit Announcements (Admin Only)</div>
+                                <div style={{display: 'grid', gap: '15px'}}>
+                                    <div>
+                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>Spirit of York Image URL:</label>
+                                        <input 
+                                            type="text"
+                                            value={announcementImages.spiritOfYork}
+                                            onChange={(e) => setAnnouncementImages(prev => ({...prev, spiritOfYork: e.target.value}))}
+                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px'}}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>Spirit of York Message:</label>
+                                        <textarea 
+                                            value={announcementMessages.spiritOfYork}
+                                            onChange={(e) => setAnnouncementMessages(prev => ({...prev, spiritOfYork: e.target.value}))}
+                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px', minHeight: '60px'}}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>The Grange Image URL:</label>
+                                        <input 
+                                            type="text"
+                                            value={announcementImages.grange}
+                                            onChange={(e) => setAnnouncementImages(prev => ({...prev, grange: e.target.value}))}
+                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px'}}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>The Grange Message:</label>
+                                        <textarea 
+                                            value={announcementMessages.grange}
+                                            onChange={(e) => setAnnouncementMessages(prev => ({...prev, grange: e.target.value}))}
+                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px', minHeight: '60px'}}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                         <div className="announcements-grid">
                             <div className="announcement-card">
                                 <img 
-                                    src="https://via.placeholder.com/600x400/252f42/ffffff?text=Spirit+of+York"
+                                    src={announcementImages.spiritOfYork}
                                     alt="Spirit of York" 
                                     className="announcement-image"
                                 />
                                 <div className="announcement-content">
                                     <div className="announcement-title">Spirit of York Distillery</div>
                                     <div className="announcement-text">
-                                        Welcome to the new year! Check out our latest releases and special offers.
-                                        {isAdmin && <div style={{marginTop: '10px', fontSize: '12px', color: '#999'}}>[Admin: Edit this message and upload image]</div>}
+                                        {announcementMessages.spiritOfYork}
                                     </div>
                                 </div>
                             </div>
                             <div className="announcement-card">
                                 <img 
-                                    src="https://via.placeholder.com/600x400/be835c/ffffff?text=The+Grange"
+                                    src={announcementImages.grange}
                                     alt="The Grange" 
                                     className="announcement-image"
                                 />
                                 <div className="announcement-content">
                                     <div className="announcement-title">The Grange of Prince Edward</div>
                                     <div className="announcement-text">
-                                        Discover our exceptional wines from Prince Edward County's finest vineyard.
-                                        {isAdmin && <div style={{marginTop: '10px', fontSize: '12px', color: '#999'}}>[Admin: Edit this message and upload image]</div>}
+                                        {announcementMessages.grange}
                                     </div>
                                 </div>
                             </div>
@@ -989,10 +1045,9 @@
                             onClick={() => setSelectedBrand('Spirit of York')}
                         >
                             <img 
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
+                                src="./Spirit of York Logo.png" 
                                 alt="Spirit of York"
                                 className="tab-logo"
-                                style={{filter: 'brightness(0)'}}
                             />
                         </button>
                         <button
@@ -1000,10 +1055,9 @@
                             onClick={() => setSelectedBrand('The Grange')}
                         >
                             <img 
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
+                                src="./Logo.png" 
                                 alt="The Grange"
                                 className="tab-logo"
-                                style={{filter: 'brightness(0)'}}
                             />
                         </button>
                     </div>
