@@ -8,7 +8,6 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -49,6 +48,57 @@
             font-size: 16px;
             color: #be835c;
             font-weight: 500;
+        }
+
+        /* Announcements Section */
+        .announcements-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .announcements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .announcements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .announcement-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .announcement-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .announcement-content {
+            padding: 20px;
+        }
+
+        .announcement-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #252f42;
+            margin-bottom: 10px;
+        }
+
+        .announcement-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
         }
 
         /* Delivery Section */
@@ -98,12 +148,53 @@
         }
 
         .form-group textarea {
-            resize: vertical;
             min-height: 80px;
+            resize: vertical;
         }
 
-        /* Product Catalog */
-        .catalog-section {
+        /* Product Tabs - Logo Based */
+        .product-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: white;
+            border: 3px solid #e0e0e0;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            height: 100px;
+        }
+
+        .tab-button:hover {
+            border-color: #be835c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-button.active {
+            border-color: #be835c;
+            background: #fff8f3;
+            box-shadow: 0 4px 12px rgba(190,131,92,0.2);
+        }
+
+        .tab-logo {
+            max-width: 100%;
+            max-height: 70px;
+            object-fit: contain;
+        }
+
+        /* Products Grid */
+        .products-section {
             background: white;
             padding: 25px;
             border-radius: 8px;
@@ -111,39 +202,23 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .catalog-section h2 {
-            font-size: 18px;
+        .products-section h2 {
+            font-size: 20px;
             margin-bottom: 20px;
             color: #252f42;
             font-weight: 600;
         }
 
-        .brand-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #e0e0e0;
-            flex-wrap: wrap;
-        }
-
-        .brand-tab {
-            padding: 12px 20px;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
+        .wine-note {
+            background: #fff8f3;
+            border-left: 4px solid #be835c;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
             color: #666;
-            transition: all 0.3s;
         }
 
-        .brand-tab.active {
-            color: #252f42;
-            border-bottom-color: #be835c;
-        }
-
-        .product-grid {
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
@@ -154,323 +229,401 @@
             border-radius: 8px;
             padding: 20px;
             transition: all 0.3s;
-            background: white;
+            position: relative;
+            cursor: pointer;
         }
 
         .product-card:hover {
             border-color: #be835c;
-            box-shadow: 0 4px 12px rgba(190, 131, 92, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .product-card.selected {
-            border-color: #be835c;
-            background: #fef9f5;
-        }
-
-        .product-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #252f42 0%, #be835c 100%);
-            border-radius: 50%;
+        .product-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 28px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
         }
 
         .product-name {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 8px;
             color: #252f42;
-            text-align: center;
+            flex: 1;
+        }
+
+        .product-icon {
+            font-size: 28px;
+            margin-left: 10px;
         }
 
         .product-details {
             font-size: 13px;
             color: #666;
-            margin-bottom: 12px;
-            text-align: center;
+            margin-bottom: 8px;
         }
 
         .product-price {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             color: #be835c;
-            text-align: center;
             margin-bottom: 15px;
         }
 
-        .quantity-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
+        .low-stock-badge {
+            background: #ff4444;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulse 2s infinite;
         }
 
-        .quantity-input button {
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .qty-button {
             width: 36px;
             height: 36px;
             border: 2px solid #be835c;
             background: white;
             color: #be835c;
             border-radius: 6px;
-            cursor: pointer;
             font-size: 18px;
-            font-weight: 600;
-            transition: all 0.3s;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .quantity-input button:hover {
+        .qty-button:hover:not(:disabled) {
             background: #be835c;
             color: white;
         }
 
-        .quantity-input input {
-            flex: 1;
+        .qty-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .qty-display {
+            min-width: 40px;
             text-align: center;
-            padding: 8px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
         }
 
-        /* Cart Summary */
-        .cart-summary {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .cart-summary h2 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #252f42;
-            font-weight: 600;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-
-        .cart-item-name {
-            font-weight: 500;
-            color: #242429;
-        }
-
-        .cart-item-qty {
-            color: #be835c;
-            font-weight: 600;
-        }
-
-        .cart-total {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #e0e0e0;
-            font-size: 18px;
-            font-weight: 600;
-            color: #252f42;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .empty-cart {
-            text-align: center;
-            color: #999;
-            padding: 30px;
-            font-size: 15px;
-        }
-
-        /* Submit Button */
-        .submit-section {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #252f42 0%, #be835c 100%);
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: #be835c;
             color: white;
             border: none;
-            padding: 16px 60px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 15px;
             font-weight: 600;
-            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(37, 47, 66, 0.3);
+            transition: all 0.2s;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37, 47, 66, 0.4);
+        .add-to-cart-btn:hover {
+            background: #a66d4a;
+            transform: translateY(-1px);
         }
 
-        .submit-btn:disabled {
+        .add-to-cart-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
             transform: none;
         }
 
-        .success-message {
-            background: #4caf50;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .error-message {
-            background: #f44336;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 22px;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .brand-tabs {
-                flex-direction: column;
-            }
-
-            .brand-tab {
-                width: 100%;
-                text-align: left;
-            }
-        }
-
-        /* CART TOTAL FOOTER */
-        .cart-footer {
+        /* Cart */
+        .cart-section {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: #252f42;
+            background: white;
             border-top: 3px solid #be835c;
             padding: 20px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
             z-index: 1000;
         }
 
-        .cart-footer-content {
+        .cart-content {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            margin-bottom: 15px;
         }
 
-        .cart-stats {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .cart-stat {
-            text-align: center;
-        }
-
-        .cart-stat-label {
-            font-size: 12px;
-            color: #be835c;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .cart-stat-value {
-            font-size: 24px;
-            color: white;
+        .cart-title {
+            font-size: 18px;
             font-weight: 600;
+            color: #252f42;
         }
 
         .cart-total {
-            background: rgba(190, 131, 92, 0.2);
-            padding: 10px 30px;
-            border-radius: 8px;
-            border: 2px solid #be835c;
-        }
-
-        .cart-total .cart-stat-value {
-            font-size: 28px;
+            font-size: 24px;
+            font-weight: 700;
             color: #be835c;
         }
 
-        @media (max-width: 768px) {
-            .cart-footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .cart-stats {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-            }
-        }
-    
-
-        /* ADMIN MODE STYLES */
-        .admin-mode {
-            background: linear-gradient(135deg, #be835c 0%, #d4a574 100%);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #252f42;
-            margin-bottom: 0;
-        }
-
-        .admin-mode h3 {
-            color: white;
+        .cart-items {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
             margin-bottom: 15px;
-            font-size: 18px;
-            letter-spacing: 2px;
+            max-height: 100px;
+            overflow-y: auto;
         }
 
-        .account-selector {
-            max-width: 600px;
-            margin: 0 auto;
+        .cart-item {
+            background: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .account-selector select {
+        .cart-item-remove {
+            background: #ff4444;
+            color: white;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .submit-order-btn {
             width: 100%;
-            padding: 15px;
-            font-size: 16px;
-            border: 2px solid #252f42;
+            padding: 16px;
+            background: #252f42;
+            color: white;
+            border: none;
             border-radius: 8px;
-            background: white;
-            color: #242429;
+            font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .account-selector select:focus {
-            outline: none;
-            border-color: #252f42;
-            box-shadow: 0 0 10px rgba(190, 131, 92, 0.5);
+        .submit-order-btn:hover:not(:disabled) {
+            background: #1a2332;
+        }
+
+        .submit-order-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #252f42;
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 25px;
+            white-space: pre-line;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn-primary {
+            background: #be835c;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: #a66d4a;
+        }
+
+        .modal-btn-secondary {
+            background: #e0e0e0;
+            color: #242429;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        /* Tech Sheet Viewer */
+        .tech-sheet-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #252f42;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        .tech-sheet-icon:hover {
+            background: #be835c;
+            transform: scale(1.1);
+        }
+
+        .tech-sheet-viewer {
+            width: 100%;
+            height: 80vh;
+            border: none;
+        }
+
+        /* Admin Controls */
+        .admin-section {
+            background: #fff8f3;
+            border: 2px solid #be835c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .admin-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #be835c;
+            margin-bottom: 15px;
+        }
+
+        .admin-selector {
+            margin-bottom: 20px;
+        }
+
+        .low-stock-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .low-stock-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .low-stock-toggle input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .low-stock-toggle label {
+            font-size: 14px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .message-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .message-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-section {
+                padding: 15px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -478,708 +631,554 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
-        // ACCOUNT NAMES - 249 total
-        const ACCOUNT_NAMES = {
-            "ADMIN001": "ADMIN - Matt Conway",
-            "5772KDCM": "Roy Thomson Hall",
-            "TFM6CE7C": "Nobu",
-            "844YRPRC": "Pearson Duty Free",
-            "CTSLRV4P": "Massey Hall",
-            "QQFX5RA7": "Spirit of York Distillery",
-            "UW7RZNV4": "Death and Taxes",
-            "R5QUJEUH": "Drom Taberna",
-            "APKB7U8N": "Bar Banane",
-            "GC3Z5V3R": "Grange of Prince Edward",
-            "ZEYYG74V": "The Royal Hotel",
-            "8DQ6KBL5": "Parsons Brewing Company",
-            "C3AD3EZM": "Liberty Soho",
-            "WKACJP7C": "The Avling Kitchen and Brewery",
-            "FN4WVL3L": "Petros82 (Adelaide)",
-            "BYNFTYZC": "Ojibiway Club",
-            "M4PKK3WH": "Kasa Moto",
-            "U7JF8Q8V": "Greta YYZ",
-            "3WYJ9PEE": "Fairmont Royal York Hotel",
-            "YH54D9LA": "CN Tower",
-            "NQ7C553C": "Bar Poet",
-            "5VTDAACG": "Jacobs & Co. Steakhouse",
-            "5AW6RUZ2": "Apt 200",
-            "5LMGB6ZD": "Empire Sandy",
-            "C2HJFYDV": "Fawn Over Market",
-            "BY9FJNL9": "Crossroads Restaurant",
-            "ZU8DWG7S": "David Duncan House",
-            "NRNT3G3W": "Alice Restaurant & Bar",
-            "FMPH8AXB": "Hamptons Restaurant",
-            "CFJDKFG2": "Ritz Carlton",
-            "JW6JYHNG": "Ganaraska Brewing Co.",
-            "BL8ELU93": "Local Public Eatery (Adelaide)",
-            "ZNH52R5H": "Ruby Soho",
-            "NPVEX9LB": "Boxcar Social Summerhill",
-            "3WLM3FS3": "Luxe Appliance Studio",
-            "LSMYDXX6": "915 DuPont Cafe",
-            "WKYW93MR": "Stone Crock Inc.",
-            "XT7QA8ZY": "Barber & Co.",
-            "MX9HTXP6": "La Condesa",
-            "P9M675KA": "Louf",
-            "SKVTNGKP": "Vinny",
-            "BLGX9CZ7": "FIRST Insurance Funding of Canada",
-            "SG36QFNJ": "RSM",
-            "N8P7S3WN": "Linny's Restaurant",
-            "SQ2FLLFH": "Beau Bistro",
-            "GQ32RHFG": "Contrada",
-            "JJBZAAZ2": "The Fredrick",
-            "ELST5DK8": "Bar Piquette",
-            "7PVKRHDK": "Trillium Woods Golf Course",
-            "FRU6VD6W": "Hendersons Brewing",
-            "P4Y9VX3K": "Local Public Eatery (Liberty)",
-            "2YM3FVV6": "Aera",
-            "ZQTHS7VQ": "Decanter (The Cellar Source)",
-            "S2ET7QBQ": "Mira Mira Diner",
-            "VU8N9JNW": "Westin Harbour Castle",
-            "4TVVHA2M": "Portland Square",
-            "5ZJVEJ4V": "Melrose / Piccolo Caffe e Vino",
-            "7FTWKS5S": "Queenston Lewiston",
-            "JAYWXCU6": "Sand and Pearl Oyster Bar",
-            "4A5873T2": "Coffee Oysters Champagne | A Toi",
-            "5P6RBBSM": "Claramount Club",
-            "PGZYDN8W": "Kingston Waterfront Hotel (Aqua Terra)",
-            "6L9DU56E": "Arden Park Hotel",
-            "63VP82A5": "Ember",
-            "3E5D358V": "Hy's Steakhouse",
-            "HJ3P9JKQ": "Mount Alverno",
-            "WQLRAUAQ": "Juna Restaurant",
-            "XEB59A52": "Don Valley Golf Course",
-            "UVPAYY9A": "Merrill House",
-            "NAAL4TKC": "Black Bear Ridge Golf Course",
-            "TRYSLCKP": "(Untitled) by Flaunt Boutique",
-            "99HQ3KCN": "Hawker",
-            "B23MHGKP": "Humber Valley Golf Course",
-            "QSK6K7FT": "The Rosebud",
-            "GJJH57ZT": "Expedition Helicopters",
-            "A2AXBGNP": "Bloomfield Public House",
-            "BJV23SDZ": "Red House Downtown",
-            "EFNE8ML6": "Vic Social",
-            "VEV56CQ8": "Lucie",
-            "W34SWXZF": "aKin",
-            "S5QRLQKS": "Table Rock House Restaurant",
-            "DX8KTWAV": "The Yardbird",
-            "7WACALXF": "Mother Cocktail Bar",
-            "YNPDSMBT": "Florin",
-            "ANAVKQFL": "The Wine Sisters",
-            "X79QTBHH": "555 Brewing Co.",
-            "YWWXNAEY": "Harbour Sixty Steakhouse",
-            "B9BGQ4AM": "Elora Mill Hotel & Spa",
-            "SC3EUHYR": "Saint John's Tavern",
-            "3ELKA2ZU": "Bar Mordecai",
-            "6ARQ7VX5": "Petros82 (Don Mills)",
-            "3BMS5273": "Beamish House",
-            "DGVG6Z6R": "East India Company",
-            "JG5EDRBE": "MNP",
-            "AF3YMWZX": "Mother Tongue / Liquid Courage",
-            "HXAVZXLU": "No Vacancy",
-            "H442Y6DH": "The Everly Restaurant & Lounge",
-            "SVJDBBS9": "Base 31",
-            "DHE5DJ9A": "Jackson Falls Country Inn",
-            "ZXYB6RZ6": "Ace Golf Bar & Lounge",
-            "535XRNY6": "Little Beasts Brewing",
-            "8VK2Y7ZD": "Wander The Resort",
-            "N3PWZR8S": "Miku",
-            "M96CBPVN": "Chronicle Brewing Taproom Ltd.",
-            "EH3PJQ97": "Hammerhead's Seafood Restaurant",
-            "455CDQH8": "Brch & Wyn",
-            "6UQBJK6F": "Hartley's Tavern",
-            "6HWKF2NC": "Eastbound Brewing Co.",
-            "GCXB7HZR": "The Knoll",
-            "WEKFG4PY": "The Springwood",
-            "3X2W6K45": "Drake Devonshire",
-            "8VTLE5R5": "The Haifa Room",
-            "3PLJPAWG": "Dina's Tavern",
-            "7SVYTKJ4": "Eem Khao",
-            "AV86WW8P": "Bar Charlotte",
-            "FZ4UTSB9": "Belle Isle",
-            "5ETF8ZYJ": "Bean Counter Cafe",
-            "DBP6LAQJ": "Le Swan",
-            "J235QQXN": "Barton Salumeria",
-            "JTSMAXJW": "Wander The Resort",
-            "Y9F7H77M": "Sunny's Chinese",
-            "WRD237R7": "Shinka Sushi Bar",
-            "MBWBRFMJ": "Mrs. Robinson",
-            "MTQQEJ2Q": "True North Airways",
-            "YDN3JG55": "Beach Hill Wines",
-            "6455GDYW": "Mati",
-            "BY87T8JS": "Six Thirty Nine",
-            "K6NMMG3X": "Waterworks Food Hall",
-            "B742KJHS": "Sofia Yorkville",
-            "5J37FUW8": "Angeline's Inn",
-            "E92N5CTE": "Animl Steakhouse",
-            "XZN3LSP2": "Scotiabank Arena",
-            "89C9QNP2": "Central Ossington",
-            "FPTMM3B3": "Aiana Restaurant",
-            "TC8H68M2": "Black Dog Tavern / Atomica",
-            "W7HM2GHG": "Elmhirst's Resort",
-            "CXME5EPH": "Mayla Concept / Le Jardin",
-            "Q9PYBSL9": "Queen & Beaver Public House",
-            "FZB4SE6N": "Rhubarb Restaurant",
-            "FDQA3PLT": "Atomica",
-            "DEN6NLNT": "Rhapsody",
-            "NVLUA65N": "Takja BBQ House",
-            "56WHMDYA": "Room 797",
-            "MLC6VYWR": "Dreamland Cafe Inc.",
-            "TT6RAM4X": "White Lily Diner",
-            "NSJ4FRTX": "Chez Piggy",
-            "UKNUE59Z": "Haliburton Post House",
-            "CYBJQ6MF": "Gloria in the Great Hall",
-            "NY63KWCQ": "Local Public Eatery (Leaside)",
-            "S523VRZA": "Bampot House",
-            "ZT7Y93A4": "Drake Hotel",
-            "P3J95R8R": "Brass Monkey Speakeasy",
-            "UC9LFC8V": "The Libertine",
-            "VJYC4NNL": "Konrad Private Event",
-            "9M2X43S3": "Granite Club",
-            "WV5JK7RF": "Stratos Pizza",
-            "MXK92ZDV": "Mildred's Temple Kitchen",
-            "6TRH26SN": "The Argyle Golf Bar Inc.",
-            "CJC8ZXWJ": "Marilynne Food Co. Ltd",
-            "C9CR3D93": "Vagabondo Restobar",
-            "MD624ESA": "The Local Social House",
-            "YCBD82TB": "Under The Vine",
-            "QYMBFSVB": "La Banane",
-            "BDYPHKWJ": "Antler",
-            "N6E2DZ2H": "St. Regis Hotel",
-            "ZP3LUJLY": "Gia",
-            "3HZS2KHN": "Track & Field Bar",
-            "N6HR8WYU": "Prodigy Hospitality Group",
-            "M88W228G": "Cherry's High Dive",
-            "7A3WHFCT": "Corbin Catering & Foods",
-            "Y9UW7Z8F": "Carbonic Coffee",
-            "T6BVGKEZ": "Queen Victoria Place",
-            "U62X7MH9": "J's Steakfrites",
-            "JDBYMJJU": "Stackt Market",
-            "QZ423ZC5": "Bar Aperitivo",
-            "NH5GZD3R": "Eighteen",
-            "L2UXYD3C": "Pan Pacific Hotel",
-            "AZHPKZGR": "Blu Ristorante and Lounge",
-            "RSTQK8R8": "Canada's National Ballet School",
-            "6QVW7UZN": "Pukka",
-            "RFDS9XB6": "Odd Duck Wine & Provisions",
-            "FGLL3G62": "The Comrade",
-            "2TX3LXHJ": "The Davenport",
-            "YWRHWVEL": "Shirley's Bayside Grill",
-            "LKK56JUY": "Bar Duchess",
-            "VWXWMCGP": "Magnone's Italian Kitchen",
-            "A8QC6VPL": "Noir Restaurant",
-            "96U6SVRB": "Anice Jewlery",
-            "9DHB3DSX": "Alo Restaurant & Bar",
-            "5DHUWQXJ": "Perch Restaurant",
-            "28F7LZNN": "Dianne's Fish Shack",
-            "964BYULE": "Andaz Ottawa Byward Market (Hyatt)",
-            "LZT6A6QV": "Cherry St Bar-B-Que",
-            "YUKXF4HA": "Low Down Bar",
-            "V5D732QQ": "Architect Hair Design",
-            "QUHZYMEY": "Arlo Wine & Restaurant",
-            "M28N5CTF": "Laughing Buddha",
-            "F96TUJH5": "TasteEx",
-            "FDWYJ2NM": "Rapscallion & Co.",
-            "U5J267CZ": "County Arts Council Holiday Mixer",
-            "XGDRGZAT": "Bar Danu",
-            "WCQ3WJQG": "Casa Paco",
-            "DQJS44CY": "Lisbon Hotel",
-            "LZUNKM4J": "Split Tree",
-            "5D2BQ3XR": "Chez Nous Wine Bar",
-            "7UJY8KSM": "Thr33s Company",
-            "9JRZBTWS": "10 Dean",
-            "TK2MG2SN": "Baton Rouge (Hunt Club)",
-            "4YW7WFL7": "Nomi Resort",
-            "HKP5M2TA": "Sussex & Co",
-            "Q8AE8UZS": "The Clarendon",
-            "VM7K7XF3": "Minami",
-            "BEZN25BN": "Everyside",
-            "9U4WXY7W": "Elizabeth Hospitality",
-            "DTUXJR29": "Brigadoon Restaurant",
-            "2ASGWWVX": "Fauna",
-            "VCGYMDCF": "King Street Trio Uptown",
-            "BDJFP2D4": "Le Poisson Bleu",
-            "V63YGLTL": "Occhiolino Pastificio",
-            "3GDUNBFS": "Tuckers Market Place",
-            "X4NN29RT": "Another Bar",
-            "F32L64Y5": "Gladstone Commons",
-            "6QHFL2E8": "Mandy's Bistro (The Epochal Imp)",
-            "HSE9226F": "Poppy's French Bistro",
-            "KPKUCUVW": "The Ace",
-            "PE8X8PTX": "Karma",
-            "Q2HT4VNR": "Let Me Be Frank and Frankly",
-            "WTBGQP4N": "Made In Canada Eatery & Whisky Pub",
-            "XUDMPMBW": "The Muskoka Eye",
-            "MJRWMY67": "The Rhino Bar & Grill",
-            "EPTXVWQ3": "Archives Wine & Spirit Merchants",
-            "AGWZU62M": "Bluewater",
-            "Q9GZZWK6": "Meyers Creek Brewing Company",
-            "BEN76PC6": "Paris Texas",
-            "Q6EGAFC3": "Pure Spirits",
-            "AZFBWPD3": "Simpl Things",
-            "HG6TT7XV": "The 222",
-            "3YBBY8SD": "History",
-            "1B2VHWPH": "Budweiser Stage",
-            "NBYUKKMV": "Electric Island",
-            "4GALK4CC": "Danforth Music Hall",
-            "0PHR4APK": "Revival Event Venue",
-            "4GRBZBC4": "Mod Club",
-            "RFMRTZ9J": "Opera House",
-            "VLY88JJW": "Kee To Bala",
-            "0IB5SNPS": "Escapade",
-            "4O4TUYR5": "Lakehouse",
-            "9K0KUXPA": "Boiler Room",
-            "LAX2DYA3": "Veld"
-        };
-
-        // PRODUCTS - 38 total with restrictions
+        // Product Database with merged DISTL products
         const PRODUCTS = {
             'Spirit of York': [
-                { id: 'soy-vodka', name: 'Vodka', size: '750mL', abv: '40%', price: 36.08, lcbo: '541755', icon: '🥃', image: './images/soy-vodka.png' },
-                { id: 'soy-gin', name: 'Gin', size: '750mL', abv: '40%', price: 36.08, lcbo: '536805', icon: '🍸', image: './images/soy-gin.png' },
-                { id: 'soy-aquavit', name: 'Aquavit', size: '750mL', abv: '44%', price: 39.63, lcbo: '645846', icon: '🥂', image: './images/soy-aquavit.png' },
-                { id: 'soy-coffee', name: 'Coffee Liqueur', size: '375mL', abv: '25%', price: 23.70, lcbo: '', icon: '☕', image: './images/soy-coffee.png' },
-                { id: 'soy-whisky', name: 'Whisky', size: '750mL', abv: '40%', price: 57.30, lcbo: '', icon: '🥃', image: './images/soy-whisky.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'soy-aperitivo', name: 'Aperitivo', size: '750mL', abv: '20%', price: 23.70, lcbo: '', icon: '🍹', image: './images/soy-aperitivo.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'soy-citruscello', name: 'Citruscello', size: '750mL', abv: '20%', price: 23.70, lcbo: '', icon: '🍋', image: './images/soy-citruscello.png', allowedAccounts: ['ADMIN001'] }
-            ],
-            'DISTL': [
-                { id: 'distl-vodka', name: 'DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: './images/distl-vodka.png' },
-                { id: 'distl-gin', name: 'DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34588', icon: '🍸', image: './images/distl-gin.png' },
-                { id: 'distl-whisky', name: 'DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '46049', icon: '🥃', image: './images/distl-whisky.png' },
-                { id: 'distl-pink', name: 'DISTL Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: './images/distl-pink.png' },
-                { id: 'distl-chili', name: 'DISTL Ancho Chili', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: './images/distl-chili.png' },
-                { id: 'distl-peach', name: 'RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍑', image: './images/distl-peach.png' },
-                { id: 'distl-rasp', name: 'RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍋', image: './images/distl-rasp.png' },
-                { id: 'distl-sweet-tea', name: 'DISTL Sweet Tea Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍵', image: './images/distl-sweet-tea.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'distl-orange-liq', name: 'DISTL Orange Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍊', image: './images/distl-orange-liq.png', allowedAccounts: ['ADMIN001'] },
-                { id: 'distl-signature-gin', name: 'DISTL Signature Gin', size: '750mL', abv: '40%', price: 28.14, lcbo: '', icon: '🍸', image: './images/distl-signature-gin.png', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'] },
-                { id: 'distl-orange-vodka', name: 'DISTL Orange Vodka', size: '750mL', abv: '40%', price: 30.75, lcbo: '', icon: '🍊', image: './images/distl-orange-vodka.png', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
-                { id: 'distl-cherry-vodka', name: 'DISTL Cherry Vodka', size: '750mL', abv: '40%', price: 20.13, lcbo: '', icon: '🍒', image: './images/distl-cherry-vodka.png', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
-                { id: 'distl-sour-poet', name: 'DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: './images/distl-sour-poet.png', allowedAccounts: ['NQ7C553C'] }
+                { id: 'soy-vodka', name: 'Spirit of York Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: '', techSheet: 1 },
+                { id: 'soy-gin', name: 'Spirit of York Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34586', icon: '🍸', image: '', techSheet: 2 },
+                { id: 'soy-whisky', name: 'Spirit of York Whisky', size: '750mL', abv: '40%', price: 57.30, lcbo: '', icon: '🥃', image: '', allowedAccounts: ['ADMIN001'], techSheet: 3 },
+                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', size: '750mL', abv: '18%', price: 23.70, lcbo: '', icon: '🍹', image: '', allowedAccounts: ['ADMIN001'], techSheet: 4 },
+                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', size: '750mL', abv: '30%', price: 23.70, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['ADMIN001'], techSheet: 5 },
+                { id: 'soy-rye', name: 'Spirit of York Rye Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '26013', icon: '🥃', image: '', techSheet: 6 },
+                { id: 'soy-limonata', name: 'Spirit of York Limonata', size: '750mL', abv: '20%', price: 23.70, lcbo: '', icon: '🍋', image: '', techSheet: 7 },
+                
+                // DISTL Products (merged with prefix)
+                { id: 'distl-vodka', name: 'Spirit of York: DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: '', techSheet: 8 },
+                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: '34588', icon: '🍸', image: '', techSheet: 9 },
+                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '46049', icon: '🥃', image: '', techSheet: 10 },
+                { id: 'distl-pink', name: 'Spirit of York: DISTL Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: '', techSheet: 11 },
+                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chili', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: '', techSheet: 12 },
+                { id: 'distl-coffee', name: 'Spirit of York: DISTL Coffee Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '☕', image: '', techSheet: 13 },
+                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍵', image: '', allowedAccounts: ['ADMIN001'], techSheet: 14 },
+                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ADMIN001'], techSheet: 15 },
+                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', size: '750mL', abv: '40%', price: 28.14, lcbo: '', icon: '🍸', image: '', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'], techSheet: 16 },
+                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', size: '750mL', abv: '40%', price: 30.75, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 17 },
+                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', size: '750mL', abv: '40%', price: 20.13, lcbo: '', icon: '🍒', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 18 },
+                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['NQ7C553C'], techSheet: 19 }
             ],
             'The Grange': [
-                { id: 'grange-laf', name: 'Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 52.20, lcbo: '', icon: '🍾', image: './images/grange-laf.png' },
-                { id: 'grange-aur-cf', name: '2023 Aurelia Cabernet Franc', size: '750mL', abv: '13%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-cf.png' },
-                { id: 'grange-aur-pn', name: '2023 Aurelia Pinot Noir', size: '750mL', abv: '12%', price: 58.50, lcbo: '', icon: '🍷', image: './images/grange-aur-pn.png' },
-                { id: 'grange-aur-ch', name: '2023 Aurelia Chardonnay', size: '750mL', abv: '14.3%', price: 58.50, lcbo: '', icon: '🥂', image: './images/grange-aur-ch.png' },
-                { id: 'grange-est-cf', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-cf.png' },
-                { id: 'grange-est-pn', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: './images/grange-est-pn.png' },
-                { id: 'grange-est-ch', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 25.50, lcbo: '', icon: '🥂', image: './images/grange-est-ch.png' },
-                { id: 'grange-alm-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: './images/grange-alm-white.png' }
-            ],
-            'Cases': [
-                { id: 'case-soy-vodka', name: 'Spirit of York Vodka Case', size: '12x750mL', abv: '40%', price: 64.00, lcbo: '', icon: '📦', image: './images/case-soy-vodka.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
-                { id: 'case-soy-gin', name: 'Spirit of York Gin Case', size: '12x750mL', abv: '40%', price: 80.00, lcbo: '', icon: '📦', image: './images/case-soy-gin.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
-                { id: 'case-soy-whisky', name: 'Spirit of York Whisky Case', size: '12x750mL', abv: '40%', price: 93.33, lcbo: '', icon: '📦', image: './images/case-soy-whisky.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
-                { id: 'case-distl-pink', name: 'DISTL Pink Gin Case (12)', size: '12x750mL', abv: '35%', price: 117.34, lcbo: '', icon: '📦', image: './images/case-distl-pink.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
-                { id: 'case-distl-gin', name: 'DISTL Gin Case', size: '12x750mL', abv: '40%', price: 138.67, lcbo: '', icon: '📦', image: './images/case-distl-gin.png', allowedAccounts: ['844YRPRC', '7FTWKS5S'] }
+                { id: 'grange-lafontaine-2021', name: 'LaFontaine (2021)', size: '750mL', abv: '12.5%', price: 16.39, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 20 },
+                { id: 'grange-rose', name: 'Rosé', size: '750mL', abv: '12%', price: 16.39, lcbo: '', icon: '🌸', image: '', isWine: true, techSheet: 21 },
+                { id: 'grange-gamay', name: 'Gamay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 22 },
+                { id: 'grange-chardonnay', name: 'Chardonnay', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 23 },
+                { id: 'grange-pinot-noir', name: 'Pinot Noir', size: '750mL', abv: '13.5%', price: 24.59, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 24 },
+                { id: 'grange-cab-franc', name: 'Cabernet Franc', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 25 },
+                { id: 'grange-riesling', name: 'Riesling', size: '750mL', abv: '11%', price: 16.39, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 26 },
+                { id: 'grange-pinot-gris', name: 'Pinot Gris', size: '750mL', abv: '13%', price: 19.69, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 27 }
             ]
+        };
+
+        // Tech Sheet PDF Base URL
+        const TECH_SHEET_PDF = 'https://drive.google.com/file/d/1xBUamX8TgVt9LWbAZP7fTSAtCsKWBTk2/view';
+
+        // Account mapping
+        const ACCOUNT_NAMES = {
+            "ADMIN001": "ADMIN MODE",
+            "QQFX5RA7": "Spirit of York Distillery"
+            // Add other accounts as needed
         };
 
         function OrderPortal() {
             const [accountCode, setAccountCode] = useState('');
             const [accountName, setAccountName] = useState('');
-            const [selectedAccountForAdmin, setSelectedAccountForAdmin] = useState('');
-            const [deliveryDate, setDeliveryDate] = useState('');
             const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
-            const [cart, setCart] = useState({});
-            const [submitting, setSubmitting] = useState(false);
+            const [deliveryDate, setDeliveryDate] = useState('');
+            const [deliveryMethod, setDeliveryMethod] = useState('delivery');
+            const [specialInstructions, setSpecialInstructions] = useState('');
+            const [cart, setCart] = useState([]);
+            const [quantities, setQuantities] = useState({});
+            const [isSubmitting, setIsSubmitting] = useState(false);
             const [message, setMessage] = useState({ type: '', text: '' });
-            const [isAdmin, setIsAdmin] = useState(false);
+            const [showWineShippingModal, setShowWineShippingModal] = useState(false);
+            const [showSpiritDeliveryModal, setShowSpiritDeliveryModal] = useState(false);
+            const [showTechSheetModal, setShowTechSheetModal] = useState(false);
+            const [selectedTechSheet, setSelectedTechSheet] = useState(null);
+            const [lowStockItems, setLowStockItems] = useState({});
+            const [pendingCartItem, setPendingCartItem] = useState(null);
+            const [wineShippingAcknowledged, setWineShippingAcknowledged] = useState(false);
+            const [spiritDeliveryAcknowledged, setSpiritDeliveryAcknowledged] = useState(false);
 
             // Get account code from URL
             useEffect(() => {
-                const urlParams = new URLSearchParams(window.location.search);
-                const code = urlParams.get('account');
+                const params = new URLSearchParams(window.location.search);
+                const code = params.get('account');
                 if (code) {
                     setAccountCode(code);
+                    setAccountName(ACCOUNT_NAMES[code] || code);
+                    
+                    // Load low stock settings if admin
                     if (code === 'ADMIN001') {
-                        setIsAdmin(true);
-                        setAccountName('ADMIN - Matt Conway');
-                    } else {
-                        const realName = ACCOUNT_NAMES[code];
-                        setAccountName(realName || `Account ${code}`);
+                        const savedLowStock = localStorage.getItem('lowStockItems');
+                        if (savedLowStock) {
+                            setLowStockItems(JSON.parse(savedLowStock));
+                        }
                     }
-                } else {
-                    setAccountName('Guest Account');
                 }
             }, []);
 
-            // When admin selects an account
+            // Save low stock settings
             useEffect(() => {
-                if (isAdmin && selectedAccountForAdmin) {
-                    setAccountName(ACCOUNT_NAMES[selectedAccountForAdmin]);
+                if (accountCode === 'ADMIN001') {
+                    localStorage.setItem('lowStockItems', JSON.stringify(lowStockItems));
                 }
-            }, [isAdmin, selectedAccountForAdmin]);
+            }, [lowStockItems, accountCode]);
 
-            // Filter products based on account permissions
-            const getVisibleProducts = (brand) => {
-                const brandProducts = PRODUCTS[brand] || [];
-                const activeAccount = isAdmin && selectedAccountForAdmin ? selectedAccountForAdmin : accountCode;
-                
-                return brandProducts.filter(product => {
-                    // If no restrictions, show to everyone
-                    if (!product.allowedAccounts) return true;
-                    
-                    // If product is admin-only (only ADMIN001 in allowedAccounts), show when in admin mode
-                    if (product.allowedAccounts.length === 1 && product.allowedAccounts[0] === 'ADMIN001') {
-                        return isAdmin;
+            const isAdmin = accountCode === 'ADMIN001';
+
+            const handleQuantityChange = (productId, delta, isWine) => {
+                const currentQty = quantities[productId] || 0;
+                let newQty = currentQty + delta;
+
+                if (isWine) {
+                    // Wine must be in multiples of 12
+                    if (delta > 0) {
+                        newQty = Math.ceil(newQty / 12) * 12;
+                    } else {
+                        newQty = Math.max(0, Math.floor(newQty / 12) * 12);
                     }
-                    
-                    // Otherwise check if active account is in allowed list (applies even to admin)
-                    return product.allowedAccounts.includes(activeAccount);
-                });
-            };
-
-            // Calculate cart totals
-            const getCartTotals = () => {
-                let totalItems = 0;
-                let totalBottles = 0;
-                let totalPrice = 0;
-
-                Object.keys(cart).forEach(productId => {
-                    const qty = cart[productId];
-                    if (qty > 0) {
-                        totalItems++;
-                        totalBottles += qty;
-                        
-                        // Find product price
-                        for (const brand in PRODUCTS) {
-                            const product = PRODUCTS[brand].find(p => p.id === productId);
-                            if (product) {
-                                totalPrice += product.price * qty;
-                                break;
-                            }
-                        }
-                    }
-                });
-
-                return { totalItems, totalBottles, totalPrice };
-            };
-
-            const { totalItems, totalBottles, totalPrice } = getCartTotals();
-
-            // Get next available delivery dates (Mon/Wed/Fri only)
-            const getDeliveryDates = () => {
-                const dates = [];
-                const today = new Date();
-                let checkDate = new Date(today);
-                checkDate.setDate(checkDate.getDate() + 1);
-
-                while (dates.length < 10) {
-                    const dayOfWeek = checkDate.getDay();
-                    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) {
-                        dates.push(new Date(checkDate));
-                    }
-                    checkDate.setDate(checkDate.getDate() + 1);
-                }
-                return dates;
-            };
-
-            const updateQuantity = (productId, delta) => {
-                setCart(prev => {
-                    const currentQty = prev[productId] || 0;
-                    const newQty = Math.max(0, currentQty + delta);
-                    
-                    if (newQty === 0) {
-                        const newCart = { ...prev };
-                        delete newCart[productId];
-                        return newCart;
-                    }
-                    
-                    return { ...prev, [productId]: newQty };
-                });
-            };
-
-            const setQuantity = (productId, value) => {
-                const qty = parseInt(value) || 0;
-                if (qty === 0) {
-                    setCart(prev => {
-                        const newCart = { ...prev };
-                        delete newCart[productId];
-                        return newCart;
-                    });
                 } else {
-                    setCart(prev => ({ ...prev, [productId]: qty }));
+                    newQty = Math.max(0, newQty);
                 }
+
+                setQuantities(prev => ({
+                    ...prev,
+                    [productId]: newQty
+                }));
             };
 
-            const getTotalBottles = () => {
-                return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+            const handleAddToCart = (product) => {
+                const qty = quantities[product.id] || 0;
+                if (qty === 0) return;
+
+                // Check if wine and show popup (non-admin only)
+                if (product.isWine && !isAdmin && !wineShippingAcknowledged) {
+                    setPendingCartItem({ product, qty });
+                    setShowWineShippingModal(true);
+                    return;
+                }
+
+                // Check if spirit and show popup (non-admin only)
+                if (!product.isWine && !isAdmin && !spiritDeliveryAcknowledged) {
+                    setPendingCartItem({ product, qty });
+                    setShowSpiritDeliveryModal(true);
+                    return;
+                }
+
+                // Add to cart
+                addItemToCart(product, qty);
             };
 
-            const getCartItems = () => {
-                const items = [];
-                Object.keys(cart).forEach(productId => {
-                    const qty = cart[productId];
-                    if (qty > 0) {
-                        for (const brand in PRODUCTS) {
-                            const product = PRODUCTS[brand].find(p => p.id === productId);
-                            if (product) {
-                                items.push({ ...product, brand, qty });
-                                break;
-                            }
-                        }
+            const addItemToCart = (product, qty) => {
+                setCart(prev => [
+                    ...prev,
+                    {
+                        ...product,
+                        quantity: qty,
+                        subtotal: product.price * qty
                     }
-                });
-                return items;
+                ]);
+                setQuantities(prev => ({
+                    ...prev,
+                    [product.id]: 0
+                }));
             };
 
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                
-                if (getTotalBottles() === 0) {
-                    setMessage({ type: 'error', text: 'Please select at least one product' });
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
+            const handleWineShippingAcknowledge = () => {
+                setWineShippingAcknowledged(true);
+                setShowWineShippingModal(false);
+                if (pendingCartItem) {
+                    addItemToCart(pendingCartItem.product, pendingCartItem.qty);
+                    setPendingCartItem(null);
                 }
+            };
 
+            const handleSpiritDeliveryAcknowledge = () => {
+                setSpiritDeliveryAcknowledged(true);
+                setShowSpiritDeliveryModal(false);
+                if (pendingCartItem) {
+                    addItemToCart(pendingCartItem.product, pendingCartItem.qty);
+                    setPendingCartItem(null);
+                }
+            };
+
+            const removeFromCart = (index) => {
+                setCart(prev => prev.filter((_, i) => i !== index));
+            };
+
+            const cartTotal = cart.reduce((sum, item) => sum + item.subtotal, 0);
+
+            const handleSubmitOrder = async () => {
+                if (cart.length === 0) return;
                 if (!deliveryDate) {
-                    setMessage({ type: 'error', text: 'Please select a delivery date' });
+                    setMessage({ type: 'error', text: 'Please select a requested delivery date' });
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     return;
                 }
 
-                // If admin, require account selection
-                if (isAdmin && !selectedAccountForAdmin) {
-                    setMessage({ type: 'error', text: 'Please select an account to place order for' });
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
-                }
-
-                setSubmitting(true);
+                setIsSubmitting(true);
                 setMessage({ type: '', text: '' });
 
                 try {
-                    const orderDetails = getCartItems()
-                        .map(item => `${item.qty}/${item.brand}/${item.name}`)
-                        .join('\n');
-
-                    const activeAccountName = isAdmin && selectedAccountForAdmin 
-                        ? ACCOUNT_NAMES[selectedAccountForAdmin]
-                        : accountName;
-                    
-                    const activeAccountCode = isAdmin && selectedAccountForAdmin
-                        ? selectedAccountForAdmin
-                        : accountCode;
-
-                    const formData = {
-                        accountName: activeAccountName,
-                        accountCode: activeAccountCode,
+                    const orderData = {
+                        accountCode,
+                        accountName,
                         deliveryDate,
-                        orderDetails,
-                        totalBottles: getTotalBottles()
+                        deliveryMethod,
+                        specialInstructions,
+                        items: cart,
+                        total: cartTotal,
+                        timestamp: new Date().toISOString(),
+                        // Flag if order contains wine (for email routing)
+                        containsWine: cart.some(item => item.isWine)
                     };
 
-                    // Debug logging
-                    console.log('Submitting order:', formData);
-                    console.log('Is Admin:', isAdmin);
-                    console.log('Selected Account:', selectedAccountForAdmin);
-
-                    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec';
-                    
-                    const response = await fetch(SCRIPT_URL, {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec', {
                         method: 'POST',
-                        mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
+                        body: JSON.stringify(orderData),
+                        mode: 'no-cors'
                     });
 
-                    setMessage({ type: 'success', text: 'Order submitted successfully!' });
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    setCart({});
+                    setMessage({ type: 'success', text: 'Order submitted successfully! You will receive a confirmation email shortly.' });
+                    setCart([]);
+                    setQuantities({});
                     setDeliveryDate('');
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    setMessage({ type: 'error', text: 'Failed to submit order. Please try again.' });
+                    setSpecialInstructions('');
+                    setWineShippingAcknowledged(false);
+                    setSpiritDeliveryAcknowledged(false);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                } finally {
-                    setSubmitting(false);
+                } catch (error) {
+                    setMessage({ type: 'error', text: 'Error submitting order. Please try again.' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
+
+                setIsSubmitting(false);
             };
+
+            const toggleLowStock = (productId) => {
+                setLowStockItems(prev => ({
+                    ...prev,
+                    [productId]: !prev[productId]
+                }));
+            };
+
+            const openTechSheet = (techSheetPage) => {
+                setSelectedTechSheet(techSheetPage);
+                setShowTechSheetModal(true);
+            };
+
+            const filterProducts = (products) => {
+                return products.filter(product => {
+                    if (!product.allowedAccounts) return true;
+                    if (product.allowedAccounts.includes('ADMIN001') && !isAdmin) return false;
+                    if (isAdmin) return true;
+                    return product.allowedAccounts.includes(accountCode);
+                });
+            };
+
+            const currentProducts = filterProducts(PRODUCTS[selectedBrand] || []);
+            const isWineTab = selectedBrand === 'The Grange';
 
             return (
                 <div className="container">
-                    {/* ADMIN MODE HEADER */}
-                    {isAdmin && (
-                        <div className="admin-mode">
-                            <h3>🔐 ADMIN MODE - SELECT ACCOUNT</h3>
-                            <div className="account-selector">
-                                <select 
-                                    value={selectedAccountForAdmin}
-                                    onChange={(e) => setSelectedAccountForAdmin(e.target.value)}
-                                >
-                                    <option value="">-- Select Account to Place Order For --</option>
-                                    {Object.entries(ACCOUNT_NAMES)
-                                        .filter(([code]) => code !== 'ADMIN001')
-                                        .sort((a, b) => a[1].localeCompare(b[1]))
-                                        .map(([code, name]) => (
-                                            <option key={code} value={code}>
-                                                {name} ({code})
-                                            </option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                    )}
-
                     <div className="header">
                         <h1>12 TRINITY</h1>
-                        <div style={{fontSize: '14px', color: '#be835c', marginTop: '8px', letterSpacing: '2px'}}>
-                            Spirit of York Distillery • The Grange of Prince Edward
-                        </div>
-                        <div className="account-name">
-                            {isAdmin && selectedAccountForAdmin 
-                                ? `Ordering for: ${ACCOUNT_NAMES[selectedAccountForAdmin]}`
-                                : accountName
-                            }
-                        </div>
+                        <div className="account-name">{accountName}</div>
                     </div>
 
                     {message.text && (
-                        <div className={message.type === 'success' ? 'success-message' : 'error-message'}>
+                        <div className={`message message-${message.type}`}>
                             {message.text}
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="delivery-section">
-                            <h2>Delivery Information</h2>
-                            
-                            <div className="form-group">
-                                <label>Delivery Date *</label>
-                                <select 
-                                    value={deliveryDate} 
-                                    onChange={(e) => setDeliveryDate(e.target.value)}
-                                    required
-                                >
-                                    <option value="">Select a delivery date...</option>
-                                    {getDeliveryDates().map(date => {
-                                        const dateStr = date.toISOString().split('T')[0];
-                                        const displayDate = date.toLocaleDateString('en-US', { 
-                                            weekday: 'long', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        });
-                                        return (
-                                            <option key={dateStr} value={dateStr}>
-                                                {displayDate}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="products-section">
-                            <h2>Select Products</h2>
-                            
-                            <div className="brand-tabs">
-                                {Object.keys(PRODUCTS)
-                                    .filter(brand => {
-                                        // Show all brands except Cases
-                                        if (brand !== 'Cases') return true;
-                                        // Only show Cases for Pearson Duty Free or Queenston Lewiston
-                                        const activeAccount = isAdmin && selectedAccountForAdmin ? selectedAccountForAdmin : accountCode;
-                                        return activeAccount === '844YRPRC' || activeAccount === '7FTWKS5S';
-                                    })
-                                    .map(brand => (
-                                    <button
-                                        key={brand}
-                                        type="button"
-                                        className={`brand-tab ${selectedBrand === brand ? 'active' : ''}`}
-                                        onClick={() => setSelectedBrand(brand)}
-                                    >
-                                        {brand}
-                                    </button>
-                                ))}
-                            </div>
-
-                            <div className="product-grid">
-                                {getVisibleProducts(selectedBrand).map(product => (
-                                    <div 
-                                        key={product.id}
-                                        className={`product-card ${cart[product.id] > 0 ? 'selected' : ''}`}
-                                    >
-                                        <div className="product-icon">
-                                            {product.image ? (
-                                                <img 
-                                                    src={product.image} 
-                                                    alt={product.name}
-                                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
-                                                    style={{maxWidth: '100%', maxHeight: '200px', objectFit: 'contain'}}
-                                                />
-                                            ) : null}
-                                            <span style={{display: product.image ? 'none' : 'block'}} >{product.icon}</span>
-                                        </div>
-                                        <div className="product-name">{product.name}</div>
-                                        <div className="product-details">
-                                            {product.size} | {product.abv}
-                                            {product.lcbo && <><br/>LCBO #{product.lcbo}</>}
-                                        </div>
-                                        <div className="product-price">${product.price.toFixed(2)}</div>
-                                        
-                                        <div className="quantity-input">
-                                            <button 
-                                                type="button"
-                                                onClick={() => updateQuantity(product.id, -1)}
-                                            >
-                                                -
-                                            </button>
-                                            <input 
-                                                type="number"
-                                                min="0"
-                                                value={cart[product.id] || 0}
-                                                onChange={(e) => setQuantity(product.id, e.target.value)}
-                                            />
-                                            <button 
-                                                type="button"
-                                                onClick={() => updateQuantity(product.id, 1)}
-                                            >
-                                                +
-                                            </button>
-                                        </div>
+                    {/* Announcements Section */}
+                    <div className="announcements-section">
+                        <div className="announcements-grid">
+                            <div className="announcement-card">
+                                <img 
+                                    src="https://via.placeholder.com/600x400/252f42/ffffff?text=Spirit+of+York"
+                                    alt="Spirit of York" 
+                                    className="announcement-image"
+                                />
+                                <div className="announcement-content">
+                                    <div className="announcement-title">Spirit of York Distillery</div>
+                                    <div className="announcement-text">
+                                        Welcome to the new year! Check out our latest releases and special offers.
+                                        {isAdmin && <div style={{marginTop: '10px', fontSize: '12px', color: '#999'}}>[Admin: Edit this message and upload image]</div>}
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="submit-section">
-                            <button 
-                                type="submit" 
-                                className="submit-btn"
-                                disabled={submitting || getTotalBottles() === 0}
-                            >
-                                {submitting ? 'Submitting Order...' : 'Submit Order'}
-                            </button>
-                        </div>
-                    </form>
-
-                    {/* CART TOTAL FOOTER */}
-                    <div className="cart-footer">
-                        <div className="cart-footer-content">
-                            <div className="cart-stats">
-                                <div className="cart-stat">
-                                    <div className="cart-stat-label">Total Items</div>
-                                    <div className="cart-stat-value">{totalItems}</div>
-                                </div>
-                                <div className="cart-stat">
-                                    <div className="cart-stat-label">Total Bottles</div>
-                                    <div className="cart-stat-value">{totalBottles}</div>
                                 </div>
                             </div>
-                            <div className="cart-total">
-                                <div className="cart-stat">
-                                    <div className="cart-stat-label">Cart Total</div>
-                                    <div className="cart-stat-value">${totalPrice.toFixed(2)}</div>
+                            <div className="announcement-card">
+                                <img 
+                                    src="https://via.placeholder.com/600x400/be835c/ffffff?text=The+Grange"
+                                    alt="The Grange" 
+                                    className="announcement-image"
+                                />
+                                <div className="announcement-content">
+                                    <div className="announcement-title">The Grange of Prince Edward</div>
+                                    <div className="announcement-text">
+                                        Discover our exceptional wines from Prince Edward County's finest vineyard.
+                                        {isAdmin && <div style={{marginTop: '10px', fontSize: '12px', color: '#999'}}>[Admin: Edit this message and upload image]</div>}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    {/* Admin Controls */}
+                    {isAdmin && (
+                        <div className="admin-section">
+                            <div className="admin-title">⚙️ Admin Controls - Low Stock Warnings</div>
+                            <div className="low-stock-controls">
+                                {Object.keys(PRODUCTS).flatMap(brand => 
+                                    PRODUCTS[brand].map(product => (
+                                        <div key={product.id} className="low-stock-toggle">
+                                            <input 
+                                                type="checkbox"
+                                                id={`low-stock-${product.id}`}
+                                                checked={lowStockItems[product.id] || false}
+                                                onChange={() => toggleLowStock(product.id)}
+                                            />
+                                            <label htmlFor={`low-stock-${product.id}`}>
+                                                {product.name}
+                                            </label>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Delivery Information */}
+                    <div className="delivery-section">
+                        <h2>Delivery Information</h2>
+                        <div className="form-group">
+                            <label>Requested Delivery Date</label>
+                            <input 
+                                type="date"
+                                value={deliveryDate}
+                                onChange={(e) => setDeliveryDate(e.target.value)}
+                                min={new Date().toISOString().split('T')[0]}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Delivery Method</label>
+                            <select value={deliveryMethod} onChange={(e) => setDeliveryMethod(e.target.value)}>
+                                <option value="delivery">Delivery</option>
+                                <option value="pickup">Pickup</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Special Instructions (Optional)</label>
+                            <textarea 
+                                value={specialInstructions}
+                                onChange={(e) => setSpecialInstructions(e.target.value)}
+                                placeholder="Any special delivery instructions..."
+                            />
+                        </div>
+                    </div>
+
+                    {/* Product Tabs with Logos */}
+                    <div className="product-tabs">
+                        <button
+                            className={`tab-button ${selectedBrand === 'Spirit of York' ? 'active' : ''}`}
+                            onClick={() => setSelectedBrand('Spirit of York')}
+                        >
+                            <img 
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
+                                alt="Spirit of York"
+                                className="tab-logo"
+                                style={{filter: 'brightness(0)'}}
+                            />
+                        </button>
+                        <button
+                            className={`tab-button ${selectedBrand === 'The Grange' ? 'active' : ''}`}
+                            onClick={() => setSelectedBrand('The Grange')}
+                        >
+                            <img 
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
+                                alt="The Grange"
+                                className="tab-logo"
+                                style={{filter: 'brightness(0)'}}
+                            />
+                        </button>
+                    </div>
+
+                    {/* Products Section */}
+                    <div className="products-section">
+                        <h2>{selectedBrand}</h2>
+                        {isWineTab && (
+                            <div className="wine-note">
+                                ℹ️ Wine is ordered by the case (12 bottles). Quantities will be adjusted automatically.
+                            </div>
+                        )}
+                        <div className="products-grid">
+                            {currentProducts.map(product => (
+                                <div key={product.id} className="product-card">
+                                    {product.techSheet && (
+                                        <div 
+                                            className="tech-sheet-icon"
+                                            onClick={() => openTechSheet(product.techSheet)}
+                                            title="View Tech Sheet"
+                                        >
+                                            📋
+                                        </div>
+                                    )}
+                                    <div className="product-header">
+                                        <div className="product-name">{product.name}</div>
+                                        <div className="product-icon">{product.icon}</div>
+                                    </div>
+                                    <div className="product-details">
+                                        {product.size} • {product.abv}
+                                        {product.lcbo && ` • LCBO ${product.lcbo}`}
+                                    </div>
+                                    <div className="product-price">${product.price.toFixed(2)}</div>
+                                    
+                                    {lowStockItems[product.id] && (
+                                        <div className="low-stock-badge">⚠️ LOW STOCK - Order Now!</div>
+                                    )}
+                                    
+                                    <div className="quantity-controls">
+                                        <button 
+                                            className="qty-button"
+                                            onClick={() => handleQuantityChange(product.id, product.isWine ? -12 : -1, product.isWine)}
+                                            disabled={(quantities[product.id] || 0) === 0}
+                                        >
+                                            −
+                                        </button>
+                                        <div className="qty-display">{quantities[product.id] || 0}</div>
+                                        <button 
+                                            className="qty-button"
+                                            onClick={() => handleQuantityChange(product.id, product.isWine ? 12 : 1, product.isWine)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <button 
+                                        className="add-to-cart-btn"
+                                        onClick={() => handleAddToCart(product)}
+                                        disabled={(quantities[product.id] || 0) === 0}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Cart */}
+                    {cart.length > 0 && (
+                        <div className="cart-section">
+                            <div className="cart-content">
+                                <div className="cart-header">
+                                    <div className="cart-title">Your Order ({cart.length} items)</div>
+                                    <div className="cart-total">${cartTotal.toFixed(2)}</div>
+                                </div>
+                                <div className="cart-items">
+                                    {cart.map((item, index) => (
+                                        <div key={index} className="cart-item">
+                                            {item.icon} {item.name} × {item.quantity} = ${item.subtotal.toFixed(2)}
+                                            <button 
+                                                className="cart-item-remove"
+                                                onClick={() => removeFromCart(index)}
+                                                title="Remove"
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                                <button 
+                                    className="submit-order-btn"
+                                    onClick={handleSubmitOrder}
+                                    disabled={isSubmitting || !deliveryDate}
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Wine Shipping Modal */}
+                    {showWineShippingModal && (
+                        <div className="modal-overlay" onClick={() => setShowWineShippingModal(false)}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <div className="modal-title">🍷 Wine Shipping Information</div>
+                                <div className="modal-text">
+                                    Shipnoble picks up in Prince Edward County on Mondays, Wednesdays, and Saturdays.
+                                    
+                                    Please note, Shipnoble does not deliver to the GTA on weekends. Pick-ups at The Grange will also be seasonally affected by operating hours.
+                                    
+                                    <strong>May - November:</strong>
+                                    • Orders before noon Monday reach GTA that week
+                                    • Orders before noon Wednesday reach GTA Thu-Wed
+                                    • Orders before noon Saturday reach GTA following week
+                                    
+                                    <strong>December - April:</strong>
+                                    • Orders before noon Wednesday reach GTA Thu-Wed
+                                    • Orders before noon Saturday reach GTA following week
+                                    
+                                    <strong>Local Delivery:</strong>
+                                    Orders must be in by end of day Wednesday for Thursday delivery (Hastings and Prince Edward Counties only).
+                                </div>
+                                <div className="modal-buttons">
+                                    <button 
+                                        className="modal-btn modal-btn-primary"
+                                        onClick={handleWineShippingAcknowledge}
+                                    >
+                                        I Understand
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Spirit Delivery Modal */}
+                    {showSpiritDeliveryModal && (
+                        <div className="modal-overlay" onClick={() => setShowSpiritDeliveryModal(false)}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <div className="modal-title">🥃 Delivery Information</div>
+                                <div className="modal-text">
+                                    Please note for deliveries in the GTA turnaround is 48-72 hours. Orders elsewhere delivery time will vary. 
+                                    
+                                    We try our best to get orders out as fast as possible. In case of an emergency contact your ambassador.
+                                </div>
+                                <div className="modal-buttons">
+                                    <button 
+                                        className="modal-btn modal-btn-primary"
+                                        onClick={handleSpiritDeliveryAcknowledge}
+                                    >
+                                        I Understand
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Tech Sheet Modal */}
+                    {showTechSheetModal && (
+                        <div className="modal-overlay" onClick={() => setShowTechSheetModal(false)}>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{maxWidth: '900px'}}>
+                                <div className="modal-title">Product Tech Sheet</div>
+                                <iframe 
+                                    src={`${TECH_SHEET_PDF}#page=${selectedTechSheet}`}
+                                    className="tech-sheet-viewer"
+                                    title="Tech Sheet"
+                                />
+                                <div className="modal-buttons">
+                                    <button 
+                                        className="modal-btn modal-btn-secondary"
+                                        onClick={() => setShowTechSheetModal(false)}
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         }
