@@ -439,6 +439,7 @@
         function OrderPortal() {
             const [accountCode, setAccountCode] = useState('');
             const [accountName, setAccountName] = useState('');
+            const [allAccounts, setAllAccounts] = useState([]);
             const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
             const [deliveryDate, setDeliveryDate] = useState('');
             const [deliveryMethod, setDeliveryMethod] = useState('delivery');
@@ -456,29 +457,76 @@
             useEffect(() => {
                 const params = new URLSearchParams(window.location.search);
                 const code = params.get('account');
-                if (code) {
-                    setAccountCode(code);
-                    
-                    fetch('./12-trinity-all-accounts.csv')
-                        .then(res => res.text())
-                        .then(csv => {
-                            const lines = csv.split('\n');
-                            for (let line of lines) {
-                                if (line.startsWith(code + ',')) {
-                                    const parts = line.split(',');
-                                    if (parts[1]) {
-                                        setAccountName(parts[1].trim().replace(/\r/g, ''));
-                                        return;
-                                    }
+                
+                fetch('./12-trinity-all-accounts.csv')
+                    .then(res => res.text())
+                    .then(csv => {
+                        const lines = csv.split('\n');
+                        const accounts = [];
+                        
+                        for (let i = 1; i < lines.length; i++) {
+                            const line = lines[i].trim().replace(/\r/g, '');
+                            if (!line) continue;
+                            
+                            const parts = line.split(',');
+                            if (parts.length >= 2) {
+                                const accCode = parts[0].trim();
+                                const accName = parts[1].trim().replace(/"/g, '');
+                                accounts.push({ code: accCode, name: accName });
+                                
+                                if (code && accCode === code) {
+                                    setAccountCode(code);
+                                    setAccountName(accName);
                                 }
                             }
+                        }
+                        
+                        setAllAccounts(accounts);
+                        
+                        if (code && !accountName) {
+                            setAccountCode(code);
                             setAccountName(code);
-                        })
-                        .catch(() => setAccountName(code));
-                }
+                        }
+                    })
+                    .catch(err => {
+                        console.error('CSV load error:', err);
+                        if (code) {
+                            setAccountCode(code);
+                            setAccountName(code);
+                        }
+                    });
             }, []);
 
             const isAdmin = accountCode === 'ADMIN001';
+
+            // Generate next Mon/Wed/Fri dates
+            const getDeliveryDates = () => {
+                const dates = [];
+                const today = new Date();
+                const daysToCheck = 21; // 3 weeks
+                
+                for (let i = 0; i < daysToCheck; i++) {
+                    const date = new Date(today);
+                    date.setDate(today.getDate() + i);
+                    const dayOfWeek = date.getDay();
+                    
+                    // 1 = Monday, 3 = Wednesday, 5 = Friday
+                    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) {
+                        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                                          'July', 'August', 'September', 'October', 'November', 'December'];
+                        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                        
+                        const formatted = `${monthNames[date.getMonth()]} ${date.getDate()} (${dayNames[dayOfWeek]})`;
+                        const value = date.toISOString().split('T')[0];
+                        
+                        dates.push({ formatted, value });
+                    }
+                }
+                
+                return dates;
+            };
+
+            const deliveryDates = getDeliveryDates();
 
             const handleQuantityChange = (productId, delta, isWine) => {
                 const currentQty = quantities[productId] || 0;
@@ -616,33 +664,49 @@
                         </div>
                     )}
 
+                    {isAdmin && (
+                        <div className="delivery-section" style={{background: '#fff8f3', border: '2px solid #be835c'}}>
+                            <h2>Admin: Order On Behalf Of</h2>
+                            <div className="form-group">
+                                <label>Select Account</label>
+                                <select 
+                                    value={accountCode} 
+                                    onChange={(e) => {
+                                        const selected = allAccounts.find(acc => acc.code === e.target.value);
+                                        if (selected) {
+                                            setAccountCode(selected.code);
+                                            setAccountName(selected.name);
+                                        }
+                                    }}
+                                >
+                                    {allAccounts.map(acc => (
+                                        <option key={acc.code} value={acc.code}>
+                                            {acc.name} ({acc.code})
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="delivery-section">
                         <h2>Delivery Information</h2>
                         <div className="form-group">
-                            <label>Requested Delivery / Pick Up Date</label>
-                            <input 
-                                type="date"
+                            <label>Requested Delivery Date</label>
+                            <select 
                                 value={deliveryDate}
                                 onChange={(e) => setDeliveryDate(e.target.value)}
-                                min={new Date().toISOString().split('T')[0]}
-                            />
+                            >
+                                <option value="">Select a delivery date...</option>
+                                {deliveryDates.map(date => (
+                                    <option key={date.value} value={date.value}>
+                                        {date.formatted}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
-                        <div className="form-group">
-                            <label>Delivery Method</label>
-                            <div className="toggle-container">
-                                <div 
-                                    className={`toggle-option ${deliveryMethod === 'delivery' ? 'active' : ''}`}
-                                    onClick={() => setDeliveryMethod('delivery')}
-                                >
-                                    Delivery
-                                </div>
-                                <div 
-                                    className={`toggle-option ${deliveryMethod === 'pickup' ? 'active' : ''}`}
-                                    onClick={() => setDeliveryMethod('pickup')}
-                                >
-                                    Pickup
-                                </div>
-                            </div>
+                        <div style={{fontSize: '13px', color: '#666', marginTop: '-10px', marginBottom: '15px'}}>
+                            Note: For pickup, please contact your ambassador
                         </div>
                     </div>
 
