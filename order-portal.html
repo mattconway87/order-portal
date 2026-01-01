@@ -15,10 +15,10 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f5f5;
             color: #242429;
-            padding-bottom: 180px;
+            padding-bottom: 200px;
         }
 
         .container {
@@ -27,7 +27,6 @@
             padding: 20px;
         }
 
-        /* Header */
         .header {
             background: #252f42;
             color: white;
@@ -40,68 +39,13 @@
         .header h1 {
             font-size: 28px;
             margin-bottom: 8px;
-            font-weight: 300;
-            letter-spacing: 2px;
         }
 
         .header .account-name {
             font-size: 16px;
             color: #be835c;
-            font-weight: 500;
         }
 
-        /* Announcements Section */
-        .announcements-section {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .announcements-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .announcements-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .announcement-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .announcement-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: #f0f0f0;
-        }
-
-        .announcement-content {
-            padding: 20px;
-        }
-
-        .announcement-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #252f42;
-            margin-bottom: 10px;
-        }
-
-        .announcement-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #666;
-        }
-
-        /* Delivery Section */
         .delivery-section {
             background: white;
             padding: 25px;
@@ -114,7 +58,6 @@
             font-size: 18px;
             margin-bottom: 20px;
             color: #252f42;
-            font-weight: 600;
         }
 
         .form-group {
@@ -125,8 +68,6 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #242429;
-            font-size: 14px;
         }
 
         .form-group input,
@@ -137,76 +78,76 @@
             border: 2px solid #e0e0e0;
             border-radius: 6px;
             font-size: 15px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #be835c;
         }
 
         .form-group textarea {
             min-height: 80px;
-            resize: vertical;
         }
 
-        /* Product Tabs - Logo Based */
+        .toggle-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .toggle-option {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .toggle-option:hover {
+            border-color: #be835c;
+        }
+
+        .toggle-option.active {
+            background: #be835c;
+            color: white;
+            border-color: #be835c;
+        }
+
         .product-tabs {
             display: flex;
             gap: 20px;
             margin-bottom: 30px;
             justify-content: center;
-            flex-wrap: wrap;
         }
 
         .tab-button {
             background: white;
             border: 3px solid #e0e0e0;
-            padding: 15px 25px;
+            padding: 15px 40px;
             border-radius: 12px;
             cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 200px;
-            height: 100px;
         }
 
         .tab-button:hover {
             border-color: #be835c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .tab-button.active {
             border-color: #be835c;
             background: #fff8f3;
-            box-shadow: 0 4px 12px rgba(190,131,92,0.2);
         }
 
-        .tab-logo {
-            max-width: 100%;
-            max-height: 70px;
-            object-fit: contain;
-        }
-
-        /* Products Grid */
         .products-section {
             background: white;
             padding: 25px;
             border-radius: 8px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .products-section h2 {
             font-size: 20px;
             margin-bottom: 20px;
-            color: #252f42;
-            font-weight: 600;
         }
 
         .wine-note {
@@ -215,7 +156,6 @@
             padding: 12px 16px;
             margin-bottom: 20px;
             font-size: 14px;
-            color: #666;
         }
 
         .products-grid {
@@ -228,40 +168,12 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             padding: 20px;
-            transition: all 0.3s;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            border-color: #be835c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .product-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
         }
 
         .product-name {
             font-size: 16px;
             font-weight: 600;
-            color: #252f42;
-            flex: 1;
-        }
-
-        .product-icon {
-            font-size: 28px;
-            margin-left: 10px;
-        }
-
-        .product-details {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .product-price {
@@ -269,23 +181,6 @@
             font-weight: 700;
             color: #be835c;
             margin-bottom: 15px;
-        }
-
-        .low-stock-badge {
-            background: #ff4444;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: inline-block;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .quantity-controls {
@@ -303,12 +198,10 @@
             color: #be835c;
             border-radius: 6px;
             font-size: 18px;
-            font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .qty-button:hover:not(:disabled) {
+        .qty-button:hover {
             background: #be835c;
             color: white;
         }
@@ -335,21 +228,17 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
         .add-to-cart-btn:hover {
             background: #a66d4a;
-            transform: translateY(-1px);
         }
 
         .add-to-cart-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
-            transform: none;
         }
 
-        /* Cart */
         .cart-section {
             position: fixed;
             bottom: 0;
@@ -370,14 +259,12 @@
         .cart-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 15px;
         }
 
         .cart-title {
             font-size: 18px;
             font-weight: 600;
-            color: #252f42;
         }
 
         .cart-total {
@@ -401,7 +288,6 @@
             border-radius: 6px;
             font-size: 13px;
             display: flex;
-            align-items: center;
             gap: 8px;
         }
 
@@ -413,8 +299,6 @@
             height: 20px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 12px;
-            line-height: 1;
         }
 
         .submit-order-btn {
@@ -427,10 +311,9 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .submit-order-btn:hover:not(:disabled) {
+        .submit-order-btn:hover {
             background: #1a2332;
         }
 
@@ -439,7 +322,6 @@
             cursor: not-allowed;
         }
 
-        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -451,179 +333,60 @@
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            padding: 20px;
         }
 
         .modal-content {
             background: white;
             border-radius: 12px;
             max-width: 600px;
-            width: 100%;
+            padding: 30px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 30px;
-            position: relative;
         }
 
         .modal-title {
             font-size: 22px;
             font-weight: 600;
-            color: #252f42;
             margin-bottom: 20px;
         }
 
         .modal-text {
             font-size: 15px;
             line-height: 1.8;
-            color: #666;
             margin-bottom: 25px;
             white-space: pre-line;
         }
 
-        .modal-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
         .modal-btn {
-            flex: 1;
+            width: 100%;
             padding: 14px;
+            background: #be835c;
+            color: white;
             border: none;
             border-radius: 8px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .modal-btn-primary {
-            background: #be835c;
-            color: white;
-        }
-
-        .modal-btn-primary:hover {
+        .modal-btn:hover {
             background: #a66d4a;
         }
 
-        .modal-btn-secondary {
-            background: #e0e0e0;
-            color: #242429;
-        }
-
-        .modal-btn-secondary:hover {
-            background: #d0d0d0;
-        }
-
-        /* Tech Sheet Viewer */
-        .tech-sheet-icon {
-            position: absolute;
-            bottom: 70px;
-            right: 15px;
-            background: #252f42;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s;
-            z-index: 10;
-        }
-
-        .tech-sheet-icon:hover {
-            background: #be835c;
-            transform: scale(1.1);
-        }
-
-        .tech-sheet-viewer {
-            width: 100%;
-            height: 80vh;
-            border: none;
-        }
-
-        /* Admin Controls */
-        .admin-section {
-            background: #fff8f3;
-            border: 2px solid #be835c;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-
-        .admin-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #be835c;
-            margin-bottom: 15px;
-        }
-
-        .admin-selector {
-            margin-bottom: 20px;
-        }
-
-        .low-stock-controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-        }
-
-        .low-stock-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px;
-            background: white;
-            border-radius: 6px;
-        }
-
-        .low-stock-toggle input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .low-stock-toggle label {
-            font-size: 14px;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        /* Success/Error Messages */
         .message {
             padding: 15px 20px;
             border-radius: 8px;
             margin-bottom: 20px;
-            font-weight: 500;
         }
 
         .message-success {
             background: #d4edda;
             color: #155724;
-            border: 2px solid #c3e6cb;
         }
 
         .message-error {
             background: #f8d7da;
             color: #721c24;
-            border: 2px solid #f5c6cb;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .cart-section {
-                padding: 15px;
-            }
-            
-            .modal-content {
-                padding: 20px;
-            }
         }
     </style>
 </head>
@@ -631,59 +394,52 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect } = React;
 
-        // Product Database with merged DISTL products
         const PRODUCTS = {
             'Spirit of York': [
-                { id: 'soy-vodka', name: 'Spirit of York Vodka', size: '750mL', abv: '40%', price: 36.08, lcbo: 'LCBO', icon: '🥃', image: '', techSheet: 1 },
-                { id: 'soy-gin', name: 'Spirit of York Gin', size: '750mL', abv: '40%', price: 36.08, lcbo: 'LCBO', icon: '🍸', image: '', techSheet: 2 },
-                { id: 'soy-aquavit', name: 'Spirit of York Aquavit', size: '750mL', abv: '44%', price: 39.63, lcbo: 'LCBO DDVP', icon: '🥃', image: '', techSheet: 3 },
-                { id: 'soy-coffee', name: 'Spirit of York Coffee Liqueur', size: '375mL', abv: '25%', price: 23.70, lcbo: '', icon: '☕', image: '', techSheet: 4 },
-                { id: 'soy-rye', name: 'Spirit of York Rye Whisky', size: '750mL', abv: '40%', price: 57.50, lcbo: '26013', icon: '🥃', image: '', allowedAccounts: ['ADMIN001'], techSheet: 5 },
-                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', size: '750mL', abv: '18%', price: 23.70, lcbo: '', icon: '🍹', image: '', allowedAccounts: ['ADMIN001'], techSheet: 6 },
-                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', size: '750mL', abv: '30%', price: 23.70, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['ADMIN001'], techSheet: 7 },
-                
-                // DISTL Products
-                { id: 'distl-vodka', name: 'Spirit of York: DISTL Vodka', size: '750mL', abv: '40%', price: 27.68, lcbo: '', icon: '🥃', image: '', techSheet: 8 },
-                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', size: '750mL', abv: '40%', price: 31.66, lcbo: 'LCBO DDVP', icon: '🍸', image: '', techSheet: 9 },
-                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', size: '750mL', abv: '40%', price: 29.63, lcbo: '', icon: '🥃', image: '', techSheet: 10 },
-                { id: 'distl-pink', name: 'Spirit of York: DISTL Flawless Pink Gin', size: '750mL', abv: '35%', price: 31.66, lcbo: '', icon: '💗', image: '', techSheet: 11 },
-                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chilli', size: '750mL', abv: '40%', price: 31.66, lcbo: '', icon: '🌶️', image: '', techSheet: 12 },
-                { id: 'distl-peach-rtd', name: 'Spirit of York: DISTL RTD Peach Blueberry', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍑', image: '', techSheet: 13 },
-                { id: 'distl-rasp-rtd', name: 'Spirit of York: DISTL RTD Raspberry Lemon', size: '355mL', abv: '5%', price: 2.31, lcbo: '', icon: '🍋', image: '', techSheet: 14 },
-                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍵', image: '', allowedAccounts: ['ADMIN001'], techSheet: 15 },
-                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', size: '750mL', abv: '20%', price: 31.66, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ADMIN001'], techSheet: 16 },
-                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', size: '750mL', abv: '40%', price: 28.14, lcbo: '', icon: '🍸', image: '', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'], techSheet: 17 },
-                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', size: '750mL', abv: '40%', price: 30.75, lcbo: '', icon: '🍊', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 18 },
-                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', size: '750mL', abv: '40%', price: 20.13, lcbo: '', icon: '🍒', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'], techSheet: 19 },
-                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', size: '750mL', abv: '20%', price: 19.25, lcbo: '', icon: '🍋', image: '', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM', 'NQ7C553C'], techSheet: 20 }
+                { id: 'soy-vodka', name: 'Spirit of York Vodka', price: 36.08 },
+                { id: 'soy-gin', name: 'Spirit of York Gin', price: 36.08 },
+                { id: 'soy-whisky', name: 'Spirit of York Whisky', price: 57.30, allowedAccounts: ['ADMIN001'] },
+                { id: 'soy-aquavit', name: 'Spirit of York Aquavit', price: 39.63 },
+                { id: 'soy-coffee', name: 'Spirit of York Coffee Liqueur', price: 23.70 },
+                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', price: 23.70, allowedAccounts: ['ADMIN001'] },
+                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', price: 23.70, allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-vodka', name: 'Spirit of York: DISTL Vodka', price: 27.68 },
+                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', price: 31.66 },
+                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', price: 29.63 },
+                { id: 'distl-pink', name: 'Spirit of York: DISTL Flawless Pink Gin', price: 31.66 },
+                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chilli Liqueur', price: 31.66 },
+                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', price: 31.66, allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', price: 31.66, allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-peach-rtd', name: 'Spirit of York: DISTL Peach Blueberry RTD', price: 2.31 },
+                { id: 'distl-rasp-rtd', name: 'Spirit of York: DISTL Raspberry Lemon RTD', price: 2.31 },
+                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', price: 28.14, allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'] },
+                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', price: 30.75, allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
+                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', price: 20.13, allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
+                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', price: 19.25, allowedAccounts: ['NQ7C553C'] },
+                { id: 'case-vodka', name: 'Spirit of York Vodka Case', price: 64.00, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-gin', name: 'Spirit of York Gin Case', price: 80.00, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-whisky', name: 'Spirit of York Whisky Case', price: 93.33, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-distl-pink', name: 'Spirit of York: DISTL Flawless Pink Gin Case (12)', price: 117.34, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
+                { id: 'case-distl-gin', name: 'Spirit of York: DISTL Gin Case', price: 138.67, allowedAccounts: ['844YRPRC', '7FTWKS5S'] }
             ],
             'The Grange': [
-                { id: 'grange-lafontaine', name: '2021 Lafontaine du Loup Brut', size: '750mL', abv: '12%', price: 52.20, lcbo: 'LCBO', icon: '🍾', image: '', isWine: true, techSheet: 21 },
-                { id: 'grange-aurelia-chard', name: '2023 Aurelia Series Chardonnay', size: '750mL', abv: '14.3%', price: 58.50, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 22 },
-                { id: 'grange-aurelia-cab', name: '2023 Aurelia Series Cabernet Franc', size: '750mL', abv: '13%', price: 58.50, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 23 },
-                { id: 'grange-aurelia-pinot', name: '2023 Aurelia Series Pinot Noir', size: '750mL', abv: '12%', price: 58.50, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 24 },
-                { id: 'grange-estate-pinot', name: '2024 Estate Pinot Noir', size: '750mL', abv: '12.7%', price: 28.80, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 25 },
-                { id: 'grange-estate-cab', name: '2024 Estate Cabernet Franc', size: '750mL', abv: '13.5%', price: 28.80, lcbo: '', icon: '🍷', image: '', isWine: true, techSheet: 26 },
-                { id: 'grange-estate-chard', name: '2024 Estate Chardonnay', size: '750mL', abv: '13%', price: 27.00, lcbo: 'LCBO Vintages', icon: '🥂', image: '', isWine: true, techSheet: 27 },
-                { id: 'grange-almanac-white', name: '2024 Almanac White', size: '750mL', abv: '11%', price: 12.55, lcbo: '', icon: '🥂', image: '', isWine: true, techSheet: 28 }
+                { id: 'grange-almanac-white', name: 'Grange 24 F Almanac White', price: 12.55, isWine: true },
+                { id: 'grange-estate-chard', name: 'Grange 24 E Chardonnay', price: 25.50, isWine: true },
+                { id: 'grange-estate-cab', name: 'Grange 24 E Cabernet Franc', price: 28.80, isWine: true },
+                { id: 'grange-estate-pinot', name: 'Grange 24 E Pinot Noir', price: 28.80, isWine: true },
+                { id: 'grange-aurelia-chard', name: 'Grange 23 A Chardonnay', price: 58.50, isWine: true },
+                { id: 'grange-aurelia-pinot', name: 'Grange 23 A Pinot Noir', price: 58.50, isWine: true },
+                { id: 'grange-aurelia-cab', name: 'Grange 23 A Cabernet Franc', price: 58.50, isWine: true },
+                { id: 'grange-lafontaine', name: 'Grange 21 A LaFontaine Brut', price: 52.20, isWine: true }
             ]
-        };
-
-        // Tech Sheet PDF Base URL
-        const TECH_SHEET_PDF = 'https://drive.google.com/file/d/1xBUamX8TgVt9LWbAZP7fTSAtCsKWBTk2/view';
-
-        // Account mapping
-        const ACCOUNT_NAMES = {
-            "ADMIN001": "ADMIN MODE",
-            "QQFX5RA7": "Spirit of York Distillery"
-            // Add other accounts as needed
         };
 
         function OrderPortal() {
             const [accountCode, setAccountCode] = useState('');
             const [accountName, setAccountName] = useState('');
+            const [allAccounts, setAllAccounts] = useState([]);
             const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
             const [deliveryDate, setDeliveryDate] = useState('');
             const [deliveryMethod, setDeliveryMethod] = useState('delivery');
@@ -692,159 +448,140 @@
             const [quantities, setQuantities] = useState({});
             const [isSubmitting, setIsSubmitting] = useState(false);
             const [message, setMessage] = useState({ type: '', text: '' });
-            const [showWineShippingModal, setShowWineShippingModal] = useState(false);
-            const [showSpiritDeliveryModal, setShowSpiritDeliveryModal] = useState(false);
-            const [showTechSheetModal, setShowTechSheetModal] = useState(false);
-            const [selectedTechSheet, setSelectedTechSheet] = useState(null);
-            const [lowStockItems, setLowStockItems] = useState({});
+            const [showWineModal, setShowWineModal] = useState(false);
+            const [showSpiritModal, setShowSpiritModal] = useState(false);
             const [pendingCartItem, setPendingCartItem] = useState(null);
-            const [wineShippingAcknowledged, setWineShippingAcknowledged] = useState(false);
-            const [spiritDeliveryAcknowledged, setSpiritDeliveryAcknowledged] = useState(false);
-            const [announcementImages, setAnnouncementImages] = useState({
-                spiritOfYork: 'https://via.placeholder.com/600x400/252f42/ffffff?text=Spirit+of+York',
-                grange: 'https://via.placeholder.com/600x400/be835c/ffffff?text=The+Grange'
-            });
-            const [announcementMessages, setAnnouncementMessages] = useState({
-                spiritOfYork: 'Welcome to the new year! Check out our latest releases and special offers.',
-                grange: 'Discover our exceptional wines from Prince Edward County\'s finest vineyard.'
-            });
-            const [accountsData, setAccountsData] = useState({});
+            const [wineAck, setWineAck] = useState(false);
+            const [spiritAck, setSpiritAck] = useState(false);
 
-            // Load accounts CSV on mount
-            useEffect(() => {
-                fetch('./12-trinity-all-accounts.csv')
-                    .then(response => response.text())
-                    .then(csvText => {
-                        const lines = csvText.split('\n');
-                        const accountMap = {};
-                        
-                        lines.forEach((line, index) => {
-                            if (index === 0 || !line.trim()) return; // Skip header and empty lines
-                            const parts = line.split(',');
-                            if (parts.length >= 2) {
-                                const code = parts[0].trim();
-                                const name = parts[1].trim();
-                                accountMap[code] = name;
-                            }
-                        });
-                        
-                        setAccountsData(accountMap);
-                    })
-                    .catch(error => {
-                        console.log('Could not load accounts CSV, using fallback names');
-                    });
-            }, []);
-
-            // Get account code from URL
             useEffect(() => {
                 const params = new URLSearchParams(window.location.search);
                 const code = params.get('account');
-                if (code) {
-                    setAccountCode(code);
-                    
-                    // Try to get name from CSV data, fallback to hardcoded, fallback to code
-                    const name = accountsData[code] || ACCOUNT_NAMES[code] || code;
-                    setAccountName(name);
-                    
-                    // Load settings
-                    const savedLowStock = localStorage.getItem('lowStockItems');
-                    if (savedLowStock) {
-                        setLowStockItems(JSON.parse(savedLowStock));
-                    }
-                    
-                    const savedAnnouncementImages = localStorage.getItem('announcementImages');
-                    if (savedAnnouncementImages) {
-                        setAnnouncementImages(JSON.parse(savedAnnouncementImages));
-                    }
-                    
-                    const savedAnnouncementMessages = localStorage.getItem('announcementMessages');
-                    if (savedAnnouncementMessages) {
-                        setAnnouncementMessages(JSON.parse(savedAnnouncementMessages));
-                    }
-                }
-            }, [accountsData]);
-
-            // Save settings
-            useEffect(() => {
-                if (accountCode === 'ADMIN001') {
-                    localStorage.setItem('lowStockItems', JSON.stringify(lowStockItems));
-                    localStorage.setItem('announcementImages', JSON.stringify(announcementImages));
-                    localStorage.setItem('announcementMessages', JSON.stringify(announcementMessages));
-                }
-            }, [lowStockItems, announcementImages, announcementMessages, accountCode]);
+                
+                fetch('./12-trinity-all-accounts.csv')
+                    .then(res => res.text())
+                    .then(csv => {
+                        const lines = csv.split('\n');
+                        const accounts = [];
+                        
+                        for (let i = 1; i < lines.length; i++) {
+                            const line = lines[i].trim().replace(/\r/g, '');
+                            if (!line) continue;
+                            
+                            const parts = line.split(',');
+                            if (parts.length >= 2) {
+                                const accCode = parts[0].trim();
+                                const accName = parts[1].trim().replace(/"/g, '');
+                                accounts.push({ code: accCode, name: accName });
+                                
+                                if (code && accCode === code) {
+                                    setAccountCode(code);
+                                    setAccountName(accName);
+                                }
+                            }
+                        }
+                        
+                        setAllAccounts(accounts);
+                        
+                        if (code && !accountName) {
+                            setAccountCode(code);
+                            setAccountName(code);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('CSV load error:', err);
+                        if (code) {
+                            setAccountCode(code);
+                            setAccountName(code);
+                        }
+                    });
+            }, []);
 
             const isAdmin = accountCode === 'ADMIN001';
+
+            // Generate next Mon/Wed/Fri dates
+            const getDeliveryDates = () => {
+                const dates = [];
+                const today = new Date();
+                const daysToCheck = 21; // 3 weeks
+                
+                for (let i = 0; i < daysToCheck; i++) {
+                    const date = new Date(today);
+                    date.setDate(today.getDate() + i);
+                    const dayOfWeek = date.getDay();
+                    
+                    // 1 = Monday, 3 = Wednesday, 5 = Friday
+                    if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5) {
+                        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                                          'July', 'August', 'September', 'October', 'November', 'December'];
+                        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                        
+                        const formatted = `${monthNames[date.getMonth()]} ${date.getDate()} (${dayNames[dayOfWeek]})`;
+                        const value = date.toISOString().split('T')[0];
+                        
+                        dates.push({ formatted, value });
+                    }
+                }
+                
+                return dates;
+            };
+
+            const deliveryDates = getDeliveryDates();
 
             const handleQuantityChange = (productId, delta, isWine) => {
                 const currentQty = quantities[productId] || 0;
                 let newQty = currentQty + delta;
 
                 if (isWine) {
-                    // Wine must be in multiples of 12
-                    if (delta > 0) {
-                        newQty = Math.ceil(newQty / 12) * 12;
-                    } else {
-                        newQty = Math.max(0, Math.floor(newQty / 12) * 12);
-                    }
+                    if (delta > 0) newQty = Math.ceil(newQty / 12) * 12;
+                    else newQty = Math.max(0, Math.floor(newQty / 12) * 12);
                 } else {
                     newQty = Math.max(0, newQty);
                 }
 
-                setQuantities(prev => ({
-                    ...prev,
-                    [productId]: newQty
-                }));
+                setQuantities(prev => ({ ...prev, [productId]: newQty }));
             };
 
             const handleAddToCart = (product) => {
                 const qty = quantities[product.id] || 0;
                 if (qty === 0) return;
 
-                // Check if wine and show popup (non-admin only)
-                if (product.isWine && !isAdmin && !wineShippingAcknowledged) {
+                if (product.isWine && !isAdmin && !wineAck) {
                     setPendingCartItem({ product, qty });
-                    setShowWineShippingModal(true);
+                    setShowWineModal(true);
                     return;
                 }
 
-                // Check if spirit and show popup (non-admin only)
-                if (!product.isWine && !isAdmin && !spiritDeliveryAcknowledged) {
+                if (!product.isWine && !isAdmin && !spiritAck) {
                     setPendingCartItem({ product, qty });
-                    setShowSpiritDeliveryModal(true);
+                    setShowSpiritModal(true);
                     return;
                 }
 
-                // Add to cart
                 addItemToCart(product, qty);
             };
 
             const addItemToCart = (product, qty) => {
-                setCart(prev => [
-                    ...prev,
-                    {
-                        ...product,
-                        quantity: qty,
-                        subtotal: product.price * qty
-                    }
-                ]);
-                setQuantities(prev => ({
-                    ...prev,
-                    [product.id]: 0
-                }));
+                setCart(prev => [...prev, {
+                    ...product,
+                    quantity: qty,
+                    subtotal: product.price * qty
+                }]);
+                setQuantities(prev => ({ ...prev, [product.id]: 0 }));
             };
 
-            const handleWineShippingAcknowledge = () => {
-                setWineShippingAcknowledged(true);
-                setShowWineShippingModal(false);
+            const handleWineAck = () => {
+                setWineAck(true);
+                setShowWineModal(false);
                 if (pendingCartItem) {
                     addItemToCart(pendingCartItem.product, pendingCartItem.qty);
                     setPendingCartItem(null);
                 }
             };
 
-            const handleSpiritDeliveryAcknowledge = () => {
-                setSpiritDeliveryAcknowledged(true);
-                setShowSpiritDeliveryModal(false);
+            const handleSpiritAck = () => {
+                setSpiritAck(true);
+                setShowSpiritModal(false);
                 if (pendingCartItem) {
                     addItemToCart(pendingCartItem.product, pendingCartItem.qty);
                     setPendingCartItem(null);
@@ -860,8 +597,7 @@
             const handleSubmitOrder = async () => {
                 if (cart.length === 0) return;
                 if (!deliveryDate) {
-                    setMessage({ type: 'error', text: 'Please select a requested delivery date' });
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    setMessage({ type: 'error', text: 'Please select a delivery date' });
                     return;
                 }
 
@@ -878,43 +614,29 @@
                         items: cart,
                         total: cartTotal,
                         timestamp: new Date().toISOString(),
-                        // Flag if order contains wine (for email routing)
                         containsWine: cart.some(item => item.isWine)
                     };
 
-                    const response = await fetch('https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec', {
+                    await fetch('https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(orderData),
                         mode: 'no-cors'
                     });
 
-                    setMessage({ type: 'success', text: 'Order submitted successfully! You will receive a confirmation email shortly.' });
+                    setMessage({ type: 'success', text: 'Order submitted successfully!' });
                     setCart([]);
                     setQuantities({});
                     setDeliveryDate('');
                     setSpecialInstructions('');
-                    setWineShippingAcknowledged(false);
-                    setSpiritDeliveryAcknowledged(false);
+                    setWineAck(false);
+                    setSpiritAck(false);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } catch (error) {
-                    setMessage({ type: 'error', text: 'Error submitting order. Please try again.' });
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    setMessage({ type: 'error', text: 'Error submitting order.' });
                 }
 
                 setIsSubmitting(false);
-            };
-
-            const toggleLowStock = (productId) => {
-                setLowStockItems(prev => ({
-                    ...prev,
-                    [productId]: !prev[productId]
-                }));
-            };
-
-            const openTechSheet = (techSheetPage) => {
-                setSelectedTechSheet(techSheetPage);
-                setShowTechSheetModal(true);
             };
 
             const filterProducts = (products) => {
@@ -942,184 +664,78 @@
                         </div>
                     )}
 
-                    {/* Announcements Section */}
-                    <div className="announcements-section">
-                        {isAdmin && (
-                            <div style={{marginBottom: '20px', padding: '15px', background: '#fff8f3', borderRadius: '8px'}}>
-                                <div style={{fontWeight: 600, marginBottom: '10px', color: '#be835c'}}>⚙️ Edit Announcements (Admin Only)</div>
-                                <div style={{display: 'grid', gap: '15px'}}>
-                                    <div>
-                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>Spirit of York Image URL:</label>
-                                        <input 
-                                            type="text"
-                                            value={announcementImages.spiritOfYork}
-                                            onChange={(e) => setAnnouncementImages(prev => ({...prev, spiritOfYork: e.target.value}))}
-                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px'}}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>Spirit of York Message:</label>
-                                        <textarea 
-                                            value={announcementMessages.spiritOfYork}
-                                            onChange={(e) => setAnnouncementMessages(prev => ({...prev, spiritOfYork: e.target.value}))}
-                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px', minHeight: '60px'}}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>The Grange Image URL:</label>
-                                        <input 
-                                            type="text"
-                                            value={announcementImages.grange}
-                                            onChange={(e) => setAnnouncementImages(prev => ({...prev, grange: e.target.value}))}
-                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px'}}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label style={{display: 'block', fontSize: '13px', marginBottom: '5px'}}>The Grange Message:</label>
-                                        <textarea 
-                                            value={announcementMessages.grange}
-                                            onChange={(e) => setAnnouncementMessages(prev => ({...prev, grange: e.target.value}))}
-                                            style={{width: '100%', padding: '8px', border: '1px solid #e0e0e0', borderRadius: '4px', fontSize: '13px', minHeight: '60px'}}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                        <div className="announcements-grid">
-                            <div className="announcement-card">
-                                <img 
-                                    src={announcementImages.spiritOfYork}
-                                    alt="Spirit of York" 
-                                    className="announcement-image"
-                                />
-                                <div className="announcement-content">
-                                    <div className="announcement-title">Spirit of York Distillery</div>
-                                    <div className="announcement-text">
-                                        {announcementMessages.spiritOfYork}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="announcement-card">
-                                <img 
-                                    src={announcementImages.grange}
-                                    alt="The Grange" 
-                                    className="announcement-image"
-                                />
-                                <div className="announcement-content">
-                                    <div className="announcement-title">The Grange of Prince Edward</div>
-                                    <div className="announcement-text">
-                                        {announcementMessages.grange}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Admin Controls */}
                     {isAdmin && (
-                        <div className="admin-section">
-                            <div className="admin-title">⚙️ Admin Controls - Low Stock Warnings</div>
-                            <div className="low-stock-controls">
-                                {Object.keys(PRODUCTS).flatMap(brand => 
-                                    PRODUCTS[brand].map(product => (
-                                        <div key={product.id} className="low-stock-toggle">
-                                            <input 
-                                                type="checkbox"
-                                                id={`low-stock-${product.id}`}
-                                                checked={lowStockItems[product.id] || false}
-                                                onChange={() => toggleLowStock(product.id)}
-                                            />
-                                            <label htmlFor={`low-stock-${product.id}`}>
-                                                {product.name}
-                                            </label>
-                                        </div>
-                                    ))
-                                )}
+                        <div className="delivery-section" style={{background: '#fff8f3', border: '2px solid #be835c'}}>
+                            <h2>Admin: Order On Behalf Of</h2>
+                            <div className="form-group">
+                                <label>Select Account</label>
+                                <select 
+                                    value={accountCode} 
+                                    onChange={(e) => {
+                                        const selected = allAccounts.find(acc => acc.code === e.target.value);
+                                        if (selected) {
+                                            setAccountCode(selected.code);
+                                            setAccountName(selected.name);
+                                        }
+                                    }}
+                                >
+                                    {allAccounts.map(acc => (
+                                        <option key={acc.code} value={acc.code}>
+                                            {acc.name} ({acc.code})
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
                     )}
 
-                    {/* Delivery Information */}
                     <div className="delivery-section">
                         <h2>Delivery Information</h2>
                         <div className="form-group">
                             <label>Requested Delivery Date</label>
-                            <input 
-                                type="date"
+                            <select 
                                 value={deliveryDate}
                                 onChange={(e) => setDeliveryDate(e.target.value)}
-                                min={new Date().toISOString().split('T')[0]}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Delivery Method</label>
-                            <select value={deliveryMethod} onChange={(e) => setDeliveryMethod(e.target.value)}>
-                                <option value="delivery">Delivery</option>
-                                <option value="pickup">Pickup</option>
+                            >
+                                <option value="">Select a delivery date...</option>
+                                {deliveryDates.map(date => (
+                                    <option key={date.value} value={date.value}>
+                                        {date.formatted}
+                                    </option>
+                                ))}
                             </select>
                         </div>
-                        <div className="form-group">
-                            <label>Special Instructions (Optional)</label>
-                            <textarea 
-                                value={specialInstructions}
-                                onChange={(e) => setSpecialInstructions(e.target.value)}
-                                placeholder="Any special delivery instructions..."
-                            />
+                        <div style={{fontSize: '13px', color: '#666', marginTop: '-10px', marginBottom: '15px'}}>
+                            Note: For pickup, please contact your ambassador
                         </div>
                     </div>
 
-                    {/* Product Tabs with Logos */}
                     <div className="product-tabs">
                         <button
                             className={`tab-button ${selectedBrand === 'Spirit of York' ? 'active' : ''}`}
                             onClick={() => setSelectedBrand('Spirit of York')}
                         >
-                            <img 
-                                src="./Spirit of York Logo.png" 
-                                alt="Spirit of York"
-                                className="tab-logo"
-                            />
+                            Spirit of York
                         </button>
                         <button
                             className={`tab-button ${selectedBrand === 'The Grange' ? 'active' : ''}`}
                             onClick={() => setSelectedBrand('The Grange')}
                         >
-                            <img 
-                                src="./Logo.png" 
-                                alt="The Grange"
-                                className="tab-logo"
-                            />
+                            The Grange
                         </button>
                     </div>
 
-                    {/* Products Section */}
                     <div className="products-section">
                         <h2>{selectedBrand}</h2>
                         {isWineTab && (
                             <div className="wine-note">
-                                ℹ️ Wine is ordered by the case (12 bottles). Quantities will be adjusted automatically.
+                                ℹ️ Wine is ordered by the case (12 bottles)
                             </div>
                         )}
                         <div className="products-grid">
                             {currentProducts.map(product => (
                                 <div key={product.id} className="product-card">
-                                    {product.techSheet && (
-                                        <div 
-                                            className="tech-sheet-icon"
-                                            onClick={() => openTechSheet(product.techSheet)}
-                                            title="View Tech Sheet"
-                                        >
-                                            📋
-                                        </div>
-                                    )}
-                                    <div className="product-header">
-                                        <div className="product-name">{product.name}</div>
-                                        <div className="product-icon">{product.icon}</div>
-                                    </div>
-                                    <div className="product-details">
-                                        {product.size} • {product.abv}
-                                        {product.lcbo && ` • ${product.lcbo}`}
-                                    </div>
+                                    <div className="product-name">{product.name}</div>
                                     {product.isWine ? (
                                         <div className="product-price">
                                             <div>${product.price.toFixed(2)} /bottle</div>
@@ -1127,10 +743,6 @@
                                         </div>
                                     ) : (
                                         <div className="product-price">${product.price.toFixed(2)}</div>
-                                    )}
-                                    
-                                    {lowStockItems[product.id] && (
-                                        <div className="low-stock-badge">⚠️ LOW STOCK - Order Now!</div>
                                     )}
                                     
                                     <div className="quantity-controls">
@@ -1161,113 +773,70 @@
                         </div>
                     </div>
 
-                    {/* Cart */}
-                    {cart.length > 0 && (
-                        <div className="cart-section">
-                            <div className="cart-content">
-                                <div className="cart-header">
-                                    <div className="cart-title">Your Order ({cart.length} items)</div>
-                                    <div className="cart-total">${cartTotal.toFixed(2)}</div>
-                                </div>
+                    <div className="cart-section">
+                        <div className="cart-content">
+                            <div className="cart-header">
+                                <div className="cart-title">Your Order ({cart.length} items)</div>
+                                <div className="cart-total">${cartTotal.toFixed(2)}</div>
+                            </div>
+                            {cart.length > 0 && (
                                 <div className="cart-items">
                                     {cart.map((item, index) => (
                                         <div key={index} className="cart-item">
-                                            {item.icon} {item.name} × {item.quantity} = ${item.subtotal.toFixed(2)}
+                                            {item.name} × {item.quantity} = ${item.subtotal.toFixed(2)}
                                             <button 
                                                 className="cart-item-remove"
                                                 onClick={() => removeFromCart(index)}
-                                                title="Remove"
                                             >
                                                 ×
                                             </button>
                                         </div>
                                     ))}
                                 </div>
-                                <button 
-                                    className="submit-order-btn"
-                                    onClick={handleSubmitOrder}
-                                    disabled={isSubmitting || !deliveryDate}
-                                >
-                                    {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                            )}
+                            <button 
+                                className="submit-order-btn"
+                                onClick={handleSubmitOrder}
+                                disabled={isSubmitting || !deliveryDate || cart.length === 0}
+                            >
+                                {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                            </button>
+                        </div>
+                    </div>
+
+                    {showWineModal && (
+                        <div className="modal-overlay">
+                            <div className="modal-content">
+                                <div className="modal-title">Wine Shipping Information</div>
+                                <div className="modal-text">
+                                    Shipnoble picks up in Prince Edward County on Mondays, Wednesdays, and Saturdays.
+                                    
+                                    Please note, Shipnoble does not deliver to the GTA on weekends.
+                                    
+                                    May-Nov: Orders before noon Monday reach GTA that week
+                                    Dec-Apr: Orders before noon Wednesday reach GTA Thu-Wed
+                                    
+                                    Local delivery: Orders by end of day Wed for Thu delivery
+                                </div>
+                                <button className="modal-btn" onClick={handleWineAck}>
+                                    I Understand
                                 </button>
                             </div>
                         </div>
                     )}
 
-                    {/* Wine Shipping Modal */}
-                    {showWineShippingModal && (
-                        <div className="modal-overlay" onClick={() => setShowWineShippingModal(false)}>
-                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                <div className="modal-title">🍷 Wine Shipping Information</div>
+                    {showSpiritModal && (
+                        <div className="modal-overlay">
+                            <div className="modal-content">
+                                <div className="modal-title">Delivery Information</div>
                                 <div className="modal-text">
-                                    Shipnoble picks up in Prince Edward County on Mondays, Wednesdays, and Saturdays.
-                                    
-                                    Please note, Shipnoble does not deliver to the GTA on weekends. Pick-ups at The Grange will also be seasonally affected by operating hours.
-                                    
-                                    <strong>May - November:</strong>
-                                    • Orders before noon Monday reach GTA that week
-                                    • Orders before noon Wednesday reach GTA Thu-Wed
-                                    • Orders before noon Saturday reach GTA following week
-                                    
-                                    <strong>December - April:</strong>
-                                    • Orders before noon Wednesday reach GTA Thu-Wed
-                                    • Orders before noon Saturday reach GTA following week
-                                    
-                                    <strong>Local Delivery:</strong>
-                                    Orders must be in by end of day Wednesday for Thursday delivery (Hastings and Prince Edward Counties only).
-                                </div>
-                                <div className="modal-buttons">
-                                    <button 
-                                        className="modal-btn modal-btn-primary"
-                                        onClick={handleWineShippingAcknowledge}
-                                    >
-                                        I Understand
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Spirit Delivery Modal */}
-                    {showSpiritDeliveryModal && (
-                        <div className="modal-overlay" onClick={() => setShowSpiritDeliveryModal(false)}>
-                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                <div className="modal-title">🥃 Delivery Information</div>
-                                <div className="modal-text">
-                                    Please note for deliveries in the GTA turnaround is 48-72 hours. Orders elsewhere delivery time will vary. 
+                                    Please note for deliveries in the GTA turnaround is 48-72 hours. Orders elsewhere delivery time will vary.
                                     
                                     We try our best to get orders out as fast as possible. In case of an emergency contact your ambassador.
                                 </div>
-                                <div className="modal-buttons">
-                                    <button 
-                                        className="modal-btn modal-btn-primary"
-                                        onClick={handleSpiritDeliveryAcknowledge}
-                                    >
-                                        I Understand
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Tech Sheet Modal */}
-                    {showTechSheetModal && (
-                        <div className="modal-overlay" onClick={() => setShowTechSheetModal(false)}>
-                            <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{maxWidth: '900px'}}>
-                                <div className="modal-title">Product Tech Sheet</div>
-                                <iframe 
-                                    src={`${TECH_SHEET_PDF}#page=${selectedTechSheet}`}
-                                    className="tech-sheet-viewer"
-                                    title="Tech Sheet"
-                                />
-                                <div className="modal-buttons">
-                                    <button 
-                                        className="modal-btn modal-btn-secondary"
-                                        onClick={() => setShowTechSheetModal(false)}
-                                    >
-                                        Close
-                                    </button>
-                                </div>
+                                <button className="modal-btn" onClick={handleSpiritAck}>
+                                    I Understand
+                                </button>
                             </div>
                         </div>
                     )}
