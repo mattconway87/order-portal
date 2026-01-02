@@ -98,7 +98,7 @@
             text-align: center;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .toggle-option:hover {
@@ -106,116 +106,97 @@
         }
 
         .toggle-option.active {
-            background: #be835c;
+            background: #252f42;
             color: white;
-            border-color: #be835c;
+            border-color: #252f42;
         }
 
-        .product-tabs {
+        .brand-tabs {
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            justify-content: center;
-        }
-
-        .tab-button {
-            background: white;
-            border: 3px solid #e0e0e0;
-            padding: 15px 40px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .tab-button:hover {
-            border-color: #be835c;
-        }
-
-        .tab-button.active {
-            border-color: #be835c;
-            background: #fff8f3;
-        }
-
-        .products-section {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
+            gap: 10px;
             margin-bottom: 25px;
         }
 
-        .products-section h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
+        .brand-tab {
+            flex: 1;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
         }
 
-        .wine-note {
-            background: #fff8f3;
-            border-left: 4px solid #be835c;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            font-size: 14px;
+        .brand-tab:hover {
+            border-color: #be835c;
         }
 
-        .products-grid {
+        .brand-tab.active {
+            background: #be835c;
+            color: white;
+            border-color: #be835c;
+        }
+
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
+            margin-top: 20px;
         }
 
         .product-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            background: white;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .product-name {
-            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #252f42;
         }
 
         .product-price {
+            color: #be835c;
             font-size: 20px;
             font-weight: 700;
-            color: #be835c;
             margin-bottom: 15px;
         }
 
-        .quantity-controls {
+        .quantity-control {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        .qty-button {
-            width: 36px;
-            height: 36px;
-            border: 2px solid #be835c;
-            background: white;
-            color: #be835c;
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e0e0e0;
             border-radius: 6px;
-            font-size: 18px;
+            background: white;
             cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            color: #252f42;
+            transition: all 0.2s;
         }
 
-        .qty-button:hover {
-            background: #be835c;
-            color: white;
-        }
-
-        .qty-button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
+        .qty-btn:hover {
+            border-color: #be835c;
+            color: #be835c;
         }
 
         .qty-display {
+            font-size: 18px;
+            font-weight: 600;
             min-width: 40px;
             text-align: center;
-            font-size: 16px;
-            font-weight: 600;
         }
 
         .add-to-cart-btn {
@@ -225,13 +206,13 @@
             color: white;
             border: none;
             border-radius: 6px;
-            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
         .add-to-cart-btn:hover {
-            background: #a66d4a;
+            background: #a67250;
         }
 
         .add-to-cart-btn:disabled {
@@ -240,86 +221,122 @@
         }
 
         .cart-section {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
             background: white;
-            border-top: 3px solid #be835c;
-            padding: 20px;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
-            z-index: 1000;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .cart-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .cart-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .cart-total {
-            font-size: 24px;
-            font-weight: 700;
-            color: #be835c;
-        }
-
-        .cart-items {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-            max-height: 100px;
-            overflow-y: auto;
+        .cart-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #252f42;
         }
 
         .cart-item {
-            background: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 13px;
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .cart-item-remove {
-            background: #ff4444;
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-details {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .cart-item-price {
+            font-weight: 700;
+            color: #be835c;
+            margin-right: 15px;
+        }
+
+        .remove-btn {
+            background: #dc3545;
             color: white;
             border: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+            padding: 8px 15px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px;
         }
 
-        .submit-order-btn {
+        .remove-btn:hover {
+            background: #c82333;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-top: 2px solid #252f42;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .cart-total-label {
+            color: #252f42;
+        }
+
+        .cart-total-amount {
+            color: #be835c;
+        }
+
+        .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             background: #252f42;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .submit-order-btn:hover {
-            background: #1a2332;
+        .submit-btn:hover {
+            background: #1a2230;
         }
 
-        .submit-order-btn:disabled {
+        .submit-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         .modal-overlay {
@@ -328,65 +345,71 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 1000;
         }
 
-        .modal-content {
+        .modal {
             background: white;
-            border-radius: 12px;
-            max-width: 600px;
             padding: 30px;
-            max-height: 90vh;
-            overflow-y: auto;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
         }
 
-        .modal-title {
-            font-size: 22px;
-            font-weight: 600;
+        .modal h3 {
+            color: #252f42;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
             margin-bottom: 20px;
+            line-height: 1.6;
         }
 
-        .modal-text {
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            white-space: pre-line;
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
         }
 
         .modal-btn {
-            width: 100%;
-            padding: 14px;
-            background: #be835c;
-            color: white;
+            flex: 1;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
         }
 
-        .modal-btn:hover {
-            background: #a66d4a;
+        .modal-btn.primary {
+            background: #be835c;
+            color: white;
         }
 
-        .message {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+        .modal-btn.secondary {
+            background: #e0e0e0;
+            color: #252f42;
         }
 
-        .message-success {
-            background: #d4edda;
-            color: #155724;
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #666;
         }
 
-        .message-error {
-            background: #f8d7da;
-            color: #721c24;
+        .admin-selector {
+            margin-bottom: 25px;
+        }
+
+        .admin-selector select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -396,7 +419,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        const PRODUCTS = {
+        const products = {
             'Spirit of York': [
                 { id: 'soy-vodka', name: 'Spirit of York Vodka', price: 36.08 },
                 { id: 'soy-gin', name: 'Spirit of York Gin', price: 36.08 },
@@ -458,43 +481,91 @@
                 const params = new URLSearchParams(window.location.search);
                 const code = params.get('account');
                 
-                fetch('./12-trinity-all-accounts.csv')
-                    .then(res => res.text())
-                    .then(csv => {
+                // Try multiple possible CSV paths
+                const csvPaths = [
+                    './12-trinity-all-accounts.csv',
+                    '12-trinity-all-accounts.csv',
+                    '/order-portal/12-trinity-all-accounts.csv'
+                ];
+                
+                let csvLoaded = false;
+                
+                const tryLoadCSV = async (path) => {
+                    try {
+                        const res = await fetch(path);
+                        if (!res.ok) throw new Error('Not found');
+                        const csv = await res.text();
+                        
                         const lines = csv.split('\n');
                         const accounts = [];
                         
                         for (let i = 1; i < lines.length; i++) {
-                            const line = lines[i].trim().replace(/\r/g, '');
+                            const line = lines[i].trim();
                             if (!line) continue;
                             
-                            const parts = line.split(',');
+                            // Parse CSV properly - handle quoted fields
+                            const parts = [];
+                            let current = '';
+                            let inQuotes = false;
+                            
+                            for (let char of line) {
+                                if (char === '"') {
+                                    inQuotes = !inQuotes;
+                                } else if (char === ',' && !inQuotes) {
+                                    parts.push(current.trim());
+                                    current = '';
+                                } else {
+                                    current += char;
+                                }
+                            }
+                            parts.push(current.trim());
+                            
                             if (parts.length >= 2) {
-                                const accCode = parts[0].trim();
-                                const accName = parts[1].trim().replace(/"/g, '');
+                                const accCode = parts[0];
+                                const accName = parts[1].replace(/^"|"$/g, '');
                                 accounts.push({ code: accCode, name: accName });
                                 
                                 if (code && accCode === code) {
                                     setAccountCode(code);
                                     setAccountName(accName);
+                                    console.log('Found account:', accName, 'for code:', code);
                                 }
                             }
                         }
                         
                         setAllAccounts(accounts);
+                        csvLoaded = true;
+                        console.log('CSV loaded successfully from:', path);
                         
+                        // Fallback if account not found in CSV
                         if (code && !accountName) {
                             setAccountCode(code);
-                            setAccountName(code);
+                            setAccountName(code); // Use code as name if not found
+                            console.warn('Account not found in CSV, using code as name');
                         }
-                    })
-                    .catch(err => {
-                        console.error('CSV load error:', err);
-                        if (code) {
-                            setAccountCode(code);
-                            setAccountName(code);
+                        
+                        return true;
+                    } catch (err) {
+                        console.log('Failed to load CSV from:', path);
+                        return false;
+                    }
+                };
+                
+                // Try loading CSV from different paths
+                (async () => {
+                    for (const path of csvPaths) {
+                        if (await tryLoadCSV(path)) {
+                            break;
                         }
-                    });
+                    }
+                    
+                    // If CSV never loaded, use code as fallback
+                    if (!csvLoaded && code) {
+                        console.error('CSV could not be loaded from any path');
+                        setAccountCode(code);
+                        setAccountName(code);
+                    }
+                })();
             }, []);
 
             const isAdmin = accountCode === 'ADMIN001';
@@ -604,52 +675,41 @@
                 setIsSubmitting(true);
                 setMessage({ type: '', text: '' });
 
-                try {
-                    const orderData = {
-                        accountCode,
-                        accountName,
-                        deliveryDate,
-                        deliveryMethod,
-                        specialInstructions,
-                        items: cart,
-                        total: cartTotal,
-                        timestamp: new Date().toISOString(),
-                        containsWine: cart.some(item => item.isWine)
-                    };
+                const orderData = {
+                    accountCode,
+                    accountName,
+                    deliveryDate,
+                    deliveryMethod,
+                    specialInstructions,
+                    items: cart,
+                    total: cartTotal,
+                    timestamp: new Date().toISOString()
+                };
 
-                    await fetch('https://script.google.com/macros/s/AKfycbyIxrZul2bWgcgPY4vA5f8pbEaxo857Z9tcAiZs4he-cKjMsnQj2X0FX1TLaxNzRpjK/exec', {
+                try {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbwRuHe1OauZqG6g9w3RQJNrEqJHRHSzYx9tGZH_XXCbDbT4c_TtS2OX5tX6ljmqOJv9/exec', {
                         method: 'POST',
+                        mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(orderData),
-                        mode: 'no-cors'
+                        body: JSON.stringify(orderData)
                     });
 
-                    setMessage({ type: 'success', text: 'Order submitted successfully!' });
+                    setMessage({ type: 'success', text: 'Order submitted successfully! You will receive a confirmation email shortly.' });
                     setCart([]);
-                    setQuantities({});
                     setDeliveryDate('');
                     setSpecialInstructions('');
-                    setWineAck(false);
-                    setSpiritAck(false);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } catch (error) {
-                    setMessage({ type: 'error', text: 'Error submitting order.' });
+                    setMessage({ type: 'error', text: 'Error submitting order. Please try again or contact us directly.' });
                 }
 
                 setIsSubmitting(false);
             };
 
-            const filterProducts = (products) => {
-                return products.filter(product => {
-                    if (!product.allowedAccounts) return true;
-                    if (product.allowedAccounts.includes('ADMIN001') && !isAdmin) return false;
-                    if (isAdmin) return true;
-                    return product.allowedAccounts.includes(accountCode);
-                });
-            };
-
-            const currentProducts = filterProducts(PRODUCTS[selectedBrand] || []);
-            const isWineTab = selectedBrand === 'The Grange';
+            const filteredProducts = products[selectedBrand].filter(product => {
+                if (isAdmin) return true;
+                if (!product.allowedAccounts) return true;
+                return product.allowedAccounts.includes(accountCode);
+            });
 
             return (
                 <div className="container">
@@ -658,30 +718,23 @@
                         <div className="account-name">{accountName}</div>
                     </div>
 
-                    {message.text && (
-                        <div className={`message message-${message.type}`}>
-                            {message.text}
-                        </div>
-                    )}
-
                     {isAdmin && (
-                        <div className="delivery-section" style={{background: '#fff8f3', border: '2px solid #be835c'}}>
+                        <div className="delivery-section">
                             <h2>Admin: Order On Behalf Of</h2>
                             <div className="form-group">
                                 <label>Select Account</label>
                                 <select 
-                                    value={accountCode} 
+                                    value={accountCode}
                                     onChange={(e) => {
-                                        const selected = allAccounts.find(acc => acc.code === e.target.value);
-                                        if (selected) {
-                                            setAccountCode(selected.code);
-                                            setAccountName(selected.name);
-                                        }
+                                        const selected = allAccounts.find(a => a.code === e.target.value);
+                                        setAccountCode(e.target.value);
+                                        setAccountName(selected ? selected.name : e.target.value);
                                     }}
                                 >
-                                    {allAccounts.map(acc => (
-                                        <option key={acc.code} value={acc.code}>
-                                            {acc.name} ({acc.code})
+                                    <option value="ADMIN001">ADMIN - Matt Conway (ADMIN001)</option>
+                                    {allAccounts.filter(a => a.code !== 'ADMIN001').map(account => (
+                                        <option key={account.code} value={account.code}>
+                                            {account.name} ({account.code})
                                         </option>
                                     ))}
                                 </select>
@@ -698,145 +751,179 @@
                                 onChange={(e) => setDeliveryDate(e.target.value)}
                             >
                                 <option value="">Select a delivery date...</option>
-                                {deliveryDates.map(date => (
-                                    <option key={date.value} value={date.value}>
-                                        {date.formatted}
-                                    </option>
+                                {deliveryDates.map(d => (
+                                    <option key={d.value} value={d.value}>{d.formatted}</option>
                                 ))}
                             </select>
                         </div>
-                        <div style={{fontSize: '13px', color: '#666', marginTop: '-10px', marginBottom: '15px'}}>
-                            Note: For pickup, please contact your ambassador
+                        <div className="form-group">
+                            <label>Delivery Method</label>
+                            <div className="toggle-container">
+                                <div 
+                                    className={`toggle-option ${deliveryMethod === 'delivery' ? 'active' : ''}`}
+                                    onClick={() => setDeliveryMethod('delivery')}
+                                >
+                                    Delivery
+                                </div>
+                                <div 
+                                    className={`toggle-option ${deliveryMethod === 'pickup' ? 'active' : ''}`}
+                                    onClick={() => setDeliveryMethod('pickup')}
+                                >
+                                    Pick Up
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Special Instructions (Optional)</label>
+                            <textarea 
+                                value={specialInstructions}
+                                onChange={(e) => setSpecialInstructions(e.target.value)}
+                                placeholder="Any special delivery instructions..."
+                            />
                         </div>
                     </div>
 
-                    <div className="product-tabs">
-                        <button
-                            className={`tab-button ${selectedBrand === 'Spirit of York' ? 'active' : ''}`}
+                    <div className="brand-tabs">
+                        <div 
+                            className={`brand-tab ${selectedBrand === 'Spirit of York' ? 'active' : ''}`}
                             onClick={() => setSelectedBrand('Spirit of York')}
                         >
                             Spirit of York
-                        </button>
-                        <button
-                            className={`tab-button ${selectedBrand === 'The Grange' ? 'active' : ''}`}
+                        </div>
+                        <div 
+                            className={`brand-tab ${selectedBrand === 'The Grange' ? 'active' : ''}`}
                             onClick={() => setSelectedBrand('The Grange')}
                         >
                             The Grange
-                        </button>
+                        </div>
                     </div>
 
-                    <div className="products-section">
-                        <h2>{selectedBrand}</h2>
-                        {isWineTab && (
-                            <div className="wine-note">
-                                ℹ️ Wine is ordered by the case (12 bottles)
-                            </div>
-                        )}
-                        <div className="products-grid">
-                            {currentProducts.map(product => (
-                                <div key={product.id} className="product-card">
-                                    <div className="product-name">{product.name}</div>
-                                    {product.isWine ? (
-                                        <div className="product-price">
-                                            <div>${product.price.toFixed(2)} /bottle</div>
-                                            <div style={{fontSize: '16px', color: '#666'}}>${(product.price * 12).toFixed(2)} /case</div>
-                                        </div>
-                                    ) : (
-                                        <div className="product-price">${product.price.toFixed(2)}</div>
-                                    )}
-                                    
-                                    <div className="quantity-controls">
-                                        <button 
-                                            className="qty-button"
-                                            onClick={() => handleQuantityChange(product.id, product.isWine ? -12 : -1, product.isWine)}
-                                            disabled={(quantities[product.id] || 0) === 0}
-                                        >
-                                            −
-                                        </button>
-                                        <div className="qty-display">{quantities[product.id] || 0}</div>
-                                        <button 
-                                            className="qty-button"
-                                            onClick={() => handleQuantityChange(product.id, product.isWine ? 12 : 1, product.isWine)}
-                                        >
-                                            +
-                                        </button>
-                                    </div>
+                    <div className="product-grid">
+                        {filteredProducts.map(product => (
+                            <div key={product.id} className="product-card">
+                                <div className="product-name">{product.name}</div>
+                                <div className="product-price">${product.price.toFixed(2)}</div>
+                                <div className="quantity-control">
                                     <button 
-                                        className="add-to-cart-btn"
-                                        onClick={() => handleAddToCart(product)}
-                                        disabled={(quantities[product.id] || 0) === 0}
+                                        className="qty-btn"
+                                        onClick={() => handleQuantityChange(product.id, product.isWine ? -12 : -1, product.isWine)}
                                     >
-                                        Add to Cart
+                                        -
+                                    </button>
+                                    <div className="qty-display">{quantities[product.id] || 0}</div>
+                                    <button 
+                                        className="qty-btn"
+                                        onClick={() => handleQuantityChange(product.id, product.isWine ? 12 : 1, product.isWine)}
+                                    >
+                                        +
                                     </button>
                                 </div>
-                            ))}
-                        </div>
+                                <button 
+                                    className="add-to-cart-btn"
+                                    onClick={() => handleAddToCart(product)}
+                                    disabled={!quantities[product.id]}
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
+                        ))}
                     </div>
 
                     <div className="cart-section">
-                        <div className="cart-content">
-                            <div className="cart-header">
-                                <div className="cart-title">Your Order ({cart.length} items)</div>
-                                <div className="cart-total">${cartTotal.toFixed(2)}</div>
-                            </div>
-                            {cart.length > 0 && (
-                                <div className="cart-items">
-                                    {cart.map((item, index) => (
-                                        <div key={index} className="cart-item">
-                                            {item.name} × {item.quantity} = ${item.subtotal.toFixed(2)}
-                                            <button 
-                                                className="cart-item-remove"
-                                                onClick={() => removeFromCart(index)}
-                                            >
-                                                ×
-                                            </button>
+                        <h2>Your Order ({cart.length} items)</h2>
+                        {message.text && (
+                            <div className={`message ${message.type}`}>{message.text}</div>
+                        )}
+                        {cart.length === 0 ? (
+                            <div className="empty-cart">Your cart is empty</div>
+                        ) : (
+                            <>
+                                {cart.map((item, index) => (
+                                    <div key={index} className="cart-item">
+                                        <div className="cart-item-info">
+                                            <div className="cart-item-name">{item.name}</div>
+                                            <div className="cart-item-details">
+                                                Qty: {item.quantity} × ${item.price.toFixed(2)}
+                                            </div>
                                         </div>
-                                    ))}
+                                        <div className="cart-item-price">${item.subtotal.toFixed(2)}</div>
+                                        <button 
+                                            className="remove-btn"
+                                            onClick={() => removeFromCart(index)}
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                ))}
+                                <div className="cart-total">
+                                    <div className="cart-total-label">Total:</div>
+                                    <div className="cart-total-amount">${cartTotal.toFixed(2)}</div>
                                 </div>
-                            )}
-                            <button 
-                                className="submit-order-btn"
-                                onClick={handleSubmitOrder}
-                                disabled={isSubmitting || !deliveryDate || cart.length === 0}
-                            >
-                                {isSubmitting ? 'Submitting...' : 'Submit Order'}
-                            </button>
-                        </div>
+                                <button 
+                                    className="submit-btn"
+                                    onClick={handleSubmitOrder}
+                                    disabled={isSubmitting || !deliveryDate}
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                                </button>
+                            </>
+                        )}
                     </div>
 
                     {showWineModal && (
                         <div className="modal-overlay">
-                            <div className="modal-content">
-                                <div className="modal-title">Wine Shipping Information</div>
-                                <div className="modal-text">
-                                    Shipnoble picks up in Prince Edward County on Mondays, Wednesdays, and Saturdays.
-                                    
-                                    Please note, Shipnoble does not deliver to the GTA on weekends.
-                                    
-                                    May-Nov: Orders before noon Monday reach GTA that week
-                                    Dec-Apr: Orders before noon Wednesday reach GTA Thu-Wed
-                                    
-                                    Local delivery: Orders by end of day Wed for Thu delivery
+                            <div className="modal">
+                                <h3>Wine Order Acknowledgment</h3>
+                                <p>
+                                    Please note: Wine orders must be placed in multiples of 12 bottles 
+                                    due to shipping and regulatory requirements.
+                                </p>
+                                <div className="modal-buttons">
+                                    <button 
+                                        className="modal-btn secondary"
+                                        onClick={() => {
+                                            setShowWineModal(false);
+                                            setPendingCartItem(null);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button 
+                                        className="modal-btn primary"
+                                        onClick={handleWineAck}
+                                    >
+                                        I Understand
+                                    </button>
                                 </div>
-                                <button className="modal-btn" onClick={handleWineAck}>
-                                    I Understand
-                                </button>
                             </div>
                         </div>
                     )}
 
                     {showSpiritModal && (
                         <div className="modal-overlay">
-                            <div className="modal-content">
-                                <div className="modal-title">Delivery Information</div>
-                                <div className="modal-text">
-                                    Please note for deliveries in the GTA turnaround is 48-72 hours. Orders elsewhere delivery time will vary.
-                                    
-                                    We try our best to get orders out as fast as possible. In case of an emergency contact your ambassador.
+                            <div className="modal">
+                                <h3>Spirit Order Acknowledgment</h3>
+                                <p>
+                                    All spirit orders are subject to LCBO availability and pricing. 
+                                    Delivery times may vary based on stock levels.
+                                </p>
+                                <div className="modal-buttons">
+                                    <button 
+                                        className="modal-btn secondary"
+                                        onClick={() => {
+                                            setShowSpiritModal(false);
+                                            setPendingCartItem(null);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button 
+                                        className="modal-btn primary"
+                                        onClick={handleSpiritAck}
+                                    >
+                                        I Understand
+                                    </button>
                                 </div>
-                                <button className="modal-btn" onClick={handleSpiritAck}>
-                                    I Understand
-                                </button>
                             </div>
                         </div>
                     )}
