@@ -481,14 +481,14 @@
                 const params = new URLSearchParams(window.location.search);
                 const code = params.get('account');
                 
+                if (!code) return;
+                
                 // Try multiple possible CSV paths
                 const csvPaths = [
                     './12-trinity-all-accounts.csv',
                     '12-trinity-all-accounts.csv',
                     '/order-portal/12-trinity-all-accounts.csv'
                 ];
-                
-                let csvLoaded = false;
                 
                 const tryLoadCSV = async (path) => {
                     try {
@@ -498,6 +498,7 @@
                         
                         const lines = csv.split('\n');
                         const accounts = [];
+                        let foundAccount = false;
                         
                         for (let i = 1; i < lines.length; i++) {
                             const line = lines[i].trim();
@@ -525,22 +526,22 @@
                                 const accName = parts[1].replace(/^"|"$/g, '');
                                 accounts.push({ code: accCode, name: accName });
                                 
-                                if (code && accCode === code) {
+                                if (accCode === code) {
                                     setAccountCode(code);
                                     setAccountName(accName);
+                                    foundAccount = true;
                                     console.log('Found account:', accName, 'for code:', code);
                                 }
                             }
                         }
                         
                         setAllAccounts(accounts);
-                        csvLoaded = true;
                         console.log('CSV loaded successfully from:', path);
                         
-                        // Fallback if account not found in CSV
-                        if (code && !accountName) {
+                        // Only use fallback if account wasn't found in CSV
+                        if (!foundAccount) {
                             setAccountCode(code);
-                            setAccountName(code); // Use code as name if not found
+                            setAccountName(code);
                             console.warn('Account not found in CSV, using code as name');
                         }
                         
@@ -553,14 +554,16 @@
                 
                 // Try loading CSV from different paths
                 (async () => {
+                    let loaded = false;
                     for (const path of csvPaths) {
                         if (await tryLoadCSV(path)) {
+                            loaded = true;
                             break;
                         }
                     }
                     
                     // If CSV never loaded, use code as fallback
-                    if (!csvLoaded && code) {
+                    if (!loaded) {
                         console.error('CSV could not be loaded from any path');
                         setAccountCode(code);
                         setAccountName(code);
