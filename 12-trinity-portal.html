@@ -676,14 +676,14 @@
                 };
 
                 try {
-                    const response = await fetch('https://script.google.com/macros/s/AKfycbwRuHe1OauZqG6g9w3RQJNrEqJHRHSzYx9tGZH_XXCbDbT4c_TtS2OX5tX6ljmqOJv9/exec', {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbzQNDPB3ZUQ-p96BmC1ry2--dYHpUiTH_Z1Jyr738V1k9eS23bhle1QDCJ51d4aUNd5/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(orderData)
                     });
 
-                    setMessage({ type: 'success', text: 'Order submitted successfully! You will receive a confirmation email shortly.' });
+                    setMessage({ type: 'success', text: 'Order submitted successfully!' });
                     setCart([]);
                     setDeliveryDate('');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
