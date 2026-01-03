@@ -458,6 +458,7 @@
             const [accountCode, setAccountCode] = useState('');
             const [accountName, setAccountName] = useState('');
             const [accountType, setAccountType] = useState('');
+            const [selectedAccountForAuth, setSelectedAccountForAuth] = useState('ADMIN001');
             const [allAccounts, setAllAccounts] = useState([]);
             const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
             const [deliveryDate, setDeliveryDate] = useState('');
@@ -868,6 +869,7 @@
                                         const selected = allAccounts.find(a => a.code === e.target.value);
                                         setAccountCode(e.target.value);
                                         setAccountName(selected ? selected.name : e.target.value);
+                                        setAccountType(selected ? selected.type : '');
                                     }}
                                 >
                                     <option value="ADMIN001">ADMIN - Matt Conway (ADMIN001)</option>
@@ -878,14 +880,36 @@
                                     ))}
                                 </select>
                             </div>
+                        </div>
+                    )}
+
+                    {isAdmin && (
+                        <div className="delivery-section" style={{ backgroundColor: '#f0f8ff', borderLeft: '4px solid #007bff' }}>
+                            <h2>🍷 Manage Split-Case Wine Authorization</h2>
+                            <div className="form-group">
+                                <label>Select Account to Authorize</label>
+                                <select 
+                                    value={selectedAccountForAuth}
+                                    onChange={(e) => setSelectedAccountForAuth(e.target.value)}
+                                >
+                                    <option value="ADMIN001">Select an account...</option>
+                                    {allAccounts.filter(a => a.code !== 'ADMIN001').map(account => (
+                                        <option key={account.code} value={account.code}>
+                                            {account.name} ({account.code})
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                             
                             {/* Split-Case Authorization Button */}
-                            {accountCode !== 'ADMIN001' && (
+                            {selectedAccountForAuth !== 'ADMIN001' && (
                                 <div style={{ marginTop: '12px' }}>
-                                    {splitCaseAccounts.includes(accountCode) ? (
+                                    {splitCaseAccounts.includes(selectedAccountForAuth) ? (
                                         <button
                                             onClick={() => {
-                                                setSplitCaseAccounts(splitCaseAccounts.filter(c => c !== accountCode));
+                                                setSplitCaseAccounts(splitCaseAccounts.filter(c => c !== selectedAccountForAuth));
+                                                setMessage({ type: 'success', text: 'Authorization removed! Click Save Settings below.' });
+                                                setTimeout(() => setMessage({ type: '', text: '' }), 3000);
                                             }}
                                             style={{
                                                 backgroundColor: '#dc3545',
@@ -902,8 +926,10 @@
                                     ) : (
                                         <button
                                             onClick={() => {
-                                                if (!splitCaseAccounts.includes(accountCode)) {
-                                                    setSplitCaseAccounts([...splitCaseAccounts, accountCode]);
+                                                if (!splitCaseAccounts.includes(selectedAccountForAuth)) {
+                                                    setSplitCaseAccounts([...splitCaseAccounts, selectedAccountForAuth]);
+                                                    setMessage({ type: 'success', text: 'Authorization added! Click Save Settings below.' });
+                                                    setTimeout(() => setMessage({ type: '', text: '' }), 3000);
                                                 }
                                             }}
                                             style={{
@@ -920,14 +946,13 @@
                                         </button>
                                     )}
                                     <div style={{ fontSize: '12px', color: '#666', marginTop: '6px' }}>
-                                        {splitCaseAccounts.includes(accountCode) 
+                                        {splitCaseAccounts.includes(selectedAccountForAuth) 
                                             ? 'This account can order wine by the bottle (must be divisible by 12)'
                                             : 'Click to allow this account to order wine by the bottle (must be divisible by 12)'}
                                     </div>
                                 </div>
                             )}
                         </div>
-                    )}
 
                     {isAdmin && (
                         <div className="delivery-section" style={{ backgroundColor: '#fff3cd', borderLeft: '4px solid #ffc107' }}>
