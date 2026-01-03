@@ -416,26 +416,26 @@
 
         const products = {
             'Spirit of York': [
-                { id: 'soy-vodka', name: 'Spirit of York Vodka', price: 36.08, abv: '40%', size: '750ml' },
-                { id: 'soy-gin', name: 'Spirit of York Gin', price: 36.08, abv: '40%', size: '750ml' },
-                { id: 'soy-whisky', name: 'Spirit of York Whisky', price: 57.30, abv: '46%', size: '750ml', allowedAccounts: ['ADMIN001'] },
-                { id: 'soy-aquavit', name: 'Spirit of York Aquavit', price: 39.63, abv: '44%', size: '750ml' },
-                { id: 'soy-coffee', name: 'Spirit of York Coffee Liqueur', price: 23.70, abv: '25%', size: '375ml' },
-                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', price: 23.70, abv: '25%', size: '375ml', allowedAccounts: ['ADMIN001'] },
-                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', price: 23.70, abv: '25%', size: '375ml', allowedAccounts: ['ADMIN001'] },
-                { id: 'distl-vodka', name: 'Spirit of York: DISTL Vodka', price: 27.68, abv: '40%', size: '750ml' },
-                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', price: 31.66, abv: '40%', size: '750ml' },
-                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', price: 29.63, abv: '40%', size: '750ml' },
-                { id: 'distl-pink', name: 'Spirit of York: DISTL Flawless Pink Gin', price: 31.66, abv: '35%', size: '750ml' },
-                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chilli Liqueur', price: 31.66, abv: '40%', size: '750ml' },
-                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', price: 31.66, abv: '30%', size: '750ml', allowedAccounts: ['ADMIN001'] },
-                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', price: 31.66, abv: '40%', size: '750ml', allowedAccounts: ['ADMIN001'] },
-                { id: 'distl-peach-rtd', name: 'Spirit of York: DISTL Peach Blueberry RTD', price: 2.31, abv: '5%', size: '355ml' },
-                { id: 'distl-rasp-rtd', name: 'Spirit of York: DISTL Raspberry Lemon RTD', price: 2.31, abv: '5%', size: '355ml' },
-                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', price: 28.14, abv: '40%', size: '750ml', allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'] },
-                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', price: 30.75, abv: '40%', size: '750ml', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
-                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', price: 20.13, abv: '40%', size: '750ml', allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
-                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', price: 19.25, size: '750ml', allowedAccounts: ['NQ7C553C'] },
+                { id: 'soy-vodka', name: 'Spirit of York Vodka', price: 36.08, abv: '40%', size: '750ml', caseSize: 6, casePrice: 216.48 },
+                { id: 'soy-gin', name: 'Spirit of York Gin', price: 36.08, abv: '40%', size: '750ml', caseSize: 6, casePrice: 216.48 },
+                { id: 'soy-whisky', name: 'Spirit of York Whisky', price: 57.30, abv: '46%', size: '750ml', caseSize: 6, casePrice: 343.80, allowedAccounts: ['ADMIN001'] },
+                { id: 'soy-aquavit', name: 'Spirit of York Aquavit', price: 39.63, abv: '44%', size: '750ml', caseSize: 6, casePrice: 237.78 },
+                { id: 'soy-coffee', name: 'Spirit of York Coffee Liqueur', price: 23.70, abv: '25%', size: '375ml', caseSize: 12, casePrice: 284.40 },
+                { id: 'soy-aperitivo', name: 'Spirit of York Aperitivo', price: 23.70, abv: '25%', size: '375ml', caseSize: 12, casePrice: 284.40, allowedAccounts: ['ADMIN001'] },
+                { id: 'soy-citruscello', name: 'Spirit of York Citruscello', price: 23.70, abv: '25%', size: '375ml', caseSize: 12, casePrice: 284.40, allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-vodka', name: 'Spirit of York: DISTL Vodka', price: 27.68, abv: '40%', size: '750ml', caseSize: 12, casePrice: 332.16 },
+                { id: 'distl-gin', name: 'Spirit of York: DISTL Gin', price: 31.66, abv: '40%', size: '750ml', caseSize: 12, casePrice: 379.92 },
+                { id: 'distl-whisky', name: 'Spirit of York: DISTL Canadian Whisky', price: 29.63, abv: '40%', size: '750ml', caseSize: 12, casePrice: 355.56 },
+                { id: 'distl-pink', name: 'Spirit of York: DISTL Flawless Pink Gin', price: 31.66, abv: '35%', size: '750ml', caseSize: 12, casePrice: 379.92 },
+                { id: 'distl-chili', name: 'Spirit of York: DISTL Ancho Chilli Liqueur', price: 31.66, abv: '40%', size: '750ml', caseSize: 12, casePrice: 379.92 },
+                { id: 'distl-sweet-tea', name: 'Spirit of York: DISTL Sweet Tea Liqueur', price: 31.66, abv: '30%', size: '750ml', caseSize: 12, casePrice: 379.92, allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-orange-liq', name: 'Spirit of York: DISTL Orange Liqueur', price: 31.66, abv: '40%', size: '750ml', caseSize: 12, casePrice: 379.92, allowedAccounts: ['ADMIN001'] },
+                { id: 'distl-peach-rtd', name: 'Spirit of York: DISTL Peach Blueberry RTD', price: 2.31, abv: '5%', size: '355ml', isRTD: true, caseSize: 24, casePrice: 55.44 },
+                { id: 'distl-rasp-rtd', name: 'Spirit of York: DISTL Raspberry Lemon RTD', price: 2.31, abv: '5%', size: '355ml', isRTD: true, caseSize: 24, casePrice: 55.44 },
+                { id: 'distl-signature-gin', name: 'Spirit of York: DISTL Signature Gin', price: 28.14, abv: '40%', size: '750ml', caseSize: 12, casePrice: 337.68, allowedAccounts: ['3YBBY8SD', '1B2VHWPH', 'NBYUKKMV', '4GALK4CC', '0PHR4APK', '4GRBZBC4', 'RFMRTZ9J', 'VLY88JJW', '0IB5SNPS', '4O4TUYR5', '9K0KUXPA', 'LAX2DYA3'] },
+                { id: 'distl-orange-vodka', name: 'Spirit of York: DISTL Orange Vodka', price: 30.75, abv: '40%', size: '750ml', caseSize: 12, casePrice: 369.00, allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
+                { id: 'distl-cherry-vodka', name: 'Spirit of York: DISTL Cherry Vodka', price: 20.13, abv: '40%', size: '750ml', caseSize: 12, casePrice: 241.56, allowedAccounts: ['ZNH52R5H', 'C3AD3EZM'] },
+                { id: 'distl-sour-poet', name: 'Spirit of York: DISTL Sour Poet', price: 19.25, size: '750ml', caseSize: 12, casePrice: 231.00, allowedAccounts: ['NQ7C553C'] },
                 { id: 'case-vodka', name: 'Spirit of York Vodka Case', price: 64.00, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
                 { id: 'case-gin', name: 'Spirit of York Gin Case', price: 80.00, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
                 { id: 'case-whisky', name: 'Spirit of York Whisky Case', price: 93.33, allowedAccounts: ['844YRPRC', '7FTWKS5S'] },
@@ -443,14 +443,14 @@
                 { id: 'case-distl-gin', name: 'Spirit of York: DISTL Gin Case', price: 138.67, allowedAccounts: ['844YRPRC', '7FTWKS5S'] }
             ],
             'The Grange': [
-                { id: 'grange-almanac-white', name: 'Grange 24 Almanac White', price: 12.55, abv: '11%', size: '750ml', isWine: true },
-                { id: 'grange-estate-chard', name: 'Grange 24 Estate Chardonnay', price: 25.50, abv: '13%', size: '750ml', isWine: true },
-                { id: 'grange-estate-cab', name: 'Grange 24 Estate Cabernet Franc', price: 28.80, abv: '13.5%', size: '750ml', isWine: true },
-                { id: 'grange-estate-pinot', name: 'Grange 24 Estate Pinot Noir', price: 28.80, abv: '12.7%', size: '750ml', isWine: true },
-                { id: 'grange-aurelia-chard', name: 'Grange 23 The Aurelia Series Chardonnay', price: 58.50, abv: '14.3%', size: '750ml', isWine: true },
-                { id: 'grange-aurelia-pinot', name: 'Grange 23 The Aurelia Series Pinot Noir', price: 58.50, abv: '12%', size: '750ml', isWine: true },
-                { id: 'grange-aurelia-cab', name: 'Grange 23 The Aurelia Series Cabernet Franc', price: 58.50, abv: '13%', size: '750ml', isWine: true },
-                { id: 'grange-lafontaine', name: 'Grange 21 LaFontaine Brut', price: 52.20, abv: '12%', size: '750ml', isWine: true }
+                { id: 'grange-almanac-white', name: 'Grange 24 Almanac White', price: 12.55, abv: '11%', size: '750ml', isWine: true, caseSize: 12, casePrice: 150.60 },
+                { id: 'grange-estate-chard', name: 'Grange 24 Estate Chardonnay', price: 25.50, abv: '13%', size: '750ml', isWine: true, caseSize: 12, casePrice: 306.00 },
+                { id: 'grange-estate-cab', name: 'Grange 24 Estate Cabernet Franc', price: 28.80, abv: '13.5%', size: '750ml', isWine: true, caseSize: 12, casePrice: 345.60 },
+                { id: 'grange-estate-pinot', name: 'Grange 24 Estate Pinot Noir', price: 28.80, abv: '12.7%', size: '750ml', isWine: true, caseSize: 12, casePrice: 345.60 },
+                { id: 'grange-aurelia-chard', name: 'Grange 23 The Aurelia Series Chardonnay', price: 58.50, abv: '14.3%', size: '750ml', isWine: true, caseSize: 12, casePrice: 702.00 },
+                { id: 'grange-aurelia-pinot', name: 'Grange 23 The Aurelia Series Pinot Noir', price: 58.50, abv: '12%', size: '750ml', isWine: true, caseSize: 12, casePrice: 702.00 },
+                { id: 'grange-aurelia-cab', name: 'Grange 23 The Aurelia Series Cabernet Franc', price: 58.50, abv: '13%', size: '750ml', isWine: true, caseSize: 12, casePrice: 702.00 },
+                { id: 'grange-lafontaine', name: 'Grange 21 LaFontaine Brut', price: 52.20, abv: '12%', size: '750ml', isWine: true, caseSize: 9, casePrice: 469.80 }
             ]
         };
 
@@ -477,6 +477,7 @@
             const [randomSoyImage, setRandomSoyImage] = useState('');
             const [randomGrangeImage, setRandomGrangeImage] = useState('');
             const [isSavingSettings, setIsSavingSettings] = useState(false);
+            const [splitCaseAccounts, setSplitCaseAccounts] = useState([]);
 
             useEffect(() => {
                 const params = new URLSearchParams(window.location.search);
@@ -577,6 +578,7 @@
                         const data = await response.json();
                         setLowInventory(data.lowInventory || {});
                         setMessages(data.messages || { spiritOfYork: '', grange: '' });
+                        setSplitCaseAccounts(data.splitCaseAccounts || []);
                     } catch (error) {
                         console.error('Error fetching settings:', error);
                     }
@@ -646,6 +648,18 @@
                 const qty = quantities[product.id] || 0;
                 if (qty === 0) return;
 
+                // Validate split-case wine orders (must be multiples of 12)
+                if (product.isWine && isSplitCaseAuthorized && !isAdmin) {
+                    if (qty % 12 !== 0) {
+                        setMessage({ 
+                            type: 'error', 
+                            text: 'Wine must be ordered in multiples of 12 bottles. Please adjust your quantity.' 
+                        });
+                        setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+                        return;
+                    }
+                }
+
                 if (product.isWine && !isAdmin && !wineAck) {
                     setPendingCartItem({ product, qty });
                     setShowWineModal(true);
@@ -701,7 +715,8 @@
                         action: 'saveSettings',
                         lowInventory: JSON.stringify(lowInventory),
                         messageSpiritOfYork: messages.spiritOfYork,
-                        messageGrange: messages.grange
+                        messageGrange: messages.grange,
+                        splitCaseAccounts: JSON.stringify(splitCaseAccounts)
                     });
                     
                     const response = await fetch(`https://script.google.com/macros/s/AKfycbxCgqgBXUEdzPgSZFarcKu_zkqo5mMKrJjN7i7Qww5__9JYc61OMDWMrEirDGDQ-2986Q/exec?${params}`);
@@ -762,6 +777,7 @@
             };
 
             const isCaseOnlyAccount = ['844YRPRC', '7FTWKS5S'].includes(accountCode);
+            const isSplitCaseAuthorized = splitCaseAccounts.includes(accountCode);
 
             const filteredProducts = products[selectedBrand].filter(product => {
                 if (isAdmin) return true;
@@ -862,6 +878,54 @@
                                     ))}
                                 </select>
                             </div>
+                            
+                            {/* Split-Case Authorization Button */}
+                            {accountCode !== 'ADMIN001' && (
+                                <div style={{ marginTop: '12px' }}>
+                                    {splitCaseAccounts.includes(accountCode) ? (
+                                        <button
+                                            onClick={() => {
+                                                setSplitCaseAccounts(splitCaseAccounts.filter(c => c !== accountCode));
+                                            }}
+                                            style={{
+                                                backgroundColor: '#dc3545',
+                                                color: 'white',
+                                                padding: '8px 16px',
+                                                border: 'none',
+                                                borderRadius: '4px',
+                                                fontSize: '14px',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            ✓ Split-Case Authorized - Click to Remove
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                if (!splitCaseAccounts.includes(accountCode)) {
+                                                    setSplitCaseAccounts([...splitCaseAccounts, accountCode]);
+                                                }
+                                            }}
+                                            style={{
+                                                backgroundColor: '#007bff',
+                                                color: 'white',
+                                                padding: '8px 16px',
+                                                border: 'none',
+                                                borderRadius: '4px',
+                                                fontSize: '14px',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            Authorize Split-Case Wine Orders
+                                        </button>
+                                    )}
+                                    <div style={{ fontSize: '12px', color: '#666', marginTop: '6px' }}>
+                                        {splitCaseAccounts.includes(accountCode) 
+                                            ? 'This account can order wine by the bottle (must be divisible by 12)'
+                                            : 'Click to allow this account to order wine by the bottle (must be divisible by 12)'}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -979,6 +1043,27 @@
                         )}
                     </div>
 
+                    {/* Wine Ordering Banner */}
+                    {selectedBrand === 'The Grange' && (
+                        <div style={{
+                            backgroundColor: '#f8f4e6',
+                            border: '2px solid #C49A3A',
+                            borderRadius: '6px',
+                            padding: '12px 16px',
+                            margin: '20px 0',
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#5a4a1a',
+                            textAlign: 'center'
+                        }}>
+                            {isSplitCaseAuthorized ? (
+                                <>ℹ️ If building a split case, total order must be divisible by 12</>
+                            ) : (
+                                <>ℹ️ Wine must be ordered by the case</>
+                            )}
+                        </div>
+                    )}
+
                     <div className="product-grid">
                         {filteredProducts.map(product => (
                             <div key={product.id} className="product-card">
@@ -1007,18 +1092,73 @@
                                         {product.size && `${product.size}`}
                                     </div>
                                 )}
-                                <div className="product-price">${product.price.toFixed(2)}</div>
+                                
+                                {/* Price Display Logic */}
+                                {product.isWine ? (
+                                    // WINE PRICING
+                                    isSplitCaseAuthorized ? (
+                                        // Authorized split-case: show bottle price, no small print
+                                        <div className="product-price" style={{ color: '#C49A3A' }}>${product.price.toFixed(2)}</div>
+                                    ) : (
+                                        // Regular: show case price
+                                        <>
+                                            <div className="product-price" style={{ color: '#C49A3A' }}>${product.casePrice.toFixed(2)}</div>
+                                            <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+                                                ${product.price.toFixed(2)} per bottle
+                                            </div>
+                                        </>
+                                    )
+                                ) : product.isRTD ? (
+                                    // RTD PRICING: show case price
+                                    <>
+                                        <div className="product-price">${product.casePrice.toFixed(2)}</div>
+                                        <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+                                            ${product.price.toFixed(2)} per can
+                                        </div>
+                                    </>
+                                ) : (
+                                    // REGULAR SPIRITS: show bottle price + case info
+                                    <>
+                                        <div className="product-price">${product.price.toFixed(2)}</div>
+                                        {product.casePrice && (
+                                            <div style={{ fontSize: '11px', color: '#666', marginTop: '4px' }}>
+                                                Case of {product.caseSize}: ${product.casePrice.toFixed(2)}
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                                
                                 <div className="quantity-control">
                                     <button 
                                         className="qty-btn"
-                                        onClick={() => handleQuantityChange(product.id, product.isWine ? -12 : -1, product.isWine)}
+                                        onClick={() => {
+                                            let decrement;
+                                            if (product.isWine) {
+                                                decrement = isSplitCaseAuthorized ? -1 : -product.caseSize;
+                                            } else if (product.isRTD) {
+                                                decrement = -product.caseSize;
+                                            } else {
+                                                decrement = -1;
+                                            }
+                                            handleQuantityChange(product.id, decrement, product.isWine);
+                                        }}
                                     >
                                         -
                                     </button>
                                     <div className="qty-display">{quantities[product.id] || 0}</div>
                                     <button 
                                         className="qty-btn"
-                                        onClick={() => handleQuantityChange(product.id, product.isWine ? 12 : 1, product.isWine)}
+                                        onClick={() => {
+                                            let increment;
+                                            if (product.isWine) {
+                                                increment = isSplitCaseAuthorized ? 1 : product.caseSize;
+                                            } else if (product.isRTD) {
+                                                increment = product.caseSize;
+                                            } else {
+                                                increment = 1;
+                                            }
+                                            handleQuantityChange(product.id, increment, product.isWine);
+                                        }}
                                     >
                                         +
                                     </button>
