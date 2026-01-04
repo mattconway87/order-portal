@@ -640,7 +640,8 @@
                 const currentQty = quantities[productId] || 0;
                 let newQty = currentQty + delta;
 
-                if (isWine) {
+                // Only round to case quantities for non-authorized wine accounts
+                if (isWine && !isSplitCaseAuthorized) {
                     if (delta > 0) newQty = Math.ceil(newQty / 12) * 12;
                     else newQty = Math.max(0, Math.floor(newQty / 12) * 12);
                 } else {
