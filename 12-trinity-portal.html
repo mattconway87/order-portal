@@ -1086,6 +1086,27 @@
 
                     <div className="delivery-section">
                         <h2>Delivery Information</h2>
+                        
+                        {/* Emergency Date Active Indicator */}
+                        {customDeliveryDate && (
+                            <div style={{
+                                backgroundColor: '#ffebee',
+                                border: '2px solid #f44336',
+                                borderRadius: '6px',
+                                padding: '15px',
+                                marginBottom: '15px',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                color: '#c62828'
+                            }}>
+                                🚨 EMERGENCY DELIVERY ACTIVE: This order will be delivered on {(() => {
+                                    const [year, month, day] = customDeliveryDate.split('-');
+                                    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+                                    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+                                })()} regardless of the date selected below.
+                            </div>
+                        )}
+                        
                         {message.text && (
                             <div className={`message ${message.type}`}>{message.text}</div>
                         )}
