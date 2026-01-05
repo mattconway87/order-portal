@@ -1457,18 +1457,18 @@
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                padding: '20px'
+                                padding: '0'
                             }}
                         >
                             <div 
                                 style={{
                                     position: 'relative',
-                                    width: '90vw',
-                                    height: '90vh',
-                                    backgroundColor: 'white',
-                                    borderRadius: '8px',
-                                    padding: '20px',
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                                    width: '95vw',
+                                    height: '95vh',
+                                    backgroundColor: '#f5f5f5',
+                                    borderRadius: '0',
+                                    padding: '0',
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center'
@@ -1479,18 +1479,18 @@
                                     onClick={() => setShowTechSheet(null)}
                                     style={{
                                         position: 'absolute',
-                                        top: '15px',
-                                        right: '15px',
+                                        top: '20px',
+                                        right: '20px',
                                         background: '#dc3545',
                                         color: 'white',
                                         border: 'none',
                                         borderRadius: '6px',
-                                        padding: '10px 20px',
+                                        padding: '12px 24px',
                                         cursor: 'pointer',
                                         fontSize: '18px',
                                         fontWeight: 'bold',
                                         zIndex: 10,
-                                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
                                     }}
                                 >
                                     ✕ Close
@@ -1499,10 +1499,8 @@
                                     src={techSheets[showTechSheet]}
                                     alt="Product Details"
                                     style={{
-                                        maxWidth: '100%',
-                                        maxHeight: '100%',
-                                        width: 'auto',
-                                        height: 'auto',
+                                        width: '100%',
+                                        height: '100%',
                                         objectFit: 'contain'
                                     }}
                                 />
