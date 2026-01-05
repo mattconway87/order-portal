@@ -484,11 +484,29 @@
             const [splitCaseAccounts, setSplitCaseAccounts] = useState([]);
             const [settingsLoaded, setSettingsLoaded] = useState(false);
             const [showTechSheet, setShowTechSheet] = useState(null); // null or product ID
-            const [techSheetZoom, setTechSheetZoom] = useState(100); // zoom percentage
+            const [techSheetZoom, setTechSheetZoom] = useState(100); // 100 or 125
             
             // Tech sheets available (product ID -> image filename)
             const techSheets = {
-                'soy-vodka': './images/tech-sheets/soy-vodka-tech.png'
+                'soy-vodka': './images/tech-sheets/soy-vodka-tech.png',
+                'soy-aquavit': './images/tech-sheets/soy-aquavit-tech.png',
+                'soy-coffee-liqueur': './images/tech-sheets/soy-coffee-liqueur-tech.png',
+                'soy-gin': './images/tech-sheets/soy-gin-tech.png',
+                'distl-vodka': './images/tech-sheets/distl-vodka-tech.png',
+                'distl-gin': './images/tech-sheets/distl-gin-tech.png',
+                'distl-whisky': './images/tech-sheets/distl-whisky-tech.png',
+                'distl-pink-gin': './images/tech-sheets/distl-pink-gin-tech.png',
+                'distl-chili-liqueur': './images/tech-sheets/distl-chili-liqueur-tech.png',
+                'distl-seltzer-peach': './images/tech-sheets/distl-seltzer-peach-tech.png',
+                'distl-seltzer-raspberry': './images/tech-sheets/distl-seltzer-raspberry-tech.png',
+                'grange-lafontaine-brut': './images/tech-sheets/grange-lafontaine-brut-tech.png',
+                'grange-2023-aurelia-cabernet': './images/tech-sheets/grange-2023-aurelia-cabernet-tech.png',
+                'grange-2023-aurelia-pinot': './images/tech-sheets/grange-2023-aurelia-pinot-tech.png',
+                'grange-2023-aurelia-chardonnay': './images/tech-sheets/grange-2023-aurelia-chardonnay-tech.png',
+                'grange-2024-cabernet': './images/tech-sheets/grange-2024-cabernet-tech.png',
+                'grange-2024-pinot': './images/tech-sheets/grange-2024-pinot-tech.png',
+                'grange-2024-chardonnay': './images/tech-sheets/grange-2024-chardonnay-tech.png',
+                'grange-almanac-white': './images/tech-sheets/grange-almanac-white-tech.png'
             };
 
             useEffect(() => {
@@ -1205,9 +1223,9 @@
                                                 e.currentTarget.style.background = '#f8f9fa';
                                                 e.currentTarget.style.borderColor = '#dee2e6';
                                             }}
-                                            title="View Product Details"
+                                            title="Product Details"
                                         >
-                                            📄 View Product Details
+                                            ℹ️ Product Details
                                         </button>
                                     )}
                                 </div>
@@ -1494,58 +1512,19 @@
                                     boxShadow: '0 2px 10px rgba(0,0,0,0.5)'
                                 }}>
                                     <button
-                                        onClick={() => setTechSheetZoom(Math.max(50, techSheetZoom - 25))}
+                                        onClick={() => setTechSheetZoom(techSheetZoom === 100 ? 125 : 100)}
                                         style={{
                                             background: '#495057',
                                             color: 'white',
                                             border: 'none',
                                             borderRadius: '4px',
-                                            padding: '8px 16px',
+                                            padding: '10px 20px',
                                             cursor: 'pointer',
-                                            fontSize: '16px',
-                                            fontWeight: 'bold'
+                                            fontSize: '15px',
+                                            fontWeight: '600'
                                         }}
                                     >
-                                        −
-                                    </button>
-                                    <span style={{ 
-                                        color: 'white', 
-                                        fontSize: '16px',
-                                        fontWeight: '600',
-                                        minWidth: '60px',
-                                        textAlign: 'center'
-                                    }}>
-                                        {techSheetZoom}%
-                                    </span>
-                                    <button
-                                        onClick={() => setTechSheetZoom(Math.min(300, techSheetZoom + 25))}
-                                        style={{
-                                            background: '#495057',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            padding: '8px 16px',
-                                            cursor: 'pointer',
-                                            fontSize: '16px',
-                                            fontWeight: 'bold'
-                                        }}
-                                    >
-                                        +
-                                    </button>
-                                    <button
-                                        onClick={() => setTechSheetZoom(100)}
-                                        style={{
-                                            background: '#6c757d',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            padding: '8px 16px',
-                                            cursor: 'pointer',
-                                            fontSize: '14px',
-                                            marginLeft: '10px'
-                                        }}
-                                    >
-                                        Reset
+                                        {techSheetZoom === 100 ? '🔍 Zoom In' : '🔍 Zoom Out'}
                                     </button>
                                 </div>
 
