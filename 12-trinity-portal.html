@@ -462,6 +462,7 @@
             const [allAccounts, setAllAccounts] = useState([]);
             const [selectedBrand, setSelectedBrand] = useState('Spirit of York');
             const [deliveryDate, setDeliveryDate] = useState('');
+            const [customDeliveryDate, setCustomDeliveryDate] = useState('');
             const [cart, setCart] = useState([]);
             const [quantities, setQuantities] = useState({});
             const [isSubmitting, setIsSubmitting] = useState(false);
@@ -732,7 +733,10 @@
             const handleSubmitOrder = async () => {
                 if (cart.length === 0) return;
                 
-                if (!deliveryDate) {
+                // Use custom delivery date if set (from Admin Settings), otherwise use regular delivery date
+                const finalDeliveryDate = customDeliveryDate || deliveryDate;
+                
+                if (!finalDeliveryDate) {
                     setMessage({ type: 'error', text: 'Please select a delivery date before submitting your order.' });
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     return;
@@ -760,7 +764,7 @@
                 const orderData = {
                     accountCode,
                     accountName,
-                    deliveryDate,
+                    deliveryDate: finalDeliveryDate,
                     items: cart,
                     total: cartTotal,
                     timestamp: new Date().toISOString()
@@ -777,6 +781,7 @@
                     setMessage({ type: 'success', text: 'Order submitted successfully!' });
                     setCart([]);
                     setDeliveryDate('');
+                    setCustomDeliveryDate('');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } catch (error) {
                     setMessage({ type: 'error', text: 'Error submitting order. Please try again or contact us directly.' });
@@ -966,6 +971,43 @@
                     {isAdmin && (
                         <div className="delivery-section" style={{ backgroundColor: '#fff3cd', borderLeft: '4px solid #ffc107' }}>
                             <h2>⚙️ Admin Settings</h2>
+                            
+                            {/* Emergency Off-Day Delivery */}
+                            <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#ffebee', border: '2px solid #f44336', borderRadius: '6px' }}>
+                                <h3 style={{ fontSize: '16px', marginBottom: '10px', color: '#c62828' }}>🚨 Emergency Off-Day Delivery</h3>
+                                <div className="form-group">
+                                    <label>Custom Delivery Date (Optional)</label>
+                                    <input
+                                        type="date"
+                                        value={customDeliveryDate}
+                                        onChange={(e) => setCustomDeliveryDate(e.target.value)}
+                                        style={{
+                                            width: '100%',
+                                            padding: '10px',
+                                            border: '1px solid #ccc',
+                                            borderRadius: '4px',
+                                            fontSize: '14px'
+                                        }}
+                                    />
+                                    <div style={{ fontSize: '12px', color: '#666', marginTop: '6px' }}>
+                                        Set this BEFORE selecting account below. Leave blank for normal delivery schedule. This will override the regular delivery date for the next order only.
+                                    </div>
+                                    {customDeliveryDate && (
+                                        <div style={{ 
+                                            marginTop: '8px', 
+                                            padding: '10px', 
+                                            backgroundColor: '#fff3cd', 
+                                            border: '1px solid #ffc107',
+                                            borderRadius: '4px',
+                                            fontSize: '14px',
+                                            fontWeight: '600',
+                                            color: '#856404'
+                                        }}>
+                                            ⚠️ Next order will be delivered on {new Date(customDeliveryDate).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} instead of the regular delivery date
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                             
                             {/* Custom Messages */}
                             <div style={{ marginBottom: '20px' }}>
