@@ -1182,17 +1182,31 @@
                                         <button
                                             onClick={() => setShowTechSheet(product.id)}
                                             style={{
-                                                background: 'none',
-                                                border: '1px solid #ccc',
-                                                borderRadius: '4px',
-                                                padding: '4px 8px',
+                                                background: '#f8f9fa',
+                                                border: '1px solid #dee2e6',
+                                                borderRadius: '6px',
+                                                padding: '6px 12px',
                                                 cursor: 'pointer',
-                                                fontSize: '14px',
-                                                marginLeft: '8px'
+                                                fontSize: '13px',
+                                                color: '#495057',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '6px',
+                                                marginLeft: '8px',
+                                                whiteSpace: 'nowrap',
+                                                transition: 'all 0.2s'
                                             }}
-                                            title="View Tech Sheet"
+                                            onMouseOver={(e) => {
+                                                e.currentTarget.style.background = '#e9ecef';
+                                                e.currentTarget.style.borderColor = '#adb5bd';
+                                            }}
+                                            onMouseOut={(e) => {
+                                                e.currentTarget.style.background = '#f8f9fa';
+                                                e.currentTarget.style.borderColor = '#dee2e6';
+                                            }}
+                                            title="View Product Details"
                                         >
-                                            📄
+                                            📄 View Product Details
                                         </button>
                                     )}
                                 </div>
@@ -1439,16 +1453,25 @@
                         <div 
                             className="modal-overlay"
                             onClick={() => setShowTechSheet(null)}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                padding: '20px'
+                            }}
                         >
                             <div 
                                 style={{
                                     position: 'relative',
-                                    maxWidth: '90vw',
-                                    maxHeight: '90vh',
+                                    width: '90vw',
+                                    height: '90vh',
                                     backgroundColor: 'white',
                                     borderRadius: '8px',
                                     padding: '20px',
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
                                 }}
                                 onClick={(e) => e.stopPropagation()}
                             >
@@ -1456,27 +1479,30 @@
                                     onClick={() => setShowTechSheet(null)}
                                     style={{
                                         position: 'absolute',
-                                        top: '10px',
-                                        right: '10px',
+                                        top: '15px',
+                                        right: '15px',
                                         background: '#dc3545',
                                         color: 'white',
                                         border: 'none',
-                                        borderRadius: '4px',
-                                        padding: '8px 16px',
+                                        borderRadius: '6px',
+                                        padding: '10px 20px',
                                         cursor: 'pointer',
-                                        fontSize: '16px',
-                                        fontWeight: 'bold'
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                        zIndex: 10,
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
                                     }}
                                 >
-                                    ✕
+                                    ✕ Close
                                 </button>
                                 <img 
                                     src={techSheets[showTechSheet]}
-                                    alt="Tech Sheet"
+                                    alt="Product Details"
                                     style={{
-                                        width: '100%',
+                                        maxWidth: '100%',
+                                        maxHeight: '100%',
+                                        width: 'auto',
                                         height: 'auto',
-                                        maxHeight: 'calc(90vh - 80px)',
                                         objectFit: 'contain'
                                     }}
                                 />
