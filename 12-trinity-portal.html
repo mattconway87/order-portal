@@ -767,6 +767,13 @@
                 // Use custom delivery date if set (from Admin Settings), otherwise use regular delivery date
                 const finalDeliveryDate = customDeliveryDate || deliveryDate;
                 
+                // DEBUG: Log the date being sent
+                console.log('=== ORDER SUBMISSION DEBUG ===');
+                console.log('deliveryDate value:', deliveryDate);
+                console.log('customDeliveryDate value:', customDeliveryDate);
+                console.log('finalDeliveryDate (sending):', finalDeliveryDate);
+                console.log('==============================');
+                
                 if (!finalDeliveryDate) {
                     setMessage({ type: 'error', text: 'Please select a delivery date before submitting your order.' });
                     window.scrollTo({ top: 0, behavior: 'smooth' });
